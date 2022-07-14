@@ -1,5 +1,5 @@
 import React from 'react';
-import { Group, Text, Button } from '@mantine/core';
+import { Group, Text } from '@mantine/core';
 import { FaSlack } from 'react-icons/fa';
 import './Header.scss';
 
