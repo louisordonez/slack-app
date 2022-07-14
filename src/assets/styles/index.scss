@@ -65,9 +65,15 @@
   --teal-tint: #d3f5f7;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 html,
 body {
   background-color: var(--dark);
+  height: 100%;
 }
 
 .header-container {

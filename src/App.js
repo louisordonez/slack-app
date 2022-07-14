@@ -14,9 +14,8 @@ const App = () => {
       <Route path="/" element={<Landing />} />
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<SignUp />} />
-      <Route element={<ProtectedRoute />}>
-        <Route path="client" element={<Client />} />
-      </Route>
+      <Route path="client" element={<Client />} />
+      <Route element={<ProtectedRoute />}></Route>
       <Route path="*" element={<Error404 />} />
     </Routes>
   );
