@@ -1,1 +1,26 @@
+.landing-text-container {
+  display: flex;
+  flex-direction: column;
+  width: 52.6rem;
+  padding: 1rem;
+}
 
+.landing-heading-text {
+  font-size: 3rem;
+  font-weight: 600;
+
+  span {
+    color: var(--orange-500);
+  }
+}
+
+.landing-sub-text {
+  font-size: 1.4rem;
+}
+
+.landing-sign-up-button {
+  margin-top: 1rem;
+  width: 20rem;
+  height: 4rem;
+  font-size: 1.2rem;
+}

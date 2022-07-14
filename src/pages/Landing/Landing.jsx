@@ -1,5 +1,5 @@
 import React from 'react';
-import { Group, Text, Button } from '@mantine/core';
+import { Group, Text, Button, Center } from '@mantine/core';
 import { FaSlack } from 'react-icons/fa';
 import './Landing.scss';
 
@@ -19,7 +19,20 @@ const Landing = () => {
         </div>
         <Button>Login</Button>
       </Group>
-      <Text>Landing</Text>
+      <Center style={{ width: '100%', height: '80vh' }}>
+        <div className="landing-text-container white-text">
+          <Text align="left" className="landing-heading-text">
+            Great teamwork starts with a <span>digital HQ</span>
+          </Text>
+          <Text align="left" className="landing-sub-text">
+            With all your people, tools and communication in one place, you can
+            work faster and more flexibly than ever before.
+          </Text>
+          <Button variant="outline" className="landing-sign-up-button">
+            SIGN UP
+          </Button>
+        </div>
+      </Center>
     </div>
   );
 };
