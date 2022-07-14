@@ -9,35 +9,44 @@ import {
   Container,
   Button,
 } from '@mantine/core';
+import Header from '../../components/Header/Header';
 
 const SignUp = () => {
   return (
-    <Container size={420} my={40}>
-      <Title
-        align="center"
-        sx={(theme) => ({
-          fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-          fontWeight: 900,
-        })}
-      >
-        Create an account
-      </Title>
-      <Text color="dimmed" size="sm" align="center" mt={5}>
-        Have an account?{' '}
-        <Anchor href="#" size="sm" onClick={(event) => event.preventDefault()}>
-          Login
-        </Anchor>
-      </Text>
+    <>
+      <Header />
+      <Container size={420} my={40}>
+        <Title
+          align="center"
+          sx={(theme) => ({
+            fontFamily: `Greycliff CF, ${theme.fontFamily}`,
+            fontWeight: 900,
+          })}
+          className="white-text"
+        >
+          Create an account
+        </Title>
+        <Text color="dimmed" size="sm" align="center" mt={5}>
+          Have an account?{' '}
+          <Anchor
+            href="#"
+            size="sm"
+            onClick={(event) => event.preventDefault()}
+          >
+            Login
+          </Anchor>
+        </Text>
 
-      <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-        <TextInput label="Email" required />
-        <PasswordInput label="Password" required mt="md" />
-        <PasswordInput label="Confirm Password" required mt="md" />
-        <Button fullWidth mt="xl">
-          Sign up
-        </Button>
-      </Paper>
-    </Container>
+        <Paper withBorder shadow="md" p={30} mt={30} radius="md">
+          <TextInput label="Email" required />
+          <PasswordInput label="Password" required mt="md" />
+          <PasswordInput label="Confirm Password" required mt="md" />
+          <Button fullWidth mt="xl">
+            Sign up
+          </Button>
+        </Paper>
+      </Container>
+    </>
   );
 };
 

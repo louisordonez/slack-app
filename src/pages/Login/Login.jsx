@@ -9,7 +9,6 @@ import {
   Container,
   Button,
 } from '@mantine/core';
-import './Login.scss';
 import Header from '../../components/Header/Header';
 
 const Login = () => {
@@ -23,17 +22,11 @@ const Login = () => {
             fontFamily: `Greycliff CF, ${theme.fontFamily}`,
             fontWeight: 900,
           })}
-          className="login-text-color"
+          className="white-text"
         >
           Welcome back!
         </Title>
-        <Text
-          color="dimmed"
-          size="sm"
-          align="center"
-          mt={5}
-          className="login-text-color"
-        >
+        <Text color="dimmed" size="sm" align="center" mt={5}>
           Do not have an account yet?{' '}
           <Anchor
             href="#"
