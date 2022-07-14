@@ -1,12 +1,12 @@
 import React from 'react';
 import { Text } from '@mantine/core';
 
-const Landing = () => {
+export function Error404() {
   return (
     <div>
-      <Text>Landing</Text>
+      <Text>Error 404</Text>
     </div>
   );
-};
+}
 
-export default Landing;
+export default Error404;
