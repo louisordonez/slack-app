@@ -10,7 +10,7 @@ import {
   Button,
 } from '@mantine/core';
 
-const Login = () => {
+const SignUp = () => {
   return (
     <Container size={420} my={40}>
       <Title
@@ -20,24 +20,25 @@ const Login = () => {
           fontWeight: 900,
         })}
       >
-        Welcome back!
+        Create an account
       </Title>
       <Text color="dimmed" size="sm" align="center" mt={5}>
-        Do not have an account yet?{' '}
+        Have an account?{' '}
         <Anchor href="#" size="sm" onClick={(event) => event.preventDefault()}>
-          Create account
+          Login
         </Anchor>
       </Text>
 
       <Paper withBorder shadow="md" p={30} mt={30} radius="md">
         <TextInput label="Email" required />
         <PasswordInput label="Password" required mt="md" />
+        <PasswordInput label="Confirm Password" required mt="md" />
         <Button fullWidth mt="xl">
-          Login
+          Sign up
         </Button>
       </Paper>
     </Container>
   );
 };
 
-export default Login;
+export default SignUp;
