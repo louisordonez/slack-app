@@ -9,6 +9,7 @@ import {
   Container,
   Button,
 } from '@mantine/core';
+import './Login.scss';
 
 const Login = () => {
   return (
@@ -19,10 +20,17 @@ const Login = () => {
           fontFamily: `Greycliff CF, ${theme.fontFamily}`,
           fontWeight: 900,
         })}
+        className="login-text-color"
       >
         Welcome back!
       </Title>
-      <Text color="dimmed" size="sm" align="center" mt={5}>
+      <Text
+        color="dimmed"
+        size="sm"
+        align="center"
+        mt={5}
+        className="login-text-color"
+      >
         Do not have an account yet?{' '}
         <Anchor href="#" size="sm" onClick={(event) => event.preventDefault()}>
           Create account
