@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import './assets/styles/App.scss';
 import Login from './pages/Login/Login';
 
 const App = () => {
