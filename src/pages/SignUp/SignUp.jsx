@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   TextInput,
   PasswordInput,
@@ -12,6 +13,8 @@ import {
 import Header from '../../components/Header/Header';
 
 const SignUp = () => {
+  let navigate = useNavigate();
+
   return (
     <>
       <Header />
@@ -28,11 +31,7 @@ const SignUp = () => {
         </Title>
         <Text color="dimmed" size="sm" align="center" mt={5}>
           Have an account?{' '}
-          <Anchor
-            href="#"
-            size="sm"
-            onClick={(event) => event.preventDefault()}
-          >
+          <Anchor size="sm" onClick={() => navigate('/login')}>
             Login
           </Anchor>
         </Text>
