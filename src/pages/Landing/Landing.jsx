@@ -12,7 +12,9 @@ const Landing = () => {
             <FaSlack />
           </div>
           <div>
-            <Text className="header-text header-logo-size">slack</Text>
+            <Text className="header-text header-logo-size bold-font">
+              slack
+            </Text>
           </div>
         </div>
         <Button>Login</Button>

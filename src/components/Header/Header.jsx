@@ -1,7 +1,6 @@
 import React from 'react';
 import { Group, Text } from '@mantine/core';
 import { FaSlack } from 'react-icons/fa';
-import './Header.scss';
 
 const Header = () => {
   return (
@@ -11,7 +10,7 @@ const Header = () => {
           <FaSlack />
         </div>
         <div>
-          <Text className="header-text header-logo-size">slack</Text>
+          <Text className="header-text header-logo-size bold-font">slack</Text>
         </div>
       </div>
     </Group>
