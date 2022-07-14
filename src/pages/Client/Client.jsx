@@ -39,7 +39,9 @@ const Client = () => {
           style={{ overflowY: 'auto' }}
         >
           <Stack>
-            <Text className="client-stack-channels-header">Channels</Text>
+            <Text className="client-stack-channels-header bold-font">
+              Channels
+            </Text>
             <Text className="client-stack-channels client-nav-hover">
               Channel 1
             </Text>
@@ -57,7 +59,7 @@ const Client = () => {
             </Text>
           </Stack>
           <Stack>
-            <Text className="client-stack-direct-messages-header">
+            <Text className="client-stack-direct-messages-header bold-font">
               Direct Messages
             </Text>
             <Text className="client-stack-direct-messages client-nav-hover">
