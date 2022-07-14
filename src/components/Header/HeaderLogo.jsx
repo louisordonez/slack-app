@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from '@mantine/core';
 import { FaSlack } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import './HeaderLogo.scss';
+import './Header.scss';
 
 const HeaderLogo = () => {
   return (
@@ -12,7 +12,9 @@ const HeaderLogo = () => {
           <FaSlack />
         </div>
         <div>
-          <Text className="header-text header-logo-size bold-font">slack</Text>
+          <Text className="header-text-margin header-logo-size bold-font">
+            slack
+          </Text>
         </div>
       </div>
     </Link>

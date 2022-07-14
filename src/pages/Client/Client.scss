@@ -1,0 +1,21 @@
+.client-header {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.client-logo-container {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--black);
+}
+
+.client-logo-size {
+  font-size: 2rem;
+}
+
+.client-logo-margin {
+  margin-top: -0.2rem;
+  margin-left: 0.2rem;
+}

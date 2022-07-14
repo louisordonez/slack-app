@@ -8,6 +8,9 @@ import {
   Burger,
   useMantineTheme,
 } from '@mantine/core';
+import './Client.scss';
+import { FaSlack } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Client = () => {
   const theme = useMantineTheme();
@@ -37,9 +40,7 @@ const Client = () => {
       }
       header={
         <Header height={70} p="md">
-          <div
-            style={{ display: 'flex', alignItems: 'center', height: '100%' }}
-          >
+          <div className="client-header">
             <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
               <Burger
                 opened={opened}
@@ -49,8 +50,12 @@ const Client = () => {
                 mr="xl"
               />
             </MediaQuery>
-
-            <Text>Application header</Text>
+            <Link to="/client" className="client-logo-container">
+              <FaSlack className="client-logo-size" />
+              <Text className="client-logo-size bold-font client-logo-margin">
+                slack
+              </Text>
+            </Link>
           </div>
         </Header>
       }
