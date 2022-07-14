@@ -14,7 +14,6 @@ const Header = () => {
           <Text className="header-text header-logo-size">slack</Text>
         </div>
       </div>
-      <Button>Login</Button>
     </Group>
   );
 };

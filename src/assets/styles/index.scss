@@ -69,3 +69,28 @@ html,
 body {
   background-color: var(--dark);
 }
+
+.header-container {
+  padding: 0.5rem;
+}
+
+.header-text-color {
+  color: var(--white);
+}
+
+.header-logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.header-logo {
+  margin-right: 0.5rem;
+}
+
+.header-logo-size {
+  font-size: 2.2rem;
+}
+
+.header-text {
+  margin-top: -0.8rem;
+}
