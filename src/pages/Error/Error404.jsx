@@ -1,12 +1,30 @@
 import React from 'react';
-import { Text } from '@mantine/core';
+import { Link } from 'react-router-dom';
+import { Text, Button, Center } from '@mantine/core';
+import './Error404.scss';
+import Header from '../../components/Header/Header';
 
-export function Error404() {
+const Error404 = () => {
   return (
-    <div>
-      <Text>Error 404</Text>
-    </div>
+    <>
+      <Header />
+      <Center className="error404-container">
+        <div className="error404-text-container white-text">
+          <Text align="center" className="error404-heading-text">
+            404
+          </Text>
+          <Text align="center" className="error404-sub-text">
+            Page Not Found
+          </Text>
+          <Center>
+            <Link to="/">
+              <Button className="error404-sign-up-button">Go Back</Button>
+            </Link>
+          </Center>
+        </div>
+      </Center>
+    </>
   );
-}
+};
 
 export default Error404;

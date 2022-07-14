@@ -1,0 +1,28 @@
+.error404-container {
+  width: 100%;
+  height: 72vh;
+}
+
+.error404-text-container {
+  display: flex;
+  flex-direction: column;
+  width: 52.6rem;
+  padding: 1rem;
+}
+
+.error404-heading-text {
+  font-size: 13rem;
+  font-weight: 600;
+}
+
+.error404-sub-text {
+  font-size: 2.4rem;
+  font-weight: 600;
+}
+
+.error404-sign-up-button {
+  margin-top: 3rem;
+  width: 12rem;
+  height: 4rem;
+  font-size: 1.2rem;
+}
