@@ -7,6 +7,8 @@ import {
   MediaQuery,
   Burger,
   useMantineTheme,
+  Button,
+  Stack,
 } from '@mantine/core';
 import './Client.scss';
 import { FaSlack } from 'react-icons/fa';
@@ -34,8 +36,46 @@ const Client = () => {
           hiddenBreakpoint="sm"
           hidden={!opened}
           width={{ sm: 200, lg: 300 }}
+          style={{ overflowY: 'auto' }}
         >
-          <Text>Application navbar</Text>
+          <Stack>
+            <Text className="client-stack-channels-header">Channels</Text>
+            <Text className="client-stack-channels client-nav-hover">
+              Channel 1
+            </Text>
+            <Text className="client-stack-channels client-nav-hover">
+              Channel 2
+            </Text>
+            <Text className="client-stack-channels client-nav-hover">
+              Channel 3
+            </Text>
+            <Text className="client-stack-channels client-nav-hover">
+              Channel 4
+            </Text>
+            <Text className="client-stack-channels client-nav-hover">
+              Channel 5
+            </Text>
+          </Stack>
+          <Stack>
+            <Text className="client-stack-direct-messages-header">
+              Direct Messages
+            </Text>
+            <Text className="client-stack-direct-messages client-nav-hover">
+              John Doe
+            </Text>
+            <Text className="client-stack-direct-messages client-nav-hover">
+              John Doe
+            </Text>
+            <Text className="client-stack-direct-messages client-nav-hover">
+              John Doe
+            </Text>
+            <Text className="client-stack-direct-messages client-nav-hover">
+              John Doe
+            </Text>
+            <Text className="client-stack-direct-messages client-nav-hover">
+              John Doe
+            </Text>
+          </Stack>
         </Navbar>
       }
       header={
@@ -56,6 +96,9 @@ const Client = () => {
                 slack
               </Text>
             </Link>
+            <div className="client-logout-container">
+              <Button variant="default">Logout</Button>
+            </div>
           </div>
         </Header>
       }

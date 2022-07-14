@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   height: 100%;
+  position: relative;
 }
 
 .client-logo-container {
@@ -18,4 +19,35 @@
 .client-logo-margin {
   margin-top: -0.2rem;
   margin-left: 0.2rem;
+}
+
+.client-logout-container {
+  position: absolute;
+  right: 0;
+}
+
+.client-stack-channels-header {
+  margin-top: 2rem;
+}
+
+.client-stack-channels {
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 0.4rem;
+}
+
+.client-stack-direct-messages-header {
+  margin-top: 2rem;
+}
+
+.client-stack-direct-messages {
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 0.4rem;
+}
+
+.client-nav-hover {
+  &:hover {
+    background-color: var(--hover);
+  }
 }
