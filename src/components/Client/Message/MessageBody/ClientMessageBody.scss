@@ -1,5 +1,35 @@
-.client-message-body {
-  border: solid;
-  min-height: 60vh;
+.client-message-body-container {
+  height: 100%;
+  margin-top: 2rem;
   margin-bottom: 2rem;
+  overflow-y: scroll;
+}
+
+.client-message-body {
+  padding: 1rem;
+
+  &:hover {
+    background-color: var(--gray-75);
+  }
+}
+.client-message-body-profile {
+  display: flex;
+  align-items: center;
+}
+
+.client-message-body-name {
+  margin-left: 0.5rem;
+}
+
+.client-message-body-date-time {
+  @extend .client-message-body-name;
+
+  color: var(--default);
+  font-size: small;
+  font-weight: 400;
+}
+
+.client-message-body-text {
+  // margin-top: -2rem;
+  margin-left: 4rem;
 }
