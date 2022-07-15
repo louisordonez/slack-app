@@ -12,9 +12,38 @@ import ClientNavbar from '../../components/Client/Navbar/ClientNavbar';
 import ClientHeader from '../../components/Client/Header/ClientHeader';
 import ClientMessage from '../../components/Client/Message/ClientMessage';
 
-const Client = () => {
+const Client = ({ onUserLogOut }) => {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
+  // const [isProfileDialogShown, setIsProfileDialogShown] = useState(false);
+  // const [isCreateChannelDialogShown, setIsCreateChannelDialogShown] =
+  //   useState(false);
+  // const [isSendDirectMessageDialogShown, setIsSendDirectMessageDialogShown] =
+  //   useState(false);
+  // const [isDeleteDialogShown, setIsDeleteDialogShown] = useState(false);
+
+  // const handleProfileDialogShown = (bool) => setIsProfileDialogShown(bool);
+
+  // const handleCreateChannelDialogShown = (bool) => {
+  //   setIsCreateChannelDialogShown(bool);
+  // };
+
+  // const handleCreateChannel = (channelName) => {
+  //   console.log(`channelName: ${channelName}`);
+  //   handleCreateChannelDialogShown(false);
+  // };
+
+  // const handleSendDirectMessageDialogShown = (bool) => {
+  //   setIsSendDirectMessageDialogShown(bool);
+  // };
+
+  // const handleSendDirectMessage = (userName, message) => {
+  //   console.log(`userName: ${userName}`);
+  //   console.log(`message: ${message}`);
+  //   setIsSendDirectMessageDialogShown(false);
+  // };
+
+  // const handleDeleteDialogShown = (bool) => setIsDeleteDialogShown(bool);
 
   return (
     <AppShell
@@ -44,7 +73,7 @@ const Client = () => {
                 mr="xl"
               />
             </MediaQuery>
-            <ClientHeader />
+            <ClientHeader onUserLogOut={onUserLogOut} />
           </div>
         </Header>
       }

@@ -4,7 +4,7 @@ import { FaSlack } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import './ClientHeader.scss';
 
-export const ClientHeader = () => {
+export const ClientHeader = ({ onUserLogOut }) => {
   return (
     <>
       <Link to="/client" className="client-logo-container">
@@ -14,7 +14,9 @@ export const ClientHeader = () => {
         </Text>
       </Link>
       <div className="client-logout-container">
-        <Button variant="default">Logout</Button>
+        <Button variant="default" onClick={onUserLogOut}>
+          Logout
+        </Button>
       </div>
     </>
   );

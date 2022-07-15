@@ -1,19 +1,44 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  TextInput,
-  PasswordInput,
-  Anchor,
-  Paper,
-  Title,
-  Text,
-  Container,
-  Button,
-} from '@mantine/core';
+import { Anchor, Title, Text, Container } from '@mantine/core';
 import Header from '../../components/Header/Header';
+import LoginForm from '../../components/Form/Login/LoginForm';
+import { useRedirectToClient } from '../../services/utils/UseRedirectToClient';
+import { axiosPostCall } from '../../services/utils/AxiosApiCall';
+import { LOGIN_ENDPOINT } from '../../services/constants/App/SlackAvionApiUrl';
 
-const Login = () => {
+const Login = ({ onLoginSubmit }) => {
+  useRedirectToClient();
+
   let navigate = useNavigate();
+
+  const handleUserLogin = (userInput) => {
+    const onSuccess = (response) => {
+      const responseHeaders = [response.headers];
+      const responseData = [response.data.data];
+      const userLoggedIn = [
+        {
+          isLoggedIn: true,
+        },
+      ];
+
+      onLoginSubmit(responseHeaders, responseData, userLoggedIn);
+      // setIsLoading(false);
+      navigate('/client');
+    };
+
+    const onError = (error) => {
+      const errorMessage = error.response.data.errors;
+
+      // errorMessage.map((message) => showErrorToast(message));
+      errorMessage.map((message) => alert(message));
+
+      // setIsLoading(false);
+    };
+
+    // setIsLoading(true);
+    axiosPostCall(LOGIN_ENDPOINT, userInput, {}, onSuccess, onError);
+  };
 
   return (
     <>
@@ -35,14 +60,7 @@ const Login = () => {
             Create account
           </Anchor>
         </Text>
-
-        <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-          <TextInput label="Email" required />
-          <PasswordInput label="Password" required mt="md" />
-          <Button fullWidth mt="xl">
-            Login
-          </Button>
-        </Paper>
+        <LoginForm onUserInputSubmit={handleUserLogin} />
       </Container>
     </>
   );
