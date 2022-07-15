@@ -6,6 +6,7 @@ import LoginForm from '../../components/Form/Login/LoginForm';
 import { useRedirectToClient } from '../../services/utils/UseRedirectToClient';
 import { axiosPostCall } from '../../services/utils/AxiosApiCall';
 import { LOGIN_ENDPOINT } from '../../services/constants/App/SlackAvionApiUrl';
+import { showErrorToast } from '../../components/Toast/Toast';
 
 const Login = ({ onLoginSubmit }) => {
   useRedirectToClient();
@@ -23,20 +24,15 @@ const Login = ({ onLoginSubmit }) => {
       ];
 
       onLoginSubmit(responseHeaders, responseData, userLoggedIn);
-      // setIsLoading(false);
       navigate('/client');
     };
 
     const onError = (error) => {
       const errorMessage = error.response.data.errors;
 
-      // errorMessage.map((message) => showErrorToast(message));
-      errorMessage.map((message) => alert(message));
-
-      // setIsLoading(false);
+      errorMessage.map((message) => showErrorToast(message));
     };
 
-    // setIsLoading(true);
     axiosPostCall(LOGIN_ENDPOINT, userInput, {}, onSuccess, onError);
   };
 
