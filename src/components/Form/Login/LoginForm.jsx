@@ -18,9 +18,7 @@ const LoginForm = ({ onUserInputSubmit }) => {
     setPassword('');
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const handleSubmit = () => {
     const userInput = {
       email,
       password,
@@ -32,26 +30,24 @@ const LoginForm = ({ onUserInputSubmit }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-          <TextInput
-            required
-            label="Email"
-            value={email}
-            onChange={(e) => handleEmail(e.target.value)}
-          />
-          <PasswordInput
-            required
-            label="Password"
-            value={password}
-            onChange={(e) => handlePassword(e.target.value)}
-            mt="md"
-          />
-          <Button fullWidth mt="xl" type="submit">
-            Login
-          </Button>
-        </Paper>
-      </form>
+      <Paper withBorder shadow="md" p={30} mt={30} radius="md">
+        <TextInput
+          required
+          label="Email"
+          value={email}
+          onChange={(e) => handleEmail(e.target.value)}
+        />
+        <PasswordInput
+          required
+          label="Password"
+          value={password}
+          onChange={(e) => handlePassword(e.target.value)}
+          mt="md"
+        />
+        <Button fullWidth mt="xl" onClick={handleSubmit}>
+          Login
+        </Button>
+      </Paper>
     </>
   );
 };

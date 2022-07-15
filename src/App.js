@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import './assets/styles/App.scss';
 import Landing from './pages/Landing/Landing';
 import Login from './pages/Login/Login';
@@ -23,6 +23,8 @@ const App = () => {
     }
   }, [isLoggedIn, userHeaders, userData]);
 
+  let navigate = useNavigate();
+
   const handleUserData = (headers, data, bool) => {
     setUserHeaders(headers);
     setUserData(data);
@@ -39,7 +41,7 @@ const App = () => {
     assignLocalStorageItem('userData', emptyArray);
     assignLocalStorageItem('isLoggedIn', emptyArray);
 
-    window.location.assign('/login');
+    navigate('/login');
   };
 
   return (

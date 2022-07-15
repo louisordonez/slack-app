@@ -26,6 +26,7 @@ const SignUp = ({ onSignUpSubmit }) => {
       ];
 
       onSignUpSubmit(responseHeaders, responseData, userLoggedIn);
+      navigate('/login');
       showSuccessToast(`You may now login using your email and password`);
     };
 
