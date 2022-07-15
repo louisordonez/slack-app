@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { TextInput, PasswordInput, Paper, Button } from '@mantine/core';
+import { showErrorToast } from '../../Toast/Toast';
 
 const SignUpForm = ({ onUserInputSubmit }) => {
   const [email, setEmail] = useState('');
@@ -28,8 +29,8 @@ const SignUpForm = ({ onUserInputSubmit }) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      // showErrorToast(`Password and Confirm Password does not match`);
-      alert(`Password and Confirm Password does not match`);
+      showErrorToast(`Password and Confirm Password does not match`);
+      resetSignUpForm();
 
       return false;
     } else {

@@ -13,6 +13,11 @@ const LoginForm = ({ onUserInputSubmit }) => {
     setPassword(value);
   };
 
+  const resetLoginForm = () => {
+    setEmail('');
+    setPassword('');
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -22,6 +27,7 @@ const LoginForm = ({ onUserInputSubmit }) => {
     };
 
     onUserInputSubmit(userInput);
+    resetLoginForm();
   };
 
   return (
@@ -31,13 +37,15 @@ const LoginForm = ({ onUserInputSubmit }) => {
           <TextInput
             required
             label="Email"
+            value={email}
             onChange={(e) => handleEmail(e.target.value)}
           />
           <PasswordInput
             required
             label="Password"
-            mt="md"
+            value={password}
             onChange={(e) => handlePassword(e.target.value)}
+            mt="md"
           />
           <Button fullWidth mt="xl" type="submit">
             Login
