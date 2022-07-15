@@ -1,19 +1,47 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  TextInput,
-  PasswordInput,
-  Anchor,
-  Paper,
-  Title,
-  Text,
-  Container,
-  Button,
-} from '@mantine/core';
+import { Anchor, Title, Text, Container } from '@mantine/core';
 import Header from '../../components/Header/Header';
+import SignUpForm from '../../components/Form/SignUp/SignUpForm';
+import { axiosPostCall } from '../../services/utils/AxiosApiCall';
+import { SIGN_UP_ENDPOINT } from '../../services/constants/App/SlackAvionApiUrl';
+import { useRedirectToClient } from '../../services/utils/UseRedirectToClient';
 
-const SignUp = () => {
+const SignUp = ({ onSignUpSubmit }) => {
+  useRedirectToClient();
+
   let navigate = useNavigate();
+
+  const handleUserSignUp = (userInput) => {
+    const headers = {};
+
+    const onSuccess = (response) => {
+      const responseHeaders = [response.headers];
+      const responseData = [response.data.data];
+      const userLoggedIn = [
+        {
+          isLoggedIn: true,
+        },
+      ];
+
+      onSignUpSubmit(responseHeaders, responseData, userLoggedIn);
+      // setIsLoading(false);
+      // showSuccessToast(`You may now login using your email and password`);
+      alert(`You may now login using your email and password`);
+    };
+
+    const onError = (error) => {
+      const errorMessage = error.response.data.errors.full_messages;
+
+      // errorMessage.map((message) => showErrorToast(message));
+      errorMessage.map((message) => alert(message));
+
+      // setIsLoading(false);
+    };
+
+    // setIsLoading(true);
+    axiosPostCall(SIGN_UP_ENDPOINT, userInput, headers, onSuccess, onError);
+  };
 
   return (
     <>
@@ -35,15 +63,7 @@ const SignUp = () => {
             Login
           </Anchor>
         </Text>
-
-        <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-          <TextInput label="Email" required />
-          <PasswordInput label="Password" required mt="md" />
-          <PasswordInput label="Confirm Password" required mt="md" />
-          <Button fullWidth mt="xl">
-            Sign up
-          </Button>
-        </Paper>
+        <SignUpForm onUserInputSubmit={handleUserSignUp} />
       </Container>
     </>
   );
