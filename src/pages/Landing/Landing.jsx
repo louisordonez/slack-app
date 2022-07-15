@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import { Group, Text, Button, Center } from '@mantine/core';
 import './Landing.scss';
 import HeaderLogo from '../../components/Header/Logo/HeaderLogo';
+import { useRedirectToClient } from '../../services/utils/UseRedirectToClient';
 
 const Landing = () => {
+  useRedirectToClient();
+
   return (
     <>
       <Group position="apart" className="header-container header-text-color">
