@@ -51,9 +51,9 @@ const Login = ({ onLoginSubmit }) => {
           Welcome back!
         </Title>
         <Text color="dimmed" size="sm" align="center" mt={5}>
-          Do not have an account yet?{' '}
+          Don't have an account?{' '}
           <Anchor size="sm" onClick={() => navigate('/signup')}>
-            Create account
+            Sign up
           </Anchor>
         </Text>
         <LoginForm onUserInputSubmit={handleUserLogin} />
