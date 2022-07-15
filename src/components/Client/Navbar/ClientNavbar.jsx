@@ -1,6 +1,6 @@
 import React from 'react';
-import './ClientNavbar.scss';
 import { Text, Button, Stack, Group } from '@mantine/core';
+import './ClientNavbar.scss';
 
 const ClientNavbar = () => {
   return (

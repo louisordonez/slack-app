@@ -1,8 +1,8 @@
 import React from 'react';
-import './ClientHeader.scss';
 import { Text, Button } from '@mantine/core';
 import { FaSlack } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import './ClientHeader.scss';
 
 export const ClientHeader = () => {
   return (

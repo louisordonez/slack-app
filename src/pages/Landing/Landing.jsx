@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Group, Text, Button, Center } from '@mantine/core';
 import './Landing.scss';
-import HeaderLogo from '../../components/Header/HeaderLogo';
+import HeaderLogo from '../../components/Header/Logo/HeaderLogo';
 
 const Landing = () => {
   return (

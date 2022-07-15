@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from '@mantine/core';
 import { FaSlack } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import './Header.scss';
+import './HeaderLogo.scss';
 
 const HeaderLogo = () => {
   return (

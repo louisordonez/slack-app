@@ -1,6 +1,6 @@
 import React from 'react';
 import { Group } from '@mantine/core';
-import HeaderLogo from './HeaderLogo';
+import HeaderLogo from './Logo/HeaderLogo';
 
 const Header = () => {
   return (
