@@ -36,7 +36,18 @@ const SignUpForm = ({ onUserInputSubmit }) => {
   };
   return (
     <>
-      <Paper withBorder shadow="md" p={30} mt={30} radius="md">
+      <Paper
+        withBorder
+        shadow="md"
+        p={30}
+        mt={30}
+        radius="md"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            handleSubmit();
+          }
+        }}
+      >
         <TextInput
           required
           label="Email"
