@@ -1,0 +1,39 @@
+.client-message-header {
+  background-color: var(--white);
+}
+
+.client-message-divider {
+  margin-left: -16px;
+  margin-right: -16px;
+  border-top-color: rgb(234, 236, 239);
+}
+
+.client-message-body {
+  border: solid;
+  min-height: 60vh;
+  margin-bottom: 2rem;
+}
+
+.client-message-input-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.client-message-text-input-container {
+  width: 100%;
+}
+
+.client-message-text-input {
+  textarea {
+    height: 6rem;
+  }
+}
+
+.client-message-send-button-container {
+  margin-left: 1rem;
+}
+
+.client-message-send-button {
+  height: 60px;
+}

@@ -1,11 +1,14 @@
+.client-container {
+  background-color: var(--white);
+}
 .client-header-container {
   background-color: var(--dark);
 }
 .client-header {
   display: flex;
   align-items: center;
-  height: 100%;
   position: relative;
+  height: 100%;
 }
 
 .client-logo-container {

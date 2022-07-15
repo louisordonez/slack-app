@@ -14,22 +14,15 @@ import {
 import './Client.scss';
 import { FaSlack } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import MessageBody from '../../components/Client/Message/MessageBody/MessageBody';
 
 const Client = () => {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
   return (
     <AppShell
-      styles={{
-        main: {
-          background:
-            theme.colorScheme === 'dark'
-              ? theme.colors.dark[8]
-              : theme.colors.gray[0],
-        },
-      }}
+      className="client-container"
       navbarOffsetBreakpoint="sm"
-      asideOffsetBreakpoint="sm"
       fixed
       navbar={
         <Navbar
@@ -42,7 +35,7 @@ const Client = () => {
           <Stack>
             <Text className="client-stack-channels-header bold-font">
               <Group position="apart">
-                Channels{' '}
+                Channels
                 <Button variant="default" compact>
                   +
                 </Button>
@@ -116,7 +109,7 @@ const Client = () => {
         </Header>
       }
     >
-      <Text>Resize app to see responsive navbar in action</Text>
+      <MessageBody />
     </AppShell>
   );
 };

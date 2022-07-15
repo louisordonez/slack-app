@@ -10,14 +10,16 @@ import Error404 from './pages/Error/Error404';
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Landing />} />
-      <Route path="login" element={<Login />} />
-      <Route path="signup" element={<SignUp />} />
-      <Route path="client" element={<Client />} />
-      <Route element={<ProtectedRoute />}></Route>
-      <Route path="*" element={<Error404 />} />
-    </Routes>
+    <div className="app-container">
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<SignUp />} />
+        <Route path="client" element={<Client />} />
+        <Route element={<ProtectedRoute />}></Route>
+        <Route path="*" element={<Error404 />} />
+      </Routes>
+    </div>
   );
 };
 
