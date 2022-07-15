@@ -41,12 +41,14 @@ const ClientMessageBody = () => {
         <div className="client-message-body">
           <div className="client-message-body-profile">
             <Avatar color="blue" size="lg"></Avatar>
-            <Text className="client-message-body-name bold-font">
-              John Smith
-              <span className="client-message-body-date-time">
-                01-01-2021 01:10 PM
-              </span>
-            </Text>
+            <div>
+              <Text className="client-message-body-name bold-font">
+                John Doe
+              </Text>
+              <Text className="client-message-body-date-time">
+                01-01-2021 01:01 PM
+              </Text>
+            </div>
           </div>
           <div className="client-message-body-text">
             <Text>
