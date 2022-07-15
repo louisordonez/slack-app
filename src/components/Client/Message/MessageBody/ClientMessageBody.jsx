@@ -1,9 +1,9 @@
 import React from 'react';
 import { Group, Divider, Text, Textarea, Button } from '@mantine/core';
 import { Send } from 'tabler-icons-react';
-import './MessageBody.scss';
+import './ClientMessageBody.scss';
 
-const MessageBody = () => {
+const ClientMessageBody = () => {
   return (
     <>
       <Group className="client-message-header">
@@ -39,4 +39,4 @@ const MessageBody = () => {
   );
 };
 
-export default MessageBody;
+export default ClientMessageBody;

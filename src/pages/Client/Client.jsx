@@ -3,22 +3,19 @@ import {
   AppShell,
   Navbar,
   Header,
-  Text,
   MediaQuery,
   Burger,
   useMantineTheme,
-  Button,
-  Stack,
-  Group,
 } from '@mantine/core';
 import './Client.scss';
-import { FaSlack } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import MessageBody from '../../components/Client/Message/MessageBody/MessageBody';
+import ClientNavbar from '../../components/Client/Navbar/ClientNavbar';
+import ClientHeader from '../../components/Client/Header/ClientHeader';
+import ClientMessageBody from '../../components/Client/Message/MessageBody/ClientMessageBody';
 
 const Client = () => {
   const theme = useMantineTheme();
   const [opened, setOpened] = useState(false);
+
   return (
     <AppShell
       className="client-container"
@@ -32,56 +29,7 @@ const Client = () => {
           width={{ sm: 210, lg: 300 }}
           className="client-navbar"
         >
-          <Stack>
-            <Text className="client-stack-channels-header bold-font">
-              <Group position="apart">
-                Channels
-                <Button variant="default" compact>
-                  +
-                </Button>
-              </Group>
-            </Text>
-            <Text className="client-stack-channels client-nav-hover">
-              Channel 1
-            </Text>
-            <Text className="client-stack-channels client-nav-hover">
-              Channel 2
-            </Text>
-            <Text className="client-stack-channels client-nav-hover">
-              Channel 3
-            </Text>
-            <Text className="client-stack-channels client-nav-hover">
-              Channel 4
-            </Text>
-            <Text className="client-stack-channels client-nav-hover">
-              Channel 5
-            </Text>
-          </Stack>
-          <Stack>
-            <Text className="client-stack-direct-messages-header bold-font">
-              <Group position="apart">
-                Direct Messages
-                <Button variant="default" compact>
-                  +
-                </Button>
-              </Group>
-            </Text>
-            <Text className="client-stack-direct-messages client-nav-hover">
-              John Doe
-            </Text>
-            <Text className="client-stack-direct-messages client-nav-hover">
-              John Doe
-            </Text>
-            <Text className="client-stack-direct-messages client-nav-hover">
-              John Doe
-            </Text>
-            <Text className="client-stack-direct-messages client-nav-hover">
-              John Doe
-            </Text>
-            <Text className="client-stack-direct-messages client-nav-hover">
-              John Doe
-            </Text>
-          </Stack>
+          <ClientNavbar />
         </Navbar>
       }
       header={
@@ -96,20 +44,12 @@ const Client = () => {
                 mr="xl"
               />
             </MediaQuery>
-            <Link to="/client" className="client-logo-container">
-              <FaSlack className="client-logo-size" />
-              <Text className="client-logo-size bold-font client-logo-margin">
-                slack
-              </Text>
-            </Link>
-            <div className="client-logout-container">
-              <Button variant="default">Logout</Button>
-            </div>
+            <ClientHeader />
           </div>
         </Header>
       }
     >
-      <MessageBody />
+      <ClientMessageBody />
     </AppShell>
   );
 };
