@@ -1,3 +1,6 @@
+.client-header-container {
+  background-color: var(--dark);
+}
 .client-header {
   display: flex;
   align-items: center;
@@ -24,6 +27,14 @@
 .client-logout-container {
   position: absolute;
   right: 0;
+}
+
+.client-navbar {
+  overflow-y: auto;
+}
+
+.client-add-button {
+  margin-left: 0.5rem;
 }
 
 .client-stack-channels-header {

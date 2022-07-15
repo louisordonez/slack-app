@@ -9,6 +9,7 @@ import {
   useMantineTheme,
   Button,
   Stack,
+  Group,
 } from '@mantine/core';
 import './Client.scss';
 import { FaSlack } from 'react-icons/fa';
@@ -35,12 +36,17 @@ const Client = () => {
           p="md"
           hiddenBreakpoint="sm"
           hidden={!opened}
-          width={{ sm: 200, lg: 300 }}
-          style={{ overflowY: 'auto' }}
+          width={{ sm: 210, lg: 300 }}
+          className="client-navbar"
         >
           <Stack>
             <Text className="client-stack-channels-header bold-font">
-              Channels
+              <Group position="apart">
+                Channels{' '}
+                <Button variant="default" compact>
+                  +
+                </Button>
+              </Group>
             </Text>
             <Text className="client-stack-channels client-nav-hover">
               Channel 1
@@ -60,7 +66,12 @@ const Client = () => {
           </Stack>
           <Stack>
             <Text className="client-stack-direct-messages-header bold-font">
-              Direct Messages
+              <Group position="apart">
+                Direct Messages
+                <Button variant="default" compact>
+                  +
+                </Button>
+              </Group>
             </Text>
             <Text className="client-stack-direct-messages client-nav-hover">
               John Doe
