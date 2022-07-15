@@ -10,7 +10,7 @@ import {
 import './Client.scss';
 import ClientNavbar from '../../components/Client/Navbar/ClientNavbar';
 import ClientHeader from '../../components/Client/Header/ClientHeader';
-import ClientMessageBody from '../../components/Client/Message/MessageBody/ClientMessageBody';
+import ClientMessage from '../../components/Client/Message/ClientMessage';
 
 const Client = () => {
   const theme = useMantineTheme();
@@ -49,7 +49,7 @@ const Client = () => {
         </Header>
       }
     >
-      <ClientMessageBody />
+      <ClientMessage />
     </AppShell>
   );
 };
