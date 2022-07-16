@@ -1,14 +1,15 @@
 import React from 'react';
 import { Navbar, Stack } from '@mantine/core';
-import './ClientNavbar.scss';
 import ClientProfileNavbar from './Profile/ClientProfileNavbar';
 import ClientChannelsNavbar from './Channels/ClientChannelsNavbar';
 import ClientDirectMessagesNavbar from './DirectMessages/ClientDirectMessagesNavbar';
+import './ClientNavbar.scss';
 
 const ClientNavbar = ({
   hidden,
   onUserLogOut,
   onCreateChannelModalShown,
+  onSendDirectMessageModalShown,
   onIsLoadingVisible,
 }) => {
   return (
@@ -32,7 +33,9 @@ const ClientNavbar = ({
           />
         </Stack>
         <Stack>
-          <ClientDirectMessagesNavbar />
+          <ClientDirectMessagesNavbar
+            onSendDirectMessageModalShown={onSendDirectMessageModalShown}
+          />
         </Stack>
       </Navbar>
     </>

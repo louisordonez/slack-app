@@ -10,46 +10,40 @@ const DATA = [
   { value: 6, label: 'Blitz.js' },
 ];
 
-const CreateChannelForm = () => {
+const ClientSendDirectMessageForm = () => {
   const [value, setValue] = useState();
-  const [channelName, setChannelName] = useState('');
-  const [channel, setChannel] = useState({});
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
 
-  const handleChannel = () => {
-    const newChannel = {
-      name: channelName,
-      user_ids: value,
-    };
-
-    setChannel(newChannel);
-  };
+  const handleDirectMessage = () => {};
 
   return (
     <>
       <Stack>
-        <TextInput
-          required
-          label="Channel name"
-          onChange={(e) => setChannelName(e.target.value)}
-        ></TextInput>
         <MultiSelect
           required
           searchable
           clearable
-          label="Select users"
+          label="Select user"
           nothingFound="Nothing found"
           maxDropdownHeight={160}
           limit={20}
           value={value}
           onChange={setValue}
           data={DATA}
+          maxSelectedValues={1}
         />
+        <TextInput
+          required
+          label="Message"
+          onChange={(e) => setMessage(e.target.value)}
+        ></TextInput>
       </Stack>
       <Group position="right" mt="xl">
-        <Button onClick={handleChannel}>Create</Button>
+        <Button onClick={handleDirectMessage}>Send</Button>
       </Group>
     </>
   );
 };
 
-export default CreateChannelForm;
+export default ClientSendDirectMessageForm;

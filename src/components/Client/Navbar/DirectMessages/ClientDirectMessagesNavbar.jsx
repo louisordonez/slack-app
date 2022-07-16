@@ -1,13 +1,17 @@
 import React from 'react';
 import { Text, Button, Group } from '@mantine/core';
 
-const ClientDirectMessagesNavbar = () => {
+const ClientDirectMessagesNavbar = ({ onSendDirectMessageModalShown }) => {
   return (
     <>
       <Text className="client-stack-direct-messages-header bold-font">
         <Group position="apart">
           Direct Messages
-          <Button variant="default" compact>
+          <Button
+            variant="default"
+            compact
+            onClick={onSendDirectMessageModalShown}
+          >
             +
           </Button>
         </Group>
