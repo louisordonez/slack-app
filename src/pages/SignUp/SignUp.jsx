@@ -28,8 +28,8 @@ const SignUp = ({ onSignUpSubmit }) => {
       ];
 
       onSignUpSubmit(responseHeaders, responseData, userLoggedIn);
-      setIsLoadingVisible(false);
       navigate('/login');
+      setIsLoadingVisible(false);
       showSuccessToast(`You may now login using your email and password`);
     };
 

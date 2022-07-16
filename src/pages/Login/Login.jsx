@@ -26,8 +26,8 @@ const Login = ({ onLoginSubmit }) => {
       ];
 
       onLoginSubmit(responseHeaders, responseData, userLoggedIn);
-      setIsLoadingVisible(false);
       navigate('/client');
+      setIsLoadingVisible(false);
     };
 
     const onError = (error) => {
