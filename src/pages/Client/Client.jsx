@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AppShell, useMantineTheme } from '@mantine/core';
+import { AppShell } from '@mantine/core';
 import './Client.scss';
 import ClientNavbar from '../../components/Client/Navbar/ClientNavbar';
 import ClientHeader from '../../components/Client/Header/ClientHeader';
