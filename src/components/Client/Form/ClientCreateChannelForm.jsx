@@ -4,15 +4,6 @@ import { USERS_ENDPOINT } from '../../../services/constants/App/SlackAvionApiUrl
 import { axiosGetCall } from '../../../services/utils/AxiosApiCall';
 import { getLocalStorageItem } from '../../../services/utils/LocalStorage';
 
-const DATA = [
-  { value: 1, label: 'React' },
-  { value: 2, label: 'Angular' },
-  { value: 3, label: 'Svelte' },
-  { value: 4, label: 'Vue' },
-  { value: 5, label: 'Next.js' },
-  { value: 6, label: 'Blitz.js' },
-];
-
 const ClientCreateChannelForm = ({ opened }) => {
   const [value, setValue] = useState();
   const [channelName, setChannelName] = useState('');
