@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Anchor, Title, Text, Container, LoadingOverlay } from '@mantine/core';
+import { Anchor, Title, Text, Container } from '@mantine/core';
 import Header from '../../components/Header/Header';
 import SignUpForm from '../../components/Form/SignUp/SignUpForm';
 import { axiosPostCall } from '../../services/utils/AxiosApiCall';
