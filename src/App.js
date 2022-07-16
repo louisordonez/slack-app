@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { LoadingOverlay } from '@mantine/core';
 import './assets/styles/App.scss';
 import Landing from './pages/Landing/Landing';
@@ -25,8 +25,6 @@ const App = () => {
     }
   }, [isLoggedIn, userHeaders, userData]);
 
-  let navigate = useNavigate();
-
   const handleUserData = (headers, data, bool) => {
     setUserHeaders(headers);
     setUserData(data);
@@ -46,7 +44,8 @@ const App = () => {
     assignLocalStorageItem('isLoggedIn', emptyArray);
 
     handleIsLoadingVisible();
-    navigate('/login');
+
+    window.location.assign('/login');
   };
 
   return (
