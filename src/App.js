@@ -56,11 +56,12 @@ const App = () => {
           path="signup"
           element={<SignUp onSignUpSubmit={handleUserData} />}
         />
-        <Route
-          path="client"
-          element={<Client onUserLogOut={handleUserLogOut} />}
-        />
-        <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}></Route>
+        <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
+          <Route
+            path="client"
+            element={<Client onUserLogOut={handleUserLogOut} />}
+          />
+        </Route>
         <Route path="*" element={<Error404 />} />
       </Routes>
     </div>
