@@ -5,7 +5,7 @@ const ProtectedRoute = ({ isLoggedIn }) => {
   if (isLoggedIn === null || isLoggedIn.length !== 0) {
     return <Outlet />;
   } else {
-    return <Navigate to="login" />;
+    return <Navigate to="/" />;
   }
 };
 
