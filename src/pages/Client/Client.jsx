@@ -12,7 +12,9 @@ import { axiosGetCall, axiosPostCall } from '../../services/utils/AxiosApiCall';
 import { showSuccessToast, showErrorToast } from '../../components/Toast/Toast';
 
 const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
-  const userHeaders = getLocalStorageItem('userHeaders')[0];
+  if (getLocalStorageItem('userHeaders') === null) {
+    window.location.assign('/');
+  }
 
   const [opened, setOpened] = useState(false);
   const [isCreateChannelModalShown, setIsCreateChannelModalShown] =
@@ -24,6 +26,8 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     setIsCreateChannelModalShown((state) => !state);
 
   const handleCreateChannel = (object) => {
+    const userHeaders = getLocalStorageItem('userHeaders')[0];
+
     const onSuccess = (response) => {
       onIsLoadingVisible(false);
 

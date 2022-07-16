@@ -10,6 +10,6 @@ export const useRedirectToClient = () => {
       if (IsLoggedInLocalStorage.length > 0) {
         navigate('/client');
       }
-    }
-  }, [navigate]);
+    } // eslint-disable-next-line
+  }, []);
 };
