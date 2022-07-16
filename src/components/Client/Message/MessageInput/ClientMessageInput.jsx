@@ -1,30 +1,38 @@
 import React from 'react';
-import { Textarea, Button } from '@mantine/core';
+import { TextInput, ActionIcon, useMantineTheme } from '@mantine/core';
 import { Send } from 'tabler-icons-react';
 import './ClientMessageInput.scss';
 
 const ClientMessageInput = () => {
+  const theme = useMantineTheme();
+
   return (
     <>
       <form>
         <div className="client-message-input-container">
           <div className="client-message-text-input-container">
-            <Textarea
+            <TextInput
               required
+              radius="xl"
+              size="md"
               className="client-message-text-input"
+              rightSection={
+                <ActionIcon
+                  size={32}
+                  radius="xl"
+                  color={theme.primaryColor}
+                  variant="filled"
+                >
+                  <Send size={18} />
+                </ActionIcon>
+              }
+              rightSectionWidth={42}
               onKeyDown={(e) => {
-                if (e.key === 'Enter' && e.shiftKey) {
-                  console.log('Enter and Shift key pressed');
-                } else {
-                  // Submit
+                if (e.key === 'Enter') {
+                  console.log('Submit');
                 }
               }}
             />
-          </div>
-          <div className="client-message-send-button-container">
-            <Button className="client-message-send-button" type="submit">
-              <Send size={32} strokeWidth={2} color={'white'} />
-            </Button>
           </div>
         </div>
       </form>
