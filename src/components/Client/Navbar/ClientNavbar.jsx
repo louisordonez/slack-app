@@ -2,14 +2,18 @@ import React from 'react';
 import { Text, Button, Stack, Group } from '@mantine/core';
 import './ClientNavbar.scss';
 
-const ClientNavbar = () => {
+const ClientNavbar = ({ onCreateChannelModalShown }) => {
   return (
     <>
       <Stack>
         <Text className="client-stack-channels-header bold-font">
           <Group position="apart">
             Channels
-            <Button variant="default" compact>
+            <Button
+              variant="default"
+              compact
+              onClick={onCreateChannelModalShown}
+            >
               +
             </Button>
           </Group>
