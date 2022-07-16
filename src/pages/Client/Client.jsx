@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   AppShell,
-  Navbar,
   Header,
   MediaQuery,
   Burger,
@@ -30,17 +29,10 @@ const Client = ({ onUserLogOut }) => {
         navbarOffsetBreakpoint="sm"
         fixed
         navbar={
-          <Navbar
-            p="md"
-            hiddenBreakpoint="sm"
+          <ClientNavbar
             hidden={!opened}
-            width={{ sm: 210, lg: 300 }}
-            className="client-navbar"
-          >
-            <ClientNavbar
-              onCreateChannelModalShown={handleCreateChannelModal}
-            />
-          </Navbar>
+            onCreateChannelModalShown={handleCreateChannelModal}
+          />
         }
         header={
           <Header height={70} p="md">
