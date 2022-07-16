@@ -1,5 +1,9 @@
-.client-message-divider {
+.client-message-header-name {
+  cursor: pointer;
+}
+
+.client-message-header-divider {
   margin-left: -16px;
   margin-right: -16px;
-  border-top-color: rgb(234, 236, 239);
+  border-top-color: var(--divider);
 }

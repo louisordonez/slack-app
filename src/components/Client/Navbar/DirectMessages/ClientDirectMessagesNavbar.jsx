@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, Button, Group } from '@mantine/core';
+import './ClientDirectMessagesNavbar.scss';
 
 const ClientDirectMessagesNavbar = ({ onSendDirectMessageModalShown }) => {
   return (

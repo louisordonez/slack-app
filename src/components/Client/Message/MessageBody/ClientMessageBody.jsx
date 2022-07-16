@@ -7,7 +7,7 @@ const ClientMessageBody = () => {
     <>
       <div className="client-message-body">
         <div className="client-message-body-profile">
-          <Avatar color="blue" size="lg"></Avatar>
+          <Avatar size="lg"></Avatar>
           <div>
             <Text className="client-message-body-name bold-font">John Doe</Text>
             <Text className="client-message-body-date-time">
@@ -37,7 +37,7 @@ const ClientMessageBody = () => {
       </div>
       <div className="client-message-body">
         <div className="client-message-body-profile">
-          <Avatar color="blue" size="lg"></Avatar>
+          <Avatar size="lg"></Avatar>
           <div>
             <Text className="client-message-body-name bold-font">John Doe</Text>
             <Text className="client-message-body-date-time">
@@ -74,7 +74,7 @@ const ClientMessageBody = () => {
       </div>
       <div className="client-message-body">
         <div className="client-message-body-profile">
-          <Avatar color="blue" size="lg"></Avatar>
+          <Avatar size="lg"></Avatar>
           <div>
             <Text className="client-message-body-name bold-font">
               John Smith

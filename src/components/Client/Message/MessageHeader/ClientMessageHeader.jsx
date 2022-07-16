@@ -1,14 +1,17 @@
 import React from 'react';
-import { Group, Divider, Text } from '@mantine/core';
+import { Group, Divider, Text, Avatar } from '@mantine/core';
 import './ClientMessageHeader.scss';
 
 const ClientMessageHeader = () => {
   return (
     <>
       <Group>
-        <Text>Channel/Name</Text>
+        <Group className="client-message-header-name">
+          <Avatar></Avatar>
+          <Text className="bold-font">Channel/Name</Text>
+        </Group>
       </Group>
-      <Divider my="sm" className="client-message-divider" />
+      <Divider my="sm" className="client-message-header-divider" />
     </>
   );
 };

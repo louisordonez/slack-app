@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, Button, Group } from '@mantine/core';
+import './ClientChannelsNavbar.scss';
 
 const ClientChannelsNavbar = ({ onCreateChannelModalShown }) => {
   return (
