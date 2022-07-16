@@ -1,54 +1,70 @@
 import React, { useEffect, useState } from 'react';
 import { TextInput, MultiSelect, Stack, Button, Group } from '@mantine/core';
-import { USERS_ENDPOINT } from '../../../services/constants/App/SlackAvionApiUrl';
-import { axiosGetCall } from '../../../services/utils/AxiosApiCall';
+import { USERS_ENDPOINT } from '../../../services/constants/SlackAvionApiUrl';
 import { getLocalStorageItem } from '../../../services/utils/LocalStorage';
+import { axiosGetCall } from '../../../services/utils/AxiosApiCall';
+import { showErrorToast } from '../../../components/Toast/Toast';
 
-const ClientCreateChannelForm = ({ opened }) => {
-  const [value, setValue] = useState();
+const ClientCreateChannelForm = ({ opened, onCreateChannel }) => {
+  const [userIds, setUserIds] = useState();
   const [channelName, setChannelName] = useState('');
-  const [channel, setChannel] = useState({});
   const [emailData, setEmailData] = useState([]);
 
   useEffect(() => {
     if (opened === true) {
       getEmailList();
-    }
+    } // eslint-disable-next-line
   }, [opened]);
 
   const onSuccess = (response) => {
-    const filterEmailList = (list) => {
+    const createNewEmailList = (list) => {
+      let newEmailListArray = [];
+
       list.forEach((object) => {
-        const newData = {
+        const newEmailData = {
           value: object.id,
           label: object.email,
         };
 
-        setEmailData((state) => [...state, newData]);
+        newEmailListArray.push(newEmailData);
       });
+
+      setEmailData(
+        newEmailListArray.sort((a, b) => {
+          return a.value - b.value;
+        })
+      );
     };
 
-    filterEmailList(response.data.data);
+    createNewEmailList(response.data.data);
   };
 
   const onError = (error) => {
-    console.log(error);
+    const errorMessage = error.response.data.errors;
+
+    errorMessage.map((message) => showErrorToast(message));
   };
 
   const getEmailList = () => {
-    const userHeaders = getLocalStorageItem('userHeaders');
+    const userHeaders = getLocalStorageItem('userHeaders')[0];
 
-    axiosGetCall(USERS_ENDPOINT, userHeaders[0], onSuccess, onError);
+    axiosGetCall(USERS_ENDPOINT, userHeaders, onSuccess, onError);
+  };
+
+  const resetCreateChannelForm = () => {
+    setUserIds('');
+    setChannelName('');
   };
 
   const handleChannel = () => {
-    const newChannel = {
-      name: channelName,
-      user_ids: value,
-    };
+    let newChannel = { name: channelName, user_ids: userIds };
 
-    // setChannel(newChannel);
-    console.log(newChannel);
+    if (userIds === undefined) {
+      newChannel = { name: channelName, user_ids: [] };
+    }
+
+    onCreateChannel(newChannel);
+    resetCreateChannelForm();
   };
 
   return (
@@ -58,6 +74,7 @@ const ClientCreateChannelForm = ({ opened }) => {
           required
           label="Channel name"
           onChange={(e) => setChannelName(e.target.value)}
+          value={channelName}
         ></TextInput>
         <MultiSelect
           required
@@ -67,8 +84,8 @@ const ClientCreateChannelForm = ({ opened }) => {
           nothingFound="Nothing found"
           maxDropdownHeight={160}
           limit={20}
-          value={value}
-          onChange={setValue}
+          value={userIds}
+          onChange={setUserIds}
           data={emailData}
         />
       </Stack>

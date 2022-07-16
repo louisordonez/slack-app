@@ -2,7 +2,11 @@ import React from 'react';
 import { Modal } from '@mantine/core';
 import ClientCreateChannelForm from '../Form/ClientCreateChannelForm';
 
-const ClientCreateChannelModal = ({ opened, onCreateChannelModalShown }) => {
+const ClientCreateChannelModal = ({
+  opened,
+  onCreateChannelModalShown,
+  onCreateChannel,
+}) => {
   return (
     <Modal
       centered
@@ -10,7 +14,10 @@ const ClientCreateChannelModal = ({ opened, onCreateChannelModalShown }) => {
       onClose={() => onCreateChannelModalShown(false)}
       title="Creat Channel"
     >
-      <ClientCreateChannelForm opened={opened} />
+      <ClientCreateChannelForm
+        opened={opened}
+        onCreateChannel={onCreateChannel}
+      />
     </Modal>
   );
 };

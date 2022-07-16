@@ -5,7 +5,7 @@ import Header from '../../components/Header/Header';
 import LoginForm from '../../components/Form/Login/LoginForm';
 import { useRedirectToClient } from '../../services/utils/UseRedirectToClient';
 import { axiosPostCall } from '../../services/utils/AxiosApiCall';
-import { LOGIN_ENDPOINT } from '../../services/constants/App/SlackAvionApiUrl';
+import { LOGIN_ENDPOINT } from '../../services/constants/SlackAvionApiUrl';
 import { showErrorToast } from '../../components/Toast/Toast';
 
 const Login = ({ onLoginSubmit, onIsLoadingVisible }) => {
@@ -16,6 +16,8 @@ const Login = ({ onLoginSubmit, onIsLoadingVisible }) => {
   const onSuccess = (response) => {
     const responseHeaders = [
       {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
         'access-token': response.headers['access-token'],
         client: response.headers.client,
         expiry: response.headers.expiry,

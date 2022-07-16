@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from '../constants/App/SlackAvionApiUrl';
+import { BASE_URL } from '../constants/SlackAvionApiUrl';
 
 export const axiosGetCall = async (
   endpoint,

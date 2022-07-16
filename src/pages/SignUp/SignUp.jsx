@@ -4,7 +4,7 @@ import { Anchor, Title, Text, Container } from '@mantine/core';
 import Header from '../../components/Header/Header';
 import SignUpForm from '../../components/Form/SignUp/SignUpForm';
 import { axiosPostCall } from '../../services/utils/AxiosApiCall';
-import { SIGN_UP_ENDPOINT } from '../../services/constants/App/SlackAvionApiUrl';
+import { SIGN_UP_ENDPOINT } from '../../services/constants/SlackAvionApiUrl';
 import { useRedirectToClient } from '../../services/utils/UseRedirectToClient';
 import { showSuccessToast, showErrorToast } from '../../components/Toast/Toast';
 
