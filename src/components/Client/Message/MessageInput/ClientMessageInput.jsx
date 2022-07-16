@@ -9,32 +9,29 @@ const ClientMessageInput = () => {
   return (
     <>
       <form>
-        <div className="client-message-input-container">
-          <div className="client-message-text-input-container">
-            <TextInput
-              required
+        <TextInput
+          required
+          radius="xl"
+          size="md"
+          className="client-message-text-input"
+          rightSection={
+            <ActionIcon
+              type="submit"
+              size={32}
               radius="xl"
-              size="md"
-              className="client-message-text-input"
-              rightSection={
-                <ActionIcon
-                  size={32}
-                  radius="xl"
-                  color={theme.primaryColor}
-                  variant="filled"
-                >
-                  <Send size={18} />
-                </ActionIcon>
-              }
-              rightSectionWidth={42}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  console.log('Submit');
-                }
-              }}
-            />
-          </div>
-        </div>
+              color={theme.primaryColor}
+              variant="filled"
+            >
+              <Send size={18} />
+            </ActionIcon>
+          }
+          rightSectionWidth={42}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              console.log('Submit');
+            }
+          }}
+        />
       </form>
     </>
   );

@@ -8,9 +8,15 @@ const ClientMessage = () => {
   return (
     <>
       <div className="client-message-container">
-        <ClientMessageHeader />
-        <ClientMessageBody />
-        <ClientMessageInput />
+        <div className="client-message-header-container">
+          <ClientMessageHeader />
+        </div>
+        <div className="client-message-body-container">
+          <ClientMessageBody />
+        </div>
+        <div className="client-message-input-container">
+          <ClientMessageInput />
+        </div>
       </div>
     </>
   );

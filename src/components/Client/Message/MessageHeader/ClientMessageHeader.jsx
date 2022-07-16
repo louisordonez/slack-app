@@ -5,7 +5,7 @@ import './ClientMessageHeader.scss';
 const ClientMessageHeader = () => {
   return (
     <>
-      <Group className="client-message-header">
+      <Group>
         <Text>Channel/Name</Text>
       </Group>
       <Divider my="sm" className="client-message-divider" />

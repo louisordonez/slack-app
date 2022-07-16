@@ -1,3 +1,18 @@
 .client-message-container {
   height: 68%;
 }
+
+.client-message-header-container {
+  background-color: var(--white);
+}
+
+.client-message-body-container {
+  height: 100%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  overflow-y: scroll;
+}
+
+.client-message-input-container {
+  width: 100%;
+}
