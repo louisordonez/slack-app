@@ -64,12 +64,7 @@ const App = () => {
         />
         <Route
           path="signup"
-          element={
-            <SignUp
-              onSignUpSubmit={handleUserData}
-              onIsLoadingVisible={handleIsLoadingVisible}
-            />
-          }
+          element={<SignUp onIsLoadingVisible={handleIsLoadingVisible} />}
         />
         <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
           <Route

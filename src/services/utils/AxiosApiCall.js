@@ -1,22 +1,31 @@
 import axios from 'axios';
 import { BASE_URL } from '../constants/App/SlackAvionApiUrl';
 
-export const axiosGetCall = async (endpoint, onSuccess, onError) => {
+export const axiosGetCall = async (
+  endpoint,
+  reqHeaders,
+  onSuccess,
+  onError
+) => {
   return axios
-    .get(`${BASE_URL}${endpoint}`)
+    .get(`${BASE_URL}${endpoint}`, {
+      headers: reqHeaders,
+    })
     .then((response) => onSuccess(response))
     .catch((error) => onError(error));
 };
 
 export const axiosPostCall = async (
   endpoint,
-  json,
-  headers,
+  body,
+  reqHeaders,
   onSuccess,
   onError
 ) => {
   return axios
-    .post(`${BASE_URL}${endpoint}`, json, headers)
+    .post(`${BASE_URL}${endpoint}`, body, {
+      headers: reqHeaders,
+    })
     .then((response) => onSuccess(response))
     .catch((error) => onError(error));
 };

@@ -10,7 +10,7 @@ const ClientCreateChannelModal = ({ opened, onCreateChannelModalShown }) => {
       onClose={() => onCreateChannelModalShown(false)}
       title="Creat Channel"
     >
-      <ClientCreateChannelForm />
+      <ClientCreateChannelForm opened={opened} />
     </Modal>
   );
 };

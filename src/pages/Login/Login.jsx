@@ -13,30 +13,41 @@ const Login = ({ onLoginSubmit, onIsLoadingVisible }) => {
 
   let navigate = useNavigate();
 
+  const onSuccess = (response) => {
+    const responseHeaders = [
+      {
+        'access-token': response.headers['access-token'],
+        client: response.headers.client,
+        expiry: response.headers.expiry,
+        uid: response.headers.uid,
+      },
+    ];
+    const responseData = [response.data.data];
+    const userLoggedIn = [
+      {
+        isLoggedIn: true,
+      },
+    ];
+
+    onLoginSubmit(responseHeaders, responseData, userLoggedIn);
+
+    window.location.assign('/login');
+
+    onIsLoadingVisible(false);
+  };
+
+  const onError = (error) => {
+    const errorMessage = error.response.data.errors;
+
+    onIsLoadingVisible(false);
+    errorMessage.map((message) => showErrorToast(message));
+  };
+
   const handleUserLogin = (userInput) => {
-    const onSuccess = (response) => {
-      const responseHeaders = [response.headers];
-      const responseData = [response.data.data];
-      const userLoggedIn = [
-        {
-          isLoggedIn: true,
-        },
-      ];
-
-      onLoginSubmit(responseHeaders, responseData, userLoggedIn);
-      window.location.assign('/login');
-      onIsLoadingVisible(false);
-    };
-
-    const onError = (error) => {
-      const errorMessage = error.response.data.errors;
-
-      onIsLoadingVisible(false);
-      errorMessage.map((message) => showErrorToast(message));
-    };
+    const emptyObj = {};
 
     onIsLoadingVisible(true);
-    axiosPostCall(LOGIN_ENDPOINT, userInput, {}, onSuccess, onError);
+    axiosPostCall(LOGIN_ENDPOINT, userInput, emptyObj, onSuccess, onError);
   };
 
   return (

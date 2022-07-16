@@ -8,38 +8,29 @@ import { SIGN_UP_ENDPOINT } from '../../services/constants/App/SlackAvionApiUrl'
 import { useRedirectToClient } from '../../services/utils/UseRedirectToClient';
 import { showSuccessToast, showErrorToast } from '../../components/Toast/Toast';
 
-const SignUp = ({ onSignUpSubmit, onIsLoadingVisible }) => {
+const SignUp = ({ onIsLoadingVisible }) => {
   useRedirectToClient();
 
   let navigate = useNavigate();
 
+  const onSuccess = () => {
+    navigate('/login');
+    onIsLoadingVisible(false);
+    showSuccessToast(`You may now login using your email and password`);
+  };
+
+  const onError = (error) => {
+    const errorMessage = error.response.data.errors.full_messages;
+
+    onIsLoadingVisible(false);
+    errorMessage.map((message) => showErrorToast(message));
+  };
+
   const handleUserSignUp = (userInput) => {
-    const headers = {};
-
-    const onSuccess = (response) => {
-      const responseHeaders = [response.headers];
-      const responseData = [response.data.data];
-      const userLoggedIn = [
-        {
-          isLoggedIn: true,
-        },
-      ];
-
-      onSignUpSubmit(responseHeaders, responseData, userLoggedIn);
-      navigate('/login');
-      onIsLoadingVisible(false);
-      showSuccessToast(`You may now login using your email and password`);
-    };
-
-    const onError = (error) => {
-      const errorMessage = error.response.data.errors.full_messages;
-
-      onIsLoadingVisible(false);
-      errorMessage.map((message) => showErrorToast(message));
-    };
+    const emptyObj = {};
 
     onIsLoadingVisible(true);
-    axiosPostCall(SIGN_UP_ENDPOINT, userInput, headers, onSuccess, onError);
+    axiosPostCall(SIGN_UP_ENDPOINT, userInput, emptyObj, onSuccess, onError);
   };
 
   return (
