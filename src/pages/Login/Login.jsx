@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Anchor, Title, Text, Container } from '@mantine/core';
+import { Anchor, Title, Text, Container, LoadingOverlay } from '@mantine/core';
 import Header from '../../components/Header/Header';
 import LoginForm from '../../components/Form/Login/LoginForm';
 import { useRedirectToClient } from '../../services/utils/UseRedirectToClient';
@@ -10,6 +10,8 @@ import { showErrorToast } from '../../components/Toast/Toast';
 
 const Login = ({ onLoginSubmit }) => {
   useRedirectToClient();
+
+  const [isLoadingVisible, setIsLoadingVisible] = useState(false);
 
   let navigate = useNavigate();
 
@@ -24,20 +26,24 @@ const Login = ({ onLoginSubmit }) => {
       ];
 
       onLoginSubmit(responseHeaders, responseData, userLoggedIn);
+      setIsLoadingVisible(false);
       navigate('/client');
     };
 
     const onError = (error) => {
       const errorMessage = error.response.data.errors;
 
+      setIsLoadingVisible(false);
       errorMessage.map((message) => showErrorToast(message));
     };
 
+    setIsLoadingVisible(true);
     axiosPostCall(LOGIN_ENDPOINT, userInput, {}, onSuccess, onError);
   };
 
   return (
     <>
+      <LoadingOverlay visible={isLoadingVisible} />
       <Header />
       <Container size={420} my={40}>
         <Title

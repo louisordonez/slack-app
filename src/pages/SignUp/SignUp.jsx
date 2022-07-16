@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Anchor, Title, Text, Container } from '@mantine/core';
+import { Anchor, Title, Text, Container, LoadingOverlay } from '@mantine/core';
 import Header from '../../components/Header/Header';
 import SignUpForm from '../../components/Form/SignUp/SignUpForm';
 import { axiosPostCall } from '../../services/utils/AxiosApiCall';
@@ -10,6 +10,8 @@ import { showSuccessToast, showErrorToast } from '../../components/Toast/Toast';
 
 const SignUp = ({ onSignUpSubmit }) => {
   useRedirectToClient();
+
+  const [isLoadingVisible, setIsLoadingVisible] = useState(false);
 
   let navigate = useNavigate();
 
@@ -26,6 +28,7 @@ const SignUp = ({ onSignUpSubmit }) => {
       ];
 
       onSignUpSubmit(responseHeaders, responseData, userLoggedIn);
+      setIsLoadingVisible(false);
       navigate('/login');
       showSuccessToast(`You may now login using your email and password`);
     };
@@ -33,14 +36,17 @@ const SignUp = ({ onSignUpSubmit }) => {
     const onError = (error) => {
       const errorMessage = error.response.data.errors.full_messages;
 
+      setIsLoadingVisible(false);
       errorMessage.map((message) => showErrorToast(message));
     };
 
+    setIsLoadingVisible(true);
     axiosPostCall(SIGN_UP_ENDPOINT, userInput, headers, onSuccess, onError);
   };
 
   return (
     <>
+      <LoadingOverlay visible={isLoadingVisible} />
       <Header />
       <Container size={420} my={40}>
         <Title
