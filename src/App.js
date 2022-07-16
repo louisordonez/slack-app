@@ -76,6 +76,7 @@ const App = () => {
             path="client"
             element={
               <Client
+                userData={userData}
                 onUserLogOut={handleUserLogOut}
                 onIsLoadingVisible={handleIsLoadingVisible}
               />
