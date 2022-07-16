@@ -8,10 +8,8 @@ import { SIGN_UP_ENDPOINT } from '../../services/constants/App/SlackAvionApiUrl'
 import { useRedirectToClient } from '../../services/utils/UseRedirectToClient';
 import { showSuccessToast, showErrorToast } from '../../components/Toast/Toast';
 
-const SignUp = ({ onSignUpSubmit }) => {
+const SignUp = ({ onSignUpSubmit, onIsLoadingVisible }) => {
   useRedirectToClient();
-
-  const [isLoadingVisible, setIsLoadingVisible] = useState(false);
 
   let navigate = useNavigate();
 
@@ -29,24 +27,23 @@ const SignUp = ({ onSignUpSubmit }) => {
 
       onSignUpSubmit(responseHeaders, responseData, userLoggedIn);
       navigate('/login');
-      setIsLoadingVisible(false);
+      onIsLoadingVisible(false);
       showSuccessToast(`You may now login using your email and password`);
     };
 
     const onError = (error) => {
       const errorMessage = error.response.data.errors.full_messages;
 
-      setIsLoadingVisible(false);
+      onIsLoadingVisible(false);
       errorMessage.map((message) => showErrorToast(message));
     };
 
-    setIsLoadingVisible(true);
+    onIsLoadingVisible(true);
     axiosPostCall(SIGN_UP_ENDPOINT, userInput, headers, onSuccess, onError);
   };
 
   return (
     <>
-      <LoadingOverlay visible={isLoadingVisible} />
       <Header />
       <Container size={420} my={40}>
         <Title

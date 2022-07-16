@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import { LoadingOverlay } from '@mantine/core';
 import './assets/styles/App.scss';
 import Landing from './pages/Landing/Landing';
 import Login from './pages/Login/Login';
@@ -14,6 +15,7 @@ const App = () => {
   const [userHeaders, setUserHeaders] = useState([]);
   const [userData, setUserData] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(IsLoggedInLocalStorage);
+  const [isLoadingVisible, setIsLoadingVisible] = useState(false);
 
   useEffect(() => {
     if (isLoggedIn === null) {
@@ -34,6 +36,8 @@ const App = () => {
     assignLocalStorageItem('isLoggedIn', bool);
   };
 
+  const handleIsLoadingVisible = () => setIsLoadingVisible((state) => !state);
+
   const handleUserLogOut = () => {
     const emptyArray = [];
 
@@ -41,25 +45,42 @@ const App = () => {
     assignLocalStorageItem('userData', emptyArray);
     assignLocalStorageItem('isLoggedIn', emptyArray);
 
+    handleIsLoadingVisible();
     navigate('/login');
   };
 
   return (
     <div className="app-container">
+      <LoadingOverlay visible={isLoadingVisible} />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route
           path="login"
-          element={<Login onLoginSubmit={handleUserData} />}
+          element={
+            <Login
+              onLoginSubmit={handleUserData}
+              onIsLoadingVisible={handleIsLoadingVisible}
+            />
+          }
         />
         <Route
           path="signup"
-          element={<SignUp onSignUpSubmit={handleUserData} />}
+          element={
+            <SignUp
+              onSignUpSubmit={handleUserData}
+              onIsLoadingVisible={handleIsLoadingVisible}
+            />
+          }
         />
         <Route element={<ProtectedRoute isLoggedIn={isLoggedIn} />}>
           <Route
             path="client"
-            element={<Client onUserLogOut={handleUserLogOut} />}
+            element={
+              <Client
+                onUserLogOut={handleUserLogOut}
+                onIsLoadingVisible={handleIsLoadingVisible}
+              />
+            }
           />
         </Route>
         <Route path="*" element={<Error404 />} />

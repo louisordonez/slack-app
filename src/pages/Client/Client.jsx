@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { LoadingOverlay, AppShell } from '@mantine/core';
+import { AppShell } from '@mantine/core';
 import './Client.scss';
 import ClientNavbar from '../../components/Client/Navbar/ClientNavbar';
 import ClientHeader from '../../components/Client/Header/ClientHeader';
 import ClientMessage from '../../components/Client/Message/ClientMessage';
 import CreateChannelModal from '../../components/Client/Modal/CreateChannelModal';
 
-const Client = ({ onUserLogOut }) => {
-  const [isLoadingVisible, setIsLoadingVisible] = useState(false);
+const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   const [isCreateChannelModalShown, setIsCreateChannelModalShown] =
     useState(false);
   const [opened, setOpened] = useState(false);
@@ -19,7 +18,6 @@ const Client = ({ onUserLogOut }) => {
 
   return (
     <>
-      <LoadingOverlay visible={isLoadingVisible} />
       <AppShell
         className="client-container"
         navbarOffsetBreakpoint="sm"
@@ -27,16 +25,12 @@ const Client = ({ onUserLogOut }) => {
         navbar={
           <ClientNavbar
             hidden={opened}
-            onCreateChannelModalShown={handleCreateChannelModal}
-          />
-        }
-        header={
-          <ClientHeader
-            opened={opened}
-            onOpened={handleOpened}
             onUserLogOut={onUserLogOut}
+            onCreateChannelModalShown={handleCreateChannelModal}
+            onIsLoadingVisible={onIsLoadingVisible}
           />
         }
+        header={<ClientHeader opened={opened} onOpened={handleOpened} />}
       >
         <ClientMessage />
       </AppShell>

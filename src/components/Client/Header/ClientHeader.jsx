@@ -11,7 +11,7 @@ import { FaSlack } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import './ClientHeader.scss';
 
-export const ClientHeader = ({ opened, onOpened, onUserLogOut }) => {
+export const ClientHeader = ({ opened, onOpened }) => {
   const theme = useMantineTheme();
 
   return (
@@ -33,11 +33,6 @@ export const ClientHeader = ({ opened, onOpened, onUserLogOut }) => {
               slack
             </Text>
           </Link>
-          <div className="client-logout-container">
-            <Button variant="default" onClick={onUserLogOut}>
-              Logout
-            </Button>
-          </div>
         </div>
       </Header>
     </>

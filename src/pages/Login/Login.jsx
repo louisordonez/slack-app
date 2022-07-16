@@ -8,10 +8,8 @@ import { axiosPostCall } from '../../services/utils/AxiosApiCall';
 import { LOGIN_ENDPOINT } from '../../services/constants/App/SlackAvionApiUrl';
 import { showErrorToast } from '../../components/Toast/Toast';
 
-const Login = ({ onLoginSubmit }) => {
+const Login = ({ onLoginSubmit, onIsLoadingVisible }) => {
   useRedirectToClient();
-
-  const [isLoadingVisible, setIsLoadingVisible] = useState(false);
 
   let navigate = useNavigate();
 
@@ -27,23 +25,22 @@ const Login = ({ onLoginSubmit }) => {
 
       onLoginSubmit(responseHeaders, responseData, userLoggedIn);
       navigate('/client');
-      setIsLoadingVisible(false);
+      onIsLoadingVisible(false);
     };
 
     const onError = (error) => {
       const errorMessage = error.response.data.errors;
 
-      setIsLoadingVisible(false);
+      onIsLoadingVisible(false);
       errorMessage.map((message) => showErrorToast(message));
     };
 
-    setIsLoadingVisible(true);
+    onIsLoadingVisible(true);
     axiosPostCall(LOGIN_ENDPOINT, userInput, {}, onSuccess, onError);
   };
 
   return (
     <>
-      <LoadingOverlay visible={isLoadingVisible} />
       <Header />
       <Container size={420} my={40}>
         <Title
