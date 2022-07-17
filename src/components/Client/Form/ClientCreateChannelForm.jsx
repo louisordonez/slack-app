@@ -17,6 +17,8 @@ const ClientCreateChannelForm = ({ opened, onCreateChannel }) => {
   }, [opened]);
 
   const onSuccess = (response) => {
+    const userData = getLocalStorageItem('userData')[0];
+
     const createNewEmailList = (list) => {
       let newEmailListArray = [];
 
@@ -30,9 +32,9 @@ const ClientCreateChannelForm = ({ opened, onCreateChannel }) => {
       });
 
       setEmailData(
-        newEmailListArray.sort((a, b) => {
-          return a.value - b.value;
-        })
+        newEmailListArray
+          .sort((a, b) => a.value - b.value)
+          .filter((u) => u.value !== userData.id)
       );
     };
 
