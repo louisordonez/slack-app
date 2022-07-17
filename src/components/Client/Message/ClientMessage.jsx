@@ -4,12 +4,15 @@ import ClientMessageInput from '../Message/MessageInput/ClientMessageInput';
 import ClientMessageHeader from '../Message/MessageHeader/ClientMessageHeader';
 import './ClientMessage.scss';
 
-const ClientMessage = ({ messageHeaderName }) => {
+const ClientMessage = ({ messageHeaderName, onChannelDetailsModalShown }) => {
   return (
     <>
       <div className="client-message-container">
         <div className="client-message-header-container">
-          <ClientMessageHeader messageHeaderName={messageHeaderName} />
+          <ClientMessageHeader
+            messageHeaderName={messageHeaderName}
+            onChannelDetailsModalShown={onChannelDetailsModalShown}
+          />
         </div>
         <div className="client-message-body-container">
           <ClientMessageBody />

@@ -6,6 +6,7 @@ import ClientHeader from '../../components/Client/Header/ClientHeader';
 import ClientMessage from '../../components/Client/Message/ClientMessage';
 import ClientCreateChannelModal from '../../components/Client/Modal/ClientCreateChannelModal';
 import ClientSendDirectMessageModal from '../../components/Client/Modal/ClientSendDirectMessageModal';
+import ClientChannelDetails from '../../components/Client/Modal/ClientChannelDetails';
 import { CHANNELS_ENDPOINT } from '../../services/constants/SlackAvionApiUrl';
 import { getLocalStorageItem } from '../../services/utils/LocalStorage'; // eslint-disable-next-line
 import { axiosGetCall, axiosPostCall } from '../../services/utils/AxiosApiCall';
@@ -24,6 +25,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   const [channels, setChannels] = useState([]);
   const [selectedChannelId, setSelectedChannelId] = useState(null);
   const [messageHeaderName, setMessageHeaderName] = useState(null);
+  const [isChannelDetailsShown, setIsChannelDetailsShown] = useState(false);
   const [isSendDirectMessageModalShown, setIsSendDirectMessageModalShown] =
     useState(false);
 
@@ -104,6 +106,9 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   const handleSendDirectMessageModal = () =>
     setIsSendDirectMessageModalShown((state) => !state);
 
+  const handleChannelDetailsModal = () =>
+    setIsChannelDetailsShown((state) => !state);
+
   return (
     <>
       <AppShell
@@ -123,7 +128,10 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
         }
         header={<ClientHeader opened={opened} onOpened={handleOpened} />}
       >
-        <ClientMessage messageHeaderName={messageHeaderName} />
+        <ClientMessage
+          messageHeaderName={messageHeaderName}
+          onChannelDetailsModalShown={handleChannelDetailsModal}
+        />
       </AppShell>
       <ClientCreateChannelModal
         opened={isCreateChannelModalShown}
@@ -133,6 +141,11 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       <ClientSendDirectMessageModal
         opened={isSendDirectMessageModalShown}
         onSendDirectMessageModalShown={handleSendDirectMessageModal}
+      />
+      <ClientChannelDetails
+        opened={isChannelDetailsShown}
+        onChannelDetailsModalShown={handleChannelDetailsModal}
+        messageHeaderName={messageHeaderName}
       />
     </>
   );
