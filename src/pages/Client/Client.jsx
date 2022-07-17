@@ -99,8 +99,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   const handleSelectedChannel = (channelId, channelName) => {
     setSelectedChannelId(channelId);
     setMessageHeaderName(channelName);
-    console.log(channelId);
-    console.log(channelName);
   };
 
   const handleSendDirectMessageModal = () =>
