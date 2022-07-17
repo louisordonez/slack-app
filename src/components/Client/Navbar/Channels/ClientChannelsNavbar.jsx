@@ -11,6 +11,12 @@ const ClientChannelsNavbar = ({ channels, onCreateChannelModalShown }) => {
     }
   }, [channels]);
 
+  const showNoChannelsMessage = () => {
+    if (channels === undefined) {
+      return <Text>No channels available</Text>;
+    }
+  };
+
   return (
     <>
       <Text className="client-stack-channels-header bold-font">
@@ -22,6 +28,7 @@ const ClientChannelsNavbar = ({ channels, onCreateChannelModalShown }) => {
         </Group>
       </Text>
       <div className="client-stack-channels-container">
+        {showNoChannelsMessage()}
         {channelsList.map((channel, key) => {
           return (
             <Text

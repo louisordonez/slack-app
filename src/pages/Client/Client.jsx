@@ -22,6 +22,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   const [isCreateChannelModalShown, setIsCreateChannelModalShown] =
     useState(false);
   const [channels, setChannels] = useState([]);
+  // const [selectedChannel, setSelectedChannel] = useState(null);
   const [isSendDirectMessageModalShown, setIsSendDirectMessageModalShown] =
     useState(false);
 
@@ -93,6 +94,10 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       onShowChannelsError
     );
   };
+
+  // const handleSelectedChannel = () => {
+  //   setSelectedChannel;
+  // };
 
   const handleSendDirectMessageModal = () =>
     setIsSendDirectMessageModalShown((state) => !state);

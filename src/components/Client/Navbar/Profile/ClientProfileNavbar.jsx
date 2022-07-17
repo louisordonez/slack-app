@@ -17,7 +17,9 @@ const ClientProfileNavbar = ({ onIsLoadingVisible, onUserLogOut }) => {
   return (
     <>
       <Center className="client-stack-channels-header">
-        <Avatar size={100}>{getAvatartLetter()}</Avatar>
+        <Avatar color="blue" size={100}>
+          {getAvatartLetter()}
+        </Avatar>
       </Center>
       <Center>
         <Text className="bold-font" size="sm">
