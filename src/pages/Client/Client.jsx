@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppShell } from '@mantine/core';
 import './Client.scss';
 import ClientNavbar from '../../components/Client/Navbar/ClientNavbar';
@@ -16,19 +16,26 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     window.location.assign('/');
   }
 
+  const userHeaders = getLocalStorageItem('userHeaders')[0];
+
   const [opened, setOpened] = useState(false);
   const [isCreateChannelModalShown, setIsCreateChannelModalShown] =
     useState(false);
+  const [channels, setChannels] = useState([]);
   const [isSendDirectMessageModalShown, setIsSendDirectMessageModalShown] =
     useState(false);
+
+  useEffect(() => {
+    handleShowChannels();
+  }, []);
+
+  const handleOpened = () => setOpened((state) => !state);
 
   const handleCreateChannelModal = () =>
     setIsCreateChannelModalShown((state) => !state);
 
   const handleCreateChannel = (object) => {
-    const userHeaders = getLocalStorageItem('userHeaders')[0];
-
-    const onSuccess = (response) => {
+    const onCreateChannelSuccess = (response) => {
       onIsLoadingVisible(false);
 
       if (response.data.errors !== undefined) {
@@ -40,10 +47,11 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       }
 
       showSuccessToast(`Channel successfully created`);
+      handleShowChannels();
       handleCreateChannelModal();
     };
 
-    const onError = (error) => {
+    const onCreateChannelError = (error) => {
       const errorMessage = error.response.data.errors;
 
       onIsLoadingVisible(false);
@@ -53,13 +61,40 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
 
     onIsLoadingVisible(true);
 
-    axiosPostCall(CHANNELS_ENDPOINT, object, userHeaders, onSuccess, onError);
+    axiosPostCall(
+      CHANNELS_ENDPOINT,
+      object,
+      userHeaders,
+      onCreateChannelSuccess,
+      onCreateChannelError
+    );
+  };
+
+  const handleShowChannels = () => {
+    const onShowChannelsSuccess = (response) => {
+      onIsLoadingVisible(false);
+      setChannels(response.data.data);
+    };
+
+    const onShowChannelsError = (error) => {
+      const errorMessage = error.response.data.errors;
+
+      onIsLoadingVisible(false);
+      errorMessage.map((message) => showErrorToast(message));
+    };
+
+    onIsLoadingVisible(true);
+
+    axiosGetCall(
+      CHANNELS_ENDPOINT,
+      userHeaders,
+      onShowChannelsSuccess,
+      onShowChannelsError
+    );
   };
 
   const handleSendDirectMessageModal = () =>
     setIsSendDirectMessageModalShown((state) => !state);
-
-  const handleOpened = () => setOpened((state) => !state);
 
   return (
     <>
@@ -74,6 +109,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
             onCreateChannelModalShown={handleCreateChannelModal}
             onSendDirectMessageModalShown={handleSendDirectMessageModal}
             onIsLoadingVisible={onIsLoadingVisible}
+            channels={channels}
           />
         }
         header={<ClientHeader opened={opened} onOpened={handleOpened} />}

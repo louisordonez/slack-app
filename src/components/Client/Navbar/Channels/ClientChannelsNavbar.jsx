@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, Button, Group } from '@mantine/core';
 import './ClientChannelsNavbar.scss';
 
-const ClientChannelsNavbar = ({ onCreateChannelModalShown }) => {
+const ClientChannelsNavbar = ({ channels, onCreateChannelModalShown }) => {
+  const [channelsList, setChannels] = useState([]);
+
+  useEffect(() => {
+    if (channels !== undefined) {
+      setChannels(channels);
+    }
+  }, [channels]);
+
   return (
     <>
       <Text className="client-stack-channels-header bold-font">
@@ -13,16 +21,17 @@ const ClientChannelsNavbar = ({ onCreateChannelModalShown }) => {
           </Button>
         </Group>
       </Text>
-      <Text className="client-stack-channels client-nav-hover">Channel 1</Text>
-      <Text className="client-stack-channels client-nav-hover">Channel 2</Text>
-      <Text className="client-stack-channels client-nav-hover">Channel 3</Text>
-      <Text className="client-stack-channels client-nav-hover">Channel 4</Text>
-      <Text className="client-stack-channels client-nav-hover">Channel 5</Text>
-      <Text className="client-stack-channels client-nav-hover">Channel 1</Text>
-      <Text className="client-stack-channels client-nav-hover">Channel 2</Text>
-      <Text className="client-stack-channels client-nav-hover">Channel 3</Text>
-      <Text className="client-stack-channels client-nav-hover">Channel 4</Text>
-      <Text className="client-stack-channels client-nav-hover">Channel 5</Text>
+      {channelsList.map((channel, key) => {
+        return (
+          <Text
+            className="client-stack-channels client-nav-hover"
+            key={key}
+            channelid={channel.id}
+          >
+            {channel.name}
+          </Text>
+        );
+      })}
     </>
   );
 };

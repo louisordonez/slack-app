@@ -11,6 +11,7 @@ const ClientNavbar = ({
   onCreateChannelModalShown,
   onSendDirectMessageModalShown,
   onIsLoadingVisible,
+  channels,
 }) => {
   return (
     <>
@@ -30,6 +31,7 @@ const ClientNavbar = ({
         <Stack>
           <ClientChannelsNavbar
             onCreateChannelModalShown={onCreateChannelModalShown}
+            channels={channels}
           />
         </Stack>
         <Stack>
