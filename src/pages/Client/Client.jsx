@@ -27,6 +27,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
 
   useEffect(() => {
     handleShowChannels();
+    // eslint-disable-next-line
   }, []);
 
   const handleOpened = () => setOpened((state) => !state);
