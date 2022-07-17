@@ -17,21 +17,32 @@ const ClientDirectMessagesNavbar = ({ onSendDirectMessageModalShown }) => {
           </Button>
         </Group>
       </Text>
-      <Text className="client-stack-direct-messages client-nav-hover">
-        John Doe
-      </Text>
-      <Text className="client-stack-direct-messages client-nav-hover">
-        John Doe
-      </Text>
-      <Text className="client-stack-direct-messages client-nav-hover">
-        John Doe
-      </Text>
-      <Text className="client-stack-direct-messages client-nav-hover">
-        John Doe
-      </Text>
-      <Text className="client-stack-direct-messages client-nav-hover">
-        John Doe
-      </Text>
+      <div className="client-stack-direct-messages-container">
+        <Text className="client-stack-direct-messages client-nav-hover">
+          John Doe
+        </Text>
+        <Text className="client-stack-direct-messages client-nav-hover">
+          John Doe
+        </Text>
+        <Text className="client-stack-direct-messages client-nav-hover">
+          John Doe
+        </Text>
+        <Text className="client-stack-direct-messages client-nav-hover">
+          John Doe
+        </Text>
+        <Text className="client-stack-direct-messages client-nav-hover">
+          John Doe
+        </Text>
+        <Text className="client-stack-direct-messages client-nav-hover">
+          John Doe
+        </Text>
+        <Text className="client-stack-direct-messages client-nav-hover">
+          John Doe
+        </Text>
+        <Text className="client-stack-direct-messages client-nav-hover">
+          John Doe
+        </Text>
+      </div>
     </>
   );
 };

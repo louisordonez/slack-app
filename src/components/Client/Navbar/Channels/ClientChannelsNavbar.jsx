@@ -21,17 +21,19 @@ const ClientChannelsNavbar = ({ channels, onCreateChannelModalShown }) => {
           </Button>
         </Group>
       </Text>
-      {channelsList.map((channel, key) => {
-        return (
-          <Text
-            className="client-stack-channels client-nav-hover"
-            key={key}
-            channelid={channel.id}
-          >
-            {channel.name}
-          </Text>
-        );
-      })}
+      <div className="client-stack-channels-container">
+        {channelsList.map((channel, key) => {
+          return (
+            <Text
+              className="client-stack-channels client-nav-hover"
+              key={key}
+              channelid={channel.id}
+            >
+              {channel.name}
+            </Text>
+          );
+        })}
+      </div>
     </>
   );
 };

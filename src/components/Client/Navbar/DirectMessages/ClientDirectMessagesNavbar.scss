@@ -1,9 +1,14 @@
 .client-stack-direct-messages-header {
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 .client-stack-direct-messages {
   cursor: pointer;
   padding: 0.4rem;
   border-radius: 0.4rem;
+}
+
+.client-stack-direct-messages-container {
+  overflow-y: auto;
+  height: 20vh;
 }
