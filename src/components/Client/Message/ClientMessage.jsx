@@ -4,12 +4,12 @@ import ClientMessageInput from '../Message/MessageInput/ClientMessageInput';
 import ClientMessageHeader from '../Message/MessageHeader/ClientMessageHeader';
 import './ClientMessage.scss';
 
-const ClientMessage = () => {
+const ClientMessage = ({ messageHeaderName }) => {
   return (
     <>
       <div className="client-message-container">
         <div className="client-message-header-container">
-          <ClientMessageHeader />
+          <ClientMessageHeader messageHeaderName={messageHeaderName} />
         </div>
         <div className="client-message-body-container">
           <ClientMessageBody />

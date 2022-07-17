@@ -22,7 +22,8 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   const [isCreateChannelModalShown, setIsCreateChannelModalShown] =
     useState(false);
   const [channels, setChannels] = useState([]);
-  // const [selectedChannel, setSelectedChannel] = useState(null);
+  const [selectedChannelId, setSelectedChannelId] = useState(null);
+  const [messageHeaderName, setMessageHeaderName] = useState(null);
   const [isSendDirectMessageModalShown, setIsSendDirectMessageModalShown] =
     useState(false);
 
@@ -95,9 +96,12 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     );
   };
 
-  // const handleSelectedChannel = () => {
-  //   setSelectedChannel;
-  // };
+  const handleSelectedChannel = (channelId, channelName) => {
+    setSelectedChannelId(channelId);
+    setMessageHeaderName(channelName);
+    console.log(channelId);
+    console.log(channelName);
+  };
 
   const handleSendDirectMessageModal = () =>
     setIsSendDirectMessageModalShown((state) => !state);
@@ -116,11 +120,12 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
             onSendDirectMessageModalShown={handleSendDirectMessageModal}
             onIsLoadingVisible={onIsLoadingVisible}
             channels={channels}
+            onSelectedChannel={handleSelectedChannel}
           />
         }
         header={<ClientHeader opened={opened} onOpened={handleOpened} />}
       >
-        <ClientMessage />
+        <ClientMessage messageHeaderName={messageHeaderName} />
       </AppShell>
       <ClientCreateChannelModal
         opened={isCreateChannelModalShown}

@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Text, Button, Group } from '@mantine/core';
 import './ClientChannelsNavbar.scss';
 
-const ClientChannelsNavbar = ({ channels, onCreateChannelModalShown }) => {
+const ClientChannelsNavbar = ({
+  onCreateChannelModalShown,
+  channels,
+  onSelectedChannel,
+}) => {
   const [channelsList, setChannels] = useState([]);
 
   useEffect(() => {
@@ -34,7 +38,7 @@ const ClientChannelsNavbar = ({ channels, onCreateChannelModalShown }) => {
             <Text
               className="client-stack-channels client-nav-hover"
               key={key}
-              channelid={channel.id}
+              onClick={() => onSelectedChannel(channel.id, channel.name)}
             >
               {channel.name}
             </Text>
