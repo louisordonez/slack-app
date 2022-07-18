@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppShell } from '@mantine/core';
 import './Client.scss';
 import ClientNavbar from '../../components/Client/Navbar/ClientNavbar';
@@ -7,7 +7,10 @@ import ClientMessage from '../../components/Client/Message/ClientMessage';
 import ClientCreateChannelModal from '../../components/Client/Modal/ClientCreateChannelModal';
 import ClientSendDirectMessageModal from '../../components/Client/Modal/ClientSendDirectMessageModal';
 import ClientChannelDetails from '../../components/Client/Modal/ClientChannelDetails';
-import { CHANNELS_ENDPOINT } from '../../services/constants/SlackAvionApiUrl';
+import {
+  CHANNELS_ENDPOINT,
+  DIRECT_MESSAGES_ENDPOINT,
+} from '../../services/constants/SlackAvionApiUrl';
 import { getLocalStorageItem } from '../../services/utils/LocalStorage'; // eslint-disable-next-line
 import { axiosGetCall, axiosPostCall } from '../../services/utils/AxiosApiCall';
 import { showSuccessToast, showErrorToast } from '../../components/Toast/Toast';
@@ -22,17 +25,12 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   const [opened, setOpened] = useState(false);
   const [isCreateChannelModalShown, setIsCreateChannelModalShown] =
     useState(false);
-  const [channels, setChannels] = useState([]);
+  const [channels, setChannels] = useState([]); // eslint-disable-next-line
   const [selectedChannelId, setSelectedChannelId] = useState(null);
   const [messageHeaderName, setMessageHeaderName] = useState('');
   const [isChannelDetailsShown, setIsChannelDetailsShown] = useState(false);
   const [isSendDirectMessageModalShown, setIsSendDirectMessageModalShown] =
     useState(false);
-
-  // const selectedChannel = useMemo(
-  //   () => channels.find((channel) => channel.id === selectedChannelId),
-  //   [channels, selectedChannelId]
-  // );
 
   useEffect(() => {
     handleShowChannels();
@@ -110,6 +108,65 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
 
   const handleSendDirectMessageModal = () =>
     setIsSendDirectMessageModalShown((state) => !state);
+  // eslint-disable-next-line
+  const handleShowDirectMessages = () => {
+    const onShowDirectMessagesSuccess = (response) => {
+      onIsLoadingVisible(false);
+      // setChannels(response.data.data);
+    };
+
+    const onShowDirectMessagesError = (error) => {
+      const errorMessage = error.response.data.errors;
+
+      onIsLoadingVisible(false);
+      errorMessage.map((message) => showErrorToast(message));
+    };
+
+    onIsLoadingVisible(true);
+
+    axiosGetCall(
+      // `${DIRECT_MESSAGES_ENDPOINT}?receiver_id=2361&receiver_class=User`,
+      userHeaders,
+      onShowDirectMessagesSuccess,
+      onShowDirectMessagesError
+    );
+  };
+
+  const handleSendDirectMessage = (object) => {
+    const onSendDirectMessageSuccess = (response) => {
+      onIsLoadingVisible(false);
+
+      if (response.data.errors !== undefined) {
+        const errorMessage = response.data.errors;
+
+        errorMessage.map((message) => showErrorToast(message));
+
+        return false;
+      }
+
+      showSuccessToast(`Direct Message successfully sent`);
+      // handleShowDirectMessages();
+      handleSendDirectMessageModal();
+    };
+
+    const onSendDirectMessageError = (error) => {
+      const errorMessage = error.response.data.errors;
+
+      onIsLoadingVisible(false);
+
+      errorMessage.map((message) => showErrorToast(message));
+    };
+
+    onIsLoadingVisible(true);
+
+    axiosPostCall(
+      DIRECT_MESSAGES_ENDPOINT,
+      object,
+      userHeaders,
+      onSendDirectMessageSuccess,
+      onSendDirectMessageError
+    );
+  };
 
   const handleChannelDetailsModal = () =>
     setIsChannelDetailsShown((state) => !state);
@@ -146,6 +203,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       <ClientSendDirectMessageModal
         opened={isSendDirectMessageModalShown}
         onSendDirectMessageModalShown={handleSendDirectMessageModal}
+        onSendDirectMessage={handleSendDirectMessage}
       />
       <ClientChannelDetails
         opened={isChannelDetailsShown}

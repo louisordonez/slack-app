@@ -5,6 +5,7 @@ import ClientSendDirectMessageForm from '../Form/ClientSendDirectMessageForm';
 const ClientSendDirectMessageModal = ({
   opened,
   onSendDirectMessageModalShown,
+  onSendDirectMessage,
 }) => {
   return (
     <Modal
@@ -13,7 +14,10 @@ const ClientSendDirectMessageModal = ({
       onClose={() => onSendDirectMessageModalShown(false)}
       title="Send Direct Message"
     >
-      <ClientSendDirectMessageForm />
+      <ClientSendDirectMessageForm
+        opened={opened}
+        onSendDirectMessage={onSendDirectMessage}
+      />
     </Modal>
   );
 };

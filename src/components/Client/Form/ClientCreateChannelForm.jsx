@@ -3,9 +3,9 @@ import { TextInput, MultiSelect, Stack, Button, Group } from '@mantine/core';
 import { getEmailList } from '../../../services/utils/EmailList';
 
 const ClientCreateChannelForm = ({ opened, onCreateChannel }) => {
-  const [userIds, setUserIds] = useState();
-  const [channelName, setChannelName] = useState('');
   const [emailData, setEmailData] = useState([]);
+  const [channelName, setChannelName] = useState('');
+  const [userIds, setUserIds] = useState(null);
 
   useEffect(() => {
     if (opened === true) {
@@ -14,14 +14,14 @@ const ClientCreateChannelForm = ({ opened, onCreateChannel }) => {
   }, [opened]);
 
   const resetCreateChannelForm = () => {
-    setUserIds('');
     setChannelName('');
+    setUserIds([]);
   };
 
   const handleChannel = () => {
     let newChannel = { name: channelName, user_ids: userIds };
 
-    if (userIds === undefined) {
+    if (userIds === null) {
       newChannel = { name: channelName, user_ids: [] };
     }
 
