@@ -32,7 +32,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   const [isSendDirectMessageModalShown, setIsSendDirectMessageModalShown] =
     useState(false);
   const [directMessages, setDirectMessages] = useState([]);
-  const [selectedId, setSelectedId] = useState(null);
   const [emailList, setEmailList] = useState([]);
 
   useEffect(() => {
@@ -147,7 +146,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
             timestamp: `${fullDate} ${regularTime}`,
           };
 
-          newDirectMessagesArray.push(messageObj);
+          return newDirectMessagesArray.push(messageObj);
         });
 
         return newDirectMessagesArray;
