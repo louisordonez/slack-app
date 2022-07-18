@@ -1,8 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text, Button, Group } from '@mantine/core';
 import './ClientDirectMessagesNavbar.scss';
 
-const ClientDirectMessagesNavbar = ({ onSendDirectMessageModalShown }) => {
+const ClientDirectMessagesNavbar = ({
+  onSendDirectMessageModalShown,
+  directMessages,
+  onSelected,
+}) => {
+  const [directMessagesList, setDirectMessagesList] = useState([]);
+
+  useEffect(() => {
+    if (directMessages !== undefined) {
+      setDirectMessagesList(directMessages);
+    }
+  }, [directMessages]);
+
+  const showNoDirectMessages = () => {
+    if (directMessages === undefined) {
+      return <Text>No direct messages available</Text>;
+    }
+  };
+
   return (
     <>
       <Text className="client-stack-direct-messages-header bold-font">
@@ -18,30 +36,18 @@ const ClientDirectMessagesNavbar = ({ onSendDirectMessageModalShown }) => {
         </Group>
       </Text>
       <div className="client-stack-direct-messages-container">
-        <Text className="client-stack-direct-messages client-nav-hover">
-          John Doe
-        </Text>
-        <Text className="client-stack-direct-messages client-nav-hover">
-          John Doe
-        </Text>
-        <Text className="client-stack-direct-messages client-nav-hover">
-          John Doe
-        </Text>
-        <Text className="client-stack-direct-messages client-nav-hover">
-          John Doe
-        </Text>
-        <Text className="client-stack-direct-messages client-nav-hover">
-          John Doe
-        </Text>
-        <Text className="client-stack-direct-messages client-nav-hover">
-          John Doe
-        </Text>
-        <Text className="client-stack-direct-messages client-nav-hover">
-          John Doe
-        </Text>
-        <Text className="client-stack-direct-messages client-nav-hover">
-          John Doe
-        </Text>
+        {showNoDirectMessages()}
+        {directMessagesList.map((directMessage, key) => {
+          return (
+            <Text
+              className="client-stack-direct-messages client-nav-hover"
+              key={key}
+              onClick={() => onSelected(directMessage.id, directMessage.email)}
+            >
+              {directMessage.email}
+            </Text>
+          );
+        })}
       </div>
     </>
   );

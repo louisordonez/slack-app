@@ -8,7 +8,7 @@ export const onEmailListSuccess = (response) => {
   const createNewEmailList = (list) => {
     let newEmailListArray = [];
 
-    list.forEach((object) => {
+    list.map((object) => {
       const newEmailData = {
         value: object.id,
         label: object.email,

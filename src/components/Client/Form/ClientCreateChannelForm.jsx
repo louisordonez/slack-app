@@ -10,7 +10,7 @@ const ClientCreateChannelForm = ({ opened, onCreateChannel }) => {
   useEffect(() => {
     if (opened === true) {
       getEmailList().then((result) => setEmailData(result));
-    } // eslint-disable-next-line
+    }
   }, [opened]);
 
   const resetCreateChannelForm = () => {

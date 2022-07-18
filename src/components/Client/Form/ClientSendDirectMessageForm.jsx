@@ -10,7 +10,7 @@ const ClientSendDirectMessageForm = ({ opened, onSendDirectMessage }) => {
   useEffect(() => {
     if (opened === true) {
       getEmailList().then((result) => setEmailData(result));
-    } // eslint-disable-next-line
+    }
   }, [opened]);
 
   const resetSendDirectMessageForm = () => {

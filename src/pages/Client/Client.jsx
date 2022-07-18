@@ -11,7 +11,7 @@ import {
   CHANNELS_ENDPOINT,
   DIRECT_MESSAGES_ENDPOINT,
 } from '../../services/constants/SlackAvionApiUrl';
-import { getLocalStorageItem } from '../../services/utils/LocalStorage'; // eslint-disable-next-line
+import { getLocalStorageItem } from '../../services/utils/LocalStorage';
 import { axiosGetCall, axiosPostCall } from '../../services/utils/AxiosApiCall';
 import { showSuccessToast, showErrorToast } from '../../components/Toast/Toast';
 
@@ -25,16 +25,18 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   const [opened, setOpened] = useState(false);
   const [isCreateChannelModalShown, setIsCreateChannelModalShown] =
     useState(false);
-  const [channels, setChannels] = useState([]); // eslint-disable-next-line
-  const [selectedChannelId, setSelectedChannelId] = useState(null);
+  const [channels, setChannels] = useState([]);
+  const [selectedId, setSelectedId] = useState(null);
   const [messageHeaderName, setMessageHeaderName] = useState('');
   const [isChannelDetailsShown, setIsChannelDetailsShown] = useState(false);
   const [isSendDirectMessageModalShown, setIsSendDirectMessageModalShown] =
     useState(false);
+  const [directMessages, setDirectMessages] = useState([]);
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     handleShowChannels();
-    // eslint-disable-next-line
+    handleShowDirectMessages();
   }, []);
 
   const handleOpened = () => setOpened((state) => !state);
@@ -101,17 +103,66 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     );
   };
 
-  const handleSelectedChannel = (channelId, channelName) => {
-    setSelectedChannelId(channelId);
-    setMessageHeaderName(channelName);
+  const handleSelected = (id, name) => {
+    setSelectedId(id);
+    setMessageHeaderName(name);
   };
 
   const handleSendDirectMessageModal = () =>
     setIsSendDirectMessageModalShown((state) => !state);
-  // eslint-disable-next-line
+
   const handleShowDirectMessages = () => {
     const onShowDirectMessagesSuccess = (response) => {
+      const createDirectMessagesList = (list) => {
+        let newDirectMessagesListArray = [];
+
+        list.forEach((object) => {
+          const newMessagesListData = {
+            id: object.receiver.id,
+            email: object.receiver.email,
+          };
+
+          newDirectMessagesListArray.push(newMessagesListData);
+        });
+
+        const seen = new Set();
+
+        const filteredDirectMessagesListArray =
+          newDirectMessagesListArray.filter((el) => {
+            const duplicate = seen.has(el.id);
+            seen.add(el.id);
+            return !duplicate;
+          });
+
+        return filteredDirectMessagesListArray;
+      };
+
+      // let date = new Date(response.data.data[0].created_at);
+      // let dateMonth =
+      //   date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth();
+      // let dateDay = date.getDay() < 10 ? `0${date.getDay()}` : date.getDay();
+      // let dateYear = date.getFullYear();
+      // let fullDate = `${dateMonth}-${dateDay}-${dateYear}`;
+      // let currentRegularTime = date.toLocaleTimeString([], {
+      //   hour: '2-digit',
+      //   minute: '2-digit',
+      // });
+
+      // const receiver = [
+      //   {
+      //     // 'sender-id': response.data.data[0].sender.id,
+      //     // 'sender-email': response.data.data[0].sender.email,
+      //     id: response.data.data[0].receiver.id,
+      //     email: response.data.data[0].receiver.email,
+      //     // body: response.data.data[0].body,
+      //     // timestamp: `${fullDate} ${currentRegularTime}`,
+      //   },
+      // ];
+
+      setDirectMessages(createDirectMessagesList(response.data.data));
       onIsLoadingVisible(false);
+
+      // console.log(receiver);
       // setChannels(response.data.data);
     };
 
@@ -125,7 +176,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     onIsLoadingVisible(true);
 
     axiosGetCall(
-      // `${DIRECT_MESSAGES_ENDPOINT}?receiver_id=2361&receiver_class=User`,
+      `${DIRECT_MESSAGES_ENDPOINT}?receiver_id=2361&receiver_class=User`,
       userHeaders,
       onShowDirectMessagesSuccess,
       onShowDirectMessagesError
@@ -145,7 +196,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       }
 
       showSuccessToast(`Direct Message successfully sent`);
-      // handleShowDirectMessages();
+      handleShowDirectMessages();
       handleSendDirectMessageModal();
     };
 
@@ -184,8 +235,9 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
             onCreateChannelModalShown={handleCreateChannelModal}
             onSendDirectMessageModalShown={handleSendDirectMessageModal}
             onIsLoadingVisible={onIsLoadingVisible}
+            onSelected={handleSelected}
             channels={channels}
-            onSelectedChannel={handleSelectedChannel}
+            directMessages={directMessages}
           />
         }
         header={<ClientHeader opened={opened} onOpened={handleOpened} />}
