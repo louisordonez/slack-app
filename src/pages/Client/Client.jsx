@@ -14,6 +14,7 @@ import {
 import { getLocalStorageItem } from '../../services/utils/LocalStorage';
 import { axiosGetCall, axiosPostCall } from '../../services/utils/AxiosApiCall';
 import { showSuccessToast, showErrorToast } from '../../components/Toast/Toast';
+import { getEmailList } from '../../services/utils/EmailList';
 
 const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   if (getLocalStorageItem('userHeaders') === null) {
@@ -30,12 +31,13 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   const [isChannelDetailsShown, setIsChannelDetailsShown] = useState(false);
   const [isSendDirectMessageModalShown, setIsSendDirectMessageModalShown] =
     useState(false);
-  // const [selectedId, setSelectedId] = useState(null);
   const [directMessages, setDirectMessages] = useState([]);
-  const [messages, setMessages] = useState([]);
+  const [selectedId, setSelectedId] = useState(null);
+  const [emailList, setEmailList] = useState([]);
 
   useEffect(() => {
     handleShowChannels();
+    getEmailList().then((result) => setEmailList(result));
   }, [directMessages]);
 
   const handleOpened = () => setOpened((state) => !state);
@@ -108,6 +110,9 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
 
   const handleSelectedId = (id) => {
     if (id.length !== 0) {
+      const emailObj = emailList.find((user) => user.value === id[0]);
+
+      setMessageHeaderName(emailObj.label);
       handleShowDirectMessages(id[0]);
     }
   };
