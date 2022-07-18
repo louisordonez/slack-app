@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { TextInput, MultiSelect, Stack, Button, Group } from '@mantine/core';
-import { USERS_ENDPOINT } from '../../../services/constants/SlackAvionApiUrl';
-import { getLocalStorageItem } from '../../../services/utils/LocalStorage';
-import { axiosGetCall } from '../../../services/utils/AxiosApiCall';
-import { showErrorToast } from '../../../components/Toast/Toast';
+import { getEmailList } from '../../../services/utils/EmailList';
 
 const ClientCreateChannelForm = ({ opened, onCreateChannel }) => {
   const [userIds, setUserIds] = useState();
@@ -12,46 +9,9 @@ const ClientCreateChannelForm = ({ opened, onCreateChannel }) => {
 
   useEffect(() => {
     if (opened === true) {
-      getEmailList();
+      getEmailList().then((result) => setEmailData(result));
     } // eslint-disable-next-line
   }, [opened]);
-
-  const onSuccess = (response) => {
-    const userData = getLocalStorageItem('userData')[0];
-
-    const createNewEmailList = (list) => {
-      let newEmailListArray = [];
-
-      list.forEach((object) => {
-        const newEmailData = {
-          value: object.id,
-          label: object.email,
-        };
-
-        newEmailListArray.push(newEmailData);
-      });
-
-      setEmailData(
-        newEmailListArray
-          .sort((a, b) => a.value - b.value)
-          .filter((u) => u.value !== userData.id)
-      );
-    };
-
-    createNewEmailList(response.data.data);
-  };
-
-  const onError = (error) => {
-    const errorMessage = error.response.data.errors;
-
-    errorMessage.map((message) => showErrorToast(message));
-  };
-
-  const getEmailList = () => {
-    const userHeaders = getLocalStorageItem('userHeaders')[0];
-
-    axiosGetCall(USERS_ENDPOINT, userHeaders, onSuccess, onError);
-  };
 
   const resetCreateChannelForm = () => {
     setUserIds('');
