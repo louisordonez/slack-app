@@ -12,6 +12,7 @@ const ClientDirectMessagesNavbar = ({
   useEffect(() => {
     getEmailList().then((result) => setEmailData(result));
   });
+
   return (
     <>
       <Text className="client-stack-direct-messages-header bold-font">
@@ -29,7 +30,6 @@ const ClientDirectMessagesNavbar = ({
       <div className="client-stack-direct-messages-container">
         <MultiSelect
           searchable
-          clearable
           label="Select user"
           nothingFound="Nothing found"
           maxDropdownHeight={160}

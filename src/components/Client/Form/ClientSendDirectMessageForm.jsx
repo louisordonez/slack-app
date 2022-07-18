@@ -57,7 +57,6 @@ const ClientSendDirectMessageForm = ({ opened, onSendDirectMessage }) => {
         <MultiSelect
           required
           searchable
-          clearable
           label="Select user"
           nothingFound="Nothing found"
           maxDropdownHeight={160}

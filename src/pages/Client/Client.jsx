@@ -30,14 +30,13 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   const [isChannelDetailsShown, setIsChannelDetailsShown] = useState(false);
   const [isSendDirectMessageModalShown, setIsSendDirectMessageModalShown] =
     useState(false);
-  const [selectedId, setSelectedId] = useState(null);
+  // const [selectedId, setSelectedId] = useState(null);
   const [directMessages, setDirectMessages] = useState([]);
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     handleShowChannels();
-    handleShowDirectMessages();
-  }, []);
+  }, [directMessages]);
 
   const handleOpened = () => setOpened((state) => !state);
 
@@ -108,7 +107,9 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   };
 
   const handleSelectedId = (id) => {
-    setSelectedId(id);
+    if (id.length !== 0) {
+      handleShowDirectMessages(id[0]);
+    }
   };
 
   const handleSendDirectMessageModal = () =>
@@ -117,56 +118,38 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   const handleShowDirectMessages = (id) => {
     const onShowDirectMessagesSuccess = (response) => {
       const createDirectMessagesList = (list) => {
-        let newDirectMessagesListArray = [];
+        let newDirectMessagesArray = [];
 
-        list.forEach((object) => {
-          const newMessagesListData = {
-            id: object.receiver.id,
-            email: object.receiver.email,
-          };
-
-          newDirectMessagesListArray.push(newMessagesListData);
-        });
-
-        const seen = new Set();
-
-        const filteredDirectMessagesListArray =
-          newDirectMessagesListArray.filter((el) => {
-            const duplicate = seen.has(el.id);
-            seen.add(el.id);
-            return !duplicate;
+        list.map((object) => {
+          const date = new Date(object.created_at);
+          const dateMonth =
+            date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth();
+          const dateDay =
+            date.getDay() < 10 ? `0${date.getDay()}` : date.getDay();
+          const dateYear = date.getFullYear();
+          const fullDate = `${dateMonth}-${dateDay}-${dateYear}`;
+          const regularTime = date.toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
           });
 
-        return filteredDirectMessagesListArray;
+          const messageObj = {
+            'sender-id': object.sender.id,
+            'sender-email': object.sender.email,
+            'receiver-id': object.receiver.id,
+            'receiver-email': object.receiver.email,
+            body: object.body,
+            timestamp: `${fullDate} ${regularTime}`,
+          };
+
+          newDirectMessagesArray.push(messageObj);
+        });
+
+        return newDirectMessagesArray;
       };
-
-      // let date = new Date(response.data.data[0].created_at);
-      // let dateMonth =
-      //   date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth();
-      // let dateDay = date.getDay() < 10 ? `0${date.getDay()}` : date.getDay();
-      // let dateYear = date.getFullYear();
-      // let fullDate = `${dateMonth}-${dateDay}-${dateYear}`;
-      // let currentRegularTime = date.toLocaleTimeString([], {
-      //   hour: '2-digit',
-      //   minute: '2-digit',
-      // });
-
-      // const receiver = [
-      //   {
-      //     // 'sender-id': response.data.data[0].sender.id,
-      //     // 'sender-email': response.data.data[0].sender.email,
-      //     id: response.data.data[0].receiver.id,
-      //     email: response.data.data[0].receiver.email,
-      //     // body: response.data.data[0].body,
-      //     // timestamp: `${fullDate} ${currentRegularTime}`,
-      //   },
-      // ];
 
       setDirectMessages(createDirectMessagesList(response.data.data));
       onIsLoadingVisible(false);
-
-      // console.log(receiver);
-      // setChannels(response.data.data);
     };
 
     const onShowDirectMessagesError = (error) => {
@@ -199,7 +182,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       }
 
       showSuccessToast(`Direct Message successfully sent`);
-      handleShowDirectMessages();
       handleSendDirectMessageModal();
     };
 
@@ -241,7 +223,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
             onSelected={handleSelected}
             channels={channels}
             onSelectedId={handleSelectedId}
-            directMessages={directMessages}
           />
         }
         header={<ClientHeader opened={opened} onOpened={handleOpened} />}
@@ -249,6 +230,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
         <ClientMessage
           messageHeaderName={messageHeaderName}
           onChannelDetailsModalShown={handleChannelDetailsModal}
+          directMessages={directMessages}
         />
       </AppShell>
       <ClientCreateChannelModal

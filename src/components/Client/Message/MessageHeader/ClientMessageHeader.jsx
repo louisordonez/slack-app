@@ -6,7 +6,7 @@ const ClientMessageHeader = ({
   messageHeaderName,
   onChannelDetailsModalShown,
 }) => {
-  const getAvatartLetter = () => {
+  const getAvatarLetter = () => {
     if (messageHeaderName) {
       return messageHeaderName.toUpperCase().charAt(0);
     }
@@ -19,7 +19,7 @@ const ClientMessageHeader = ({
           className="client-message-header-name"
           onClick={onChannelDetailsModalShown}
         >
-          <Avatar color="blue">{getAvatartLetter()}</Avatar>
+          <Avatar color="blue">{getAvatarLetter()}</Avatar>
           <Text className="bold-font"> {messageHeaderName}</Text>
         </Group>
       </Group>

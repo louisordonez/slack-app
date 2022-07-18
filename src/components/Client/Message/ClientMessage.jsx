@@ -4,7 +4,11 @@ import ClientMessageInput from '../Message/MessageInput/ClientMessageInput';
 import ClientMessageHeader from '../Message/MessageHeader/ClientMessageHeader';
 import './ClientMessage.scss';
 
-const ClientMessage = ({ messageHeaderName, onChannelDetailsModalShown }) => {
+const ClientMessage = ({
+  messageHeaderName,
+  onChannelDetailsModalShown,
+  directMessages,
+}) => {
   return (
     <>
       <div className="client-message-container">
@@ -15,7 +19,7 @@ const ClientMessage = ({ messageHeaderName, onChannelDetailsModalShown }) => {
           />
         </div>
         <div className="client-message-body-container">
-          <ClientMessageBody />
+          <ClientMessageBody directMessages={directMessages} />
         </div>
         <div className="client-message-input-container">
           <ClientMessageInput />
