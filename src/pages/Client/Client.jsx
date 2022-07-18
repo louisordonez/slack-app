@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { AppShell } from '@mantine/core';
 import './Client.scss';
 import ClientNavbar from '../../components/Client/Navbar/ClientNavbar';
@@ -24,10 +24,15 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     useState(false);
   const [channels, setChannels] = useState([]);
   const [selectedChannelId, setSelectedChannelId] = useState(null);
-  const [messageHeaderName, setMessageHeaderName] = useState(null);
+  const [messageHeaderName, setMessageHeaderName] = useState('');
   const [isChannelDetailsShown, setIsChannelDetailsShown] = useState(false);
   const [isSendDirectMessageModalShown, setIsSendDirectMessageModalShown] =
     useState(false);
+
+  // const selectedChannel = useMemo(
+  //   () => channels.find((channel) => channel.id === selectedChannelId),
+  //   [channels, selectedChannelId]
+  // );
 
   useEffect(() => {
     handleShowChannels();
