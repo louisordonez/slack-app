@@ -26,11 +26,11 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   const [isCreateChannelModalShown, setIsCreateChannelModalShown] =
     useState(false);
   const [channels, setChannels] = useState([]);
-  const [selectedId, setSelectedId] = useState(null);
   const [messageHeaderName, setMessageHeaderName] = useState('');
   const [isChannelDetailsShown, setIsChannelDetailsShown] = useState(false);
   const [isSendDirectMessageModalShown, setIsSendDirectMessageModalShown] =
     useState(false);
+  const [selectedId, setSelectedId] = useState(null);
   const [directMessages, setDirectMessages] = useState([]);
   const [messages, setMessages] = useState([]);
 
@@ -103,15 +103,18 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     );
   };
 
-  const handleSelected = (id, name) => {
-    setSelectedId(id);
+  const handleSelected = (name) => {
     setMessageHeaderName(name);
+  };
+
+  const handleSelectedId = (id) => {
+    setSelectedId(id);
   };
 
   const handleSendDirectMessageModal = () =>
     setIsSendDirectMessageModalShown((state) => !state);
 
-  const handleShowDirectMessages = () => {
+  const handleShowDirectMessages = (id) => {
     const onShowDirectMessagesSuccess = (response) => {
       const createDirectMessagesList = (list) => {
         let newDirectMessagesListArray = [];
@@ -176,7 +179,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     onIsLoadingVisible(true);
 
     axiosGetCall(
-      `${DIRECT_MESSAGES_ENDPOINT}?receiver_id=2361&receiver_class=User`,
+      `${DIRECT_MESSAGES_ENDPOINT}?receiver_id=${id}&receiver_class=User`,
       userHeaders,
       onShowDirectMessagesSuccess,
       onShowDirectMessagesError
@@ -237,6 +240,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
             onIsLoadingVisible={onIsLoadingVisible}
             onSelected={handleSelected}
             channels={channels}
+            onSelectedId={handleSelectedId}
             directMessages={directMessages}
           />
         }

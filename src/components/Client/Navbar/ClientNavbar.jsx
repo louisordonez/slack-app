@@ -13,7 +13,7 @@ const ClientNavbar = ({
   onIsLoadingVisible,
   channels,
   onSelected,
-  directMessages,
+  onSelectedId,
 }) => {
   return (
     <>
@@ -40,8 +40,7 @@ const ClientNavbar = ({
         <Stack>
           <ClientDirectMessagesNavbar
             onSendDirectMessageModalShown={onSendDirectMessageModalShown}
-            directMessages={directMessages}
-            onSelected={onSelected}
+            onSelectedId={onSelectedId}
           />
         </Stack>
       </Navbar>

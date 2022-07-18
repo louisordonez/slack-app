@@ -1,26 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { Text, Button, Group } from '@mantine/core';
+import React, { useState, useEffect } from 'react';
+import { Text, Button, Group, MultiSelect } from '@mantine/core';
 import './ClientDirectMessagesNavbar.scss';
+import { getEmailList } from '../../../../services/utils/EmailList';
 
 const ClientDirectMessagesNavbar = ({
   onSendDirectMessageModalShown,
-  directMessages,
-  onSelected,
+  onSelectedId,
 }) => {
-  const [directMessagesList, setDirectMessagesList] = useState([]);
+  const [emailData, setEmailData] = useState([]);
 
   useEffect(() => {
-    if (directMessages !== undefined) {
-      setDirectMessagesList(directMessages);
-    }
-  }, [directMessages]);
-
-  const showNoDirectMessages = () => {
-    if (directMessages === undefined) {
-      return <Text>No direct messages available</Text>;
-    }
-  };
-
+    getEmailList().then((result) => setEmailData(result));
+  });
   return (
     <>
       <Text className="client-stack-direct-messages-header bold-font">
@@ -36,18 +27,17 @@ const ClientDirectMessagesNavbar = ({
         </Group>
       </Text>
       <div className="client-stack-direct-messages-container">
-        {showNoDirectMessages()}
-        {directMessagesList.map((directMessage, key) => {
-          return (
-            <Text
-              className="client-stack-direct-messages client-nav-hover"
-              key={key}
-              onClick={() => onSelected(directMessage.id, directMessage.email)}
-            >
-              {directMessage.email}
-            </Text>
-          );
-        })}
+        <MultiSelect
+          searchable
+          clearable
+          label="Select user"
+          nothingFound="Nothing found"
+          maxDropdownHeight={160}
+          limit={20}
+          onChange={onSelectedId}
+          data={emailData}
+          maxSelectedValues={1}
+        />
       </div>
     </>
   );

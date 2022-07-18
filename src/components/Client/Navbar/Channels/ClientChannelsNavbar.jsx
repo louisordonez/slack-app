@@ -38,7 +38,7 @@ const ClientChannelsNavbar = ({
             <Text
               className="client-stack-channels client-nav-hover"
               key={key}
-              onClick={() => onSelected(channel.id, channel.name)}
+              onClick={() => onSelected(channel.name)}
             >
               {channel.name}
             </Text>
