@@ -14,7 +14,7 @@ export const onEmailListSuccess = (response) => {
         label: object.email,
       };
 
-      newEmailListArray.push(newEmailData);
+      return newEmailListArray.push(newEmailData);
     });
 
     return newEmailListArray
