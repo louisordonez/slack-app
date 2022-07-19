@@ -225,8 +225,11 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     );
   };
 
-  const handleChannelDetailsModal = () =>
-    setIsChannelDetailsShown((state) => !state);
+  const handleChannelDetailsModal = () => {
+    if (receiverClass === 'Channel') {
+      setIsChannelDetailsShown((state) => !state);
+    }
+  };
 
   return (
     <>
