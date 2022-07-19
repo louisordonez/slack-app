@@ -5,7 +5,7 @@ import { getEmailList } from '../../../../services/utils/EmailList';
 
 const ClientDirectMessagesNavbar = ({
   onSendDirectMessageModalShown,
-  onSelectedId,
+  onSelectedUser,
 }) => {
   const [emailData, setEmailData] = useState([]);
 
@@ -34,7 +34,7 @@ const ClientDirectMessagesNavbar = ({
           nothingFound="Nothing found"
           maxDropdownHeight={160}
           limit={20}
-          onChange={onSelectedId}
+          onChange={onSelectedUser}
           data={emailData}
           maxSelectedValues={1}
         />

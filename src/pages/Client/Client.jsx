@@ -9,7 +9,7 @@ import ClientSendDirectMessageModal from '../../components/Client/Modal/ClientSe
 import ClientChannelDetails from '../../components/Client/Modal/ClientChannelDetails';
 import {
   CHANNELS_ENDPOINT,
-  DIRECT_MESSAGES_ENDPOINT,
+  MESSAGES_ENDPOINT,
 } from '../../services/constants/SlackAvionApiUrl';
 import { getLocalStorageItem } from '../../services/utils/LocalStorage';
 import { axiosGetCall, axiosPostCall } from '../../services/utils/AxiosApiCall';
@@ -42,6 +42,11 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   }, [messages]);
 
   const handleOpened = () => setOpened((state) => !state);
+
+  const handleSelected = (name, receiverClass) => {
+    setMessageHeaderName(name);
+    setReceiverClass(receiverClass);
+  };
 
   const handleCreateChannelModal = () =>
     setIsCreateChannelModalShown((state) => !state);
@@ -105,12 +110,45 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     );
   };
 
-  const handleSelected = (name, receiverClass) => {
-    setMessageHeaderName(name);
-    setReceiverClass(receiverClass);
+  const handleSelectedChannel = (id) => {
+    setSelectedId(id);
   };
 
-  const handleSelectedId = (id) => {
+  const handleSendChannelMessage = (object) => {
+    const onSendChannelMessageSuccess = (response) => {
+      onIsLoadingVisible(false);
+
+      if (response.data.errors !== undefined) {
+        const errorMessage = response.data.errors;
+
+        errorMessage.map((message) => showErrorToast(message));
+
+        return false;
+      }
+
+      showSuccessToast(`Message successfully sent`);
+    };
+
+    const onSendChannelMessageError = (error) => {
+      const errorMessage = error.response.data.errors;
+
+      onIsLoadingVisible(false);
+
+      errorMessage.map((message) => showErrorToast(message));
+    };
+
+    onIsLoadingVisible(true);
+
+    axiosPostCall(
+      MESSAGES_ENDPOINT,
+      object,
+      userHeaders,
+      onSendChannelMessageSuccess,
+      onSendChannelMessageError
+    );
+  };
+
+  const handleSelectedUser = (id) => {
     onIsLoadingVisible(true);
 
     if (id.length !== 0) {
@@ -180,7 +218,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     onIsLoadingVisible(true);
 
     axiosGetCall(
-      `${DIRECT_MESSAGES_ENDPOINT}?receiver_id=${id}&receiver_class=User`,
+      `${MESSAGES_ENDPOINT}?receiver_id=${id}&receiver_class=User`,
       userHeaders,
       onShowDirectMessagesSuccess,
       onShowDirectMessagesError
@@ -199,7 +237,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
         return false;
       }
 
-      showSuccessToast(`Direct Message successfully sent`);
+      showSuccessToast(`Message successfully sent`);
     };
 
     const onSendDirectMessageError = (error) => {
@@ -213,7 +251,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     onIsLoadingVisible(true);
 
     axiosPostCall(
-      DIRECT_MESSAGES_ENDPOINT,
+      MESSAGES_ENDPOINT,
       object,
       userHeaders,
       onSendDirectMessageSuccess,
@@ -238,7 +276,8 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
             onSendDirectMessageModalShown={handleSendDirectMessageModal}
             onIsLoadingVisible={onIsLoadingVisible}
             onSelected={handleSelected}
-            onSelectedId={handleSelectedId}
+            onSelectedUser={handleSelectedUser}
+            onSelectedChannel={handleSelectedChannel}
             channels={channels}
           />
         }
@@ -246,11 +285,12 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       >
         <ClientMessage
           onChannelDetailsModalShown={handleChannelDetailsModal}
+          onSendChannelMessage={handleSendChannelMessage}
           onSendDirectMessage={handleSendDirectMessage}
           messageHeaderName={messageHeaderName}
           selectedId={selectedId}
-          messages={messages}
           receiverClass={receiverClass}
+          messages={messages}
         />
       </AppShell>
       <ClientCreateChannelModal

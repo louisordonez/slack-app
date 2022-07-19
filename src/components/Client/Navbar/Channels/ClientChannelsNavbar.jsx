@@ -4,8 +4,9 @@ import './ClientChannelsNavbar.scss';
 
 const ClientChannelsNavbar = ({
   onCreateChannelModalShown,
-  channels,
   onSelected,
+  onSelectedChannel,
+  channels,
 }) => {
   const [channelsList, setChannels] = useState([]);
 
@@ -44,6 +45,7 @@ const ClientChannelsNavbar = ({
               key={key}
               onClick={() => {
                 onSelected(channel.name, 'Channel');
+                onSelectedChannel(channel.id);
               }}
             >
               {channel.name}

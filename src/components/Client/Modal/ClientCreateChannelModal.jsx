@@ -12,7 +12,7 @@ const ClientCreateChannelModal = ({
       centered
       opened={opened}
       onClose={() => onCreateChannelModalShown(false)}
-      title="Creat Channel"
+      title="Create Channel"
     >
       <ClientCreateChannelForm
         opened={opened}

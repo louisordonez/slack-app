@@ -5,6 +5,7 @@ import './ClientMessageInput.scss';
 
 const ClientMessageInput = ({
   selectedId,
+  onSendChannelMessage,
   onSendDirectMessage,
   receiverClass,
 }) => {
@@ -24,9 +25,9 @@ const ClientMessageInput = ({
       body: message,
     };
 
-    if (receiverClass === 'User') {
-      onSendDirectMessage(messageObj);
-    }
+    receiverClass === 'User'
+      ? onSendDirectMessage(messageObj)
+      : onSendChannelMessage(messageObj);
 
     setMessage('');
   };
