@@ -43,11 +43,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
 
   const handleOpened = () => setOpened((state) => !state);
 
-  const handleSelected = (name, receiverClass) => {
-    setMessageHeaderName(name);
-    setReceiverClass(receiverClass);
-  };
-
   const handleCreateChannelModal = () =>
     setIsCreateChannelModalShown((state) => !state);
 
@@ -110,8 +105,14 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     );
   };
 
-  const handleSelectedChannel = (id) => {
-    setSelectedId(id);
+  const handleSelectedChannel = (channelId, channelName) => {
+    if (receiverClass === 'User') {
+      showErrorToast(`Clear selected user first`);
+    } else {
+      setSelectedId(channelId);
+      setMessageHeaderName(channelName);
+      setReceiverClass('Channel');
+    }
   };
 
   const handleSendChannelMessage = (object) => {
@@ -275,7 +276,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
             onCreateChannelModalShown={handleCreateChannelModal}
             onSendDirectMessageModalShown={handleSendDirectMessageModal}
             onIsLoadingVisible={onIsLoadingVisible}
-            onSelected={handleSelected}
             onSelectedUser={handleSelectedUser}
             onSelectedChannel={handleSelectedChannel}
             channels={channels}

@@ -4,7 +4,6 @@ import './ClientChannelsNavbar.scss';
 
 const ClientChannelsNavbar = ({
   onCreateChannelModalShown,
-  onSelected,
   onSelectedChannel,
   channels,
 }) => {
@@ -44,8 +43,7 @@ const ClientChannelsNavbar = ({
               className="client-stack-channels client-nav-hover"
               key={key}
               onClick={() => {
-                onSelected(channel.name, 'Channel');
-                onSelectedChannel(channel.id);
+                onSelectedChannel(channel.id, channel.name);
               }}
             >
               {channel.name}

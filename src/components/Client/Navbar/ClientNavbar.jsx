@@ -12,7 +12,6 @@ const ClientNavbar = ({
   onSendDirectMessageModalShown,
   onIsLoadingVisible,
   channels,
-  onSelected,
   onSelectedUser,
   onSelectedChannel,
 }) => {
@@ -40,7 +39,6 @@ const ClientNavbar = ({
         <Stack>
           <ClientChannelsNavbar
             onCreateChannelModalShown={onCreateChannelModalShown}
-            onSelected={onSelected}
             onSelectedChannel={onSelectedChannel}
             channels={channels}
           />
