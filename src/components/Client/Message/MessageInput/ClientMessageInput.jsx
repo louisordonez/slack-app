@@ -3,7 +3,11 @@ import { TextInput, ActionIcon, useMantineTheme } from '@mantine/core';
 import { Send } from 'tabler-icons-react';
 import './ClientMessageInput.scss';
 
-const ClientMessageInput = ({ selectedId, onSendDirectMessage }) => {
+const ClientMessageInput = ({
+  selectedId,
+  onSendDirectMessage,
+  receiverClass,
+}) => {
   const theme = useMantineTheme();
 
   const [isDisabled, setIsDisabled] = useState(true);
@@ -16,11 +20,14 @@ const ClientMessageInput = ({ selectedId, onSendDirectMessage }) => {
   const handleSubmitMessage = () => {
     const messageObj = {
       receiver_id: selectedId,
-      receiver_class: 'User',
+      receiver_class: receiverClass,
       body: message,
     };
 
-    onSendDirectMessage(messageObj);
+    if (receiverClass === 'User') {
+      onSendDirectMessage(messageObj);
+    }
+
     setMessage('');
   };
 

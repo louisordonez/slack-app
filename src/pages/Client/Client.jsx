@@ -105,8 +105,9 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     );
   };
 
-  const handleSelected = (name) => {
+  const handleSelected = (name, receiverClass) => {
     setMessageHeaderName(name);
+    setReceiverClass(receiverClass);
   };
 
   const handleSelectedId = (id) => {
@@ -116,10 +117,12 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       const emailObj = emailList.find((user) => user.value === id[0]);
 
       setSelectedId(id[0]);
+      setReceiverClass('User');
       setMessageHeaderName(emailObj.label);
       handleShowDirectMessages(id[0]);
     } else {
       setSelectedId(null);
+      setReceiverClass('');
       setMessageHeaderName('');
       setMessages([]);
     }
@@ -247,6 +250,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
           messageHeaderName={messageHeaderName}
           selectedId={selectedId}
           messages={messages}
+          receiverClass={receiverClass}
         />
       </AppShell>
       <ClientCreateChannelModal

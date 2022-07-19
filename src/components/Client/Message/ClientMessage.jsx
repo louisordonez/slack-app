@@ -10,6 +10,7 @@ const ClientMessage = ({
   messageHeaderName,
   messages,
   selectedId,
+  receiverClass,
 }) => {
   return (
     <>
@@ -27,6 +28,7 @@ const ClientMessage = ({
           <ClientMessageInput
             selectedId={selectedId}
             onSendDirectMessage={onSendDirectMessage}
+            receiverClass={receiverClass}
           />
         </div>
       </div>
