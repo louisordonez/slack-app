@@ -17,9 +17,7 @@ export const onEmailListSuccess = (response) => {
       return newEmailListArray.push(newEmailData);
     });
 
-    return newEmailListArray
-      .sort((a, b) => a.value - b.value)
-      .filter((u) => u.value !== userData.id);
+    return newEmailListArray;
   };
 
   return createNewEmailList(response.data.data);
