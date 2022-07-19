@@ -3,8 +3,6 @@ import { getLocalStorageItem } from '../utils/LocalStorage';
 import { axiosGetCall } from '../utils/AxiosApiCall';
 
 export const onEmailListSuccess = (response) => {
-  const userData = getLocalStorageItem('userData')[0];
-
   const createNewEmailList = (list) => {
     let newEmailListArray = [];
 
