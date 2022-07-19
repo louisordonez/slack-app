@@ -235,18 +235,18 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
             onSendDirectMessageModalShown={handleSendDirectMessageModal}
             onIsLoadingVisible={onIsLoadingVisible}
             onSelected={handleSelected}
-            channels={channels}
             onSelectedId={handleSelectedId}
+            channels={channels}
           />
         }
         header={<ClientHeader opened={opened} onOpened={handleOpened} />}
       >
         <ClientMessage
-          messageHeaderName={messageHeaderName}
           onChannelDetailsModalShown={handleChannelDetailsModal}
-          messages={messages}
-          selectedId={selectedId}
           onSendDirectMessage={handleSendDirectMessage}
+          messageHeaderName={messageHeaderName}
+          selectedId={selectedId}
+          messages={messages}
         />
       </AppShell>
       <ClientCreateChannelModal
