@@ -43,6 +43,9 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
 
   const handleOpened = () => setOpened((state) => !state);
 
+  const handleSendDirectMessageModal = () =>
+    setIsSendDirectMessageModalShown((state) => !state);
+
   const handleSendMessage = (object) => {
     const onSendMessageSuccess = (response) => {
       onIsLoadingVisible(false);
@@ -75,6 +78,79 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       onSendMessageSuccess,
       onSendMessageError
     );
+  };
+
+  const handleShowMessages = (id, receiver) => {
+    const onShowDirectMessagesSuccess = (response) => {
+      const createDirectMessagesList = (list) => {
+        let newDirectMessagesArray = [];
+
+        list.map((object) => {
+          const date = new Date(object.created_at);
+          const dateMonth =
+            date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth();
+          const dateDay =
+            date.getDay() < 10 ? `0${date.getDay()}` : date.getDay();
+          const dateYear = date.getFullYear();
+          const fullDate = `${dateMonth}-${dateDay}-${dateYear}`;
+          const time = date.toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+          });
+          const messageObj = {
+            'sender-id': object.sender.id,
+            'sender-email': object.sender.email,
+            'receiver-id': object.receiver.id,
+            'receiver-email': object.receiver.email,
+            body: object.body,
+            timestamp: `${fullDate} ${time}`,
+          };
+
+          return newDirectMessagesArray.push(messageObj);
+        });
+
+        return newDirectMessagesArray;
+      };
+
+      setMessages(createDirectMessagesList(response.data.data));
+      onIsLoadingVisible(false);
+    };
+
+    const onShowDirectMessagesError = (error) => {
+      const errorMessage = error.response.data.errors;
+
+      onIsLoadingVisible(false);
+      errorMessage.map((message) => showErrorToast(message));
+    };
+
+    onIsLoadingVisible(true);
+
+    axiosGetCall(
+      `${MESSAGES_ENDPOINT}?receiver_id=${id}&receiver_class=${receiver}`,
+      userHeaders,
+      onShowDirectMessagesSuccess,
+      onShowDirectMessagesError
+    );
+  };
+
+  const handleSelectedUser = (id) => {
+    onIsLoadingVisible(true);
+
+    if (id.length !== 0) {
+      const emailObj = emailList.find((user) => user.value === id[0]);
+
+      setSelectedId(id[0]);
+      setReceiverClass('User');
+      setMessageHeaderName(emailObj.label);
+      handleShowMessages(id[0], 'User');
+    } else {
+      setSelectedId(null);
+      setReceiverClass('');
+      setMessageHeaderName('');
+      setMessages([]);
+    }
+
+    onIsLoadingVisible(false);
   };
 
   const handleCreateChannelModal = () =>
@@ -146,83 +222,8 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       setSelectedId(channelId);
       setMessageHeaderName(channelName);
       setReceiverClass('Channel');
+      handleShowMessages(channelId, 'Channel');
     }
-  };
-
-  const handleSelectedUser = (id) => {
-    onIsLoadingVisible(true);
-
-    if (id.length !== 0) {
-      const emailObj = emailList.find((user) => user.value === id[0]);
-
-      setSelectedId(id[0]);
-      setReceiverClass('User');
-      setMessageHeaderName(emailObj.label);
-      handleShowDirectMessages(id[0]);
-    } else {
-      setSelectedId(null);
-      setReceiverClass('');
-      setMessageHeaderName('');
-      setMessages([]);
-    }
-
-    onIsLoadingVisible(false);
-  };
-
-  const handleSendDirectMessageModal = () =>
-    setIsSendDirectMessageModalShown((state) => !state);
-
-  const handleShowDirectMessages = (id) => {
-    const onShowDirectMessagesSuccess = (response) => {
-      const createDirectMessagesList = (list) => {
-        let newDirectMessagesArray = [];
-
-        list.map((object) => {
-          const date = new Date(object.created_at);
-          const dateMonth =
-            date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth();
-          const dateDay =
-            date.getDay() < 10 ? `0${date.getDay()}` : date.getDay();
-          const dateYear = date.getFullYear();
-          const fullDate = `${dateMonth}-${dateDay}-${dateYear}`;
-          const time = date.toLocaleTimeString([], {
-            hour: '2-digit',
-            minute: '2-digit',
-          });
-          const messageObj = {
-            'sender-id': object.sender.id,
-            'sender-email': object.sender.email,
-            'receiver-id': object.receiver.id,
-            'receiver-email': object.receiver.email,
-            body: object.body,
-            timestamp: `${fullDate} ${time}`,
-          };
-
-          return newDirectMessagesArray.push(messageObj);
-        });
-
-        return newDirectMessagesArray;
-      };
-
-      setMessages(createDirectMessagesList(response.data.data));
-      onIsLoadingVisible(false);
-    };
-
-    const onShowDirectMessagesError = (error) => {
-      const errorMessage = error.response.data.errors;
-
-      onIsLoadingVisible(false);
-      errorMessage.map((message) => showErrorToast(message));
-    };
-
-    onIsLoadingVisible(true);
-
-    axiosGetCall(
-      `${MESSAGES_ENDPOINT}?receiver_id=${id}&receiver_class=User`,
-      userHeaders,
-      onShowDirectMessagesSuccess,
-      onShowDirectMessagesError
-    );
   };
 
   const handleChannelDetailsModal = () => {
