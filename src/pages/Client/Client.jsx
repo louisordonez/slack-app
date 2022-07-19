@@ -43,6 +43,40 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
 
   const handleOpened = () => setOpened((state) => !state);
 
+  const handleSendMessage = (object) => {
+    const onSendMessageSuccess = (response) => {
+      onIsLoadingVisible(false);
+
+      if (response.data.errors !== undefined) {
+        const errorMessage = response.data.errors;
+
+        errorMessage.map((message) => showErrorToast(message));
+
+        return false;
+      }
+
+      showSuccessToast(`Message successfully sent`);
+    };
+
+    const onSendMessageError = (error) => {
+      const errorMessage = error.response.data.errors;
+
+      onIsLoadingVisible(false);
+
+      errorMessage.map((message) => showErrorToast(message));
+    };
+
+    onIsLoadingVisible(true);
+
+    axiosPostCall(
+      MESSAGES_ENDPOINT,
+      object,
+      userHeaders,
+      onSendMessageSuccess,
+      onSendMessageError
+    );
+  };
+
   const handleCreateChannelModal = () =>
     setIsCreateChannelModalShown((state) => !state);
 
@@ -113,40 +147,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       setMessageHeaderName(channelName);
       setReceiverClass('Channel');
     }
-  };
-
-  const handleSendChannelMessage = (object) => {
-    const onSendChannelMessageSuccess = (response) => {
-      onIsLoadingVisible(false);
-
-      if (response.data.errors !== undefined) {
-        const errorMessage = response.data.errors;
-
-        errorMessage.map((message) => showErrorToast(message));
-
-        return false;
-      }
-
-      showSuccessToast(`Message successfully sent`);
-    };
-
-    const onSendChannelMessageError = (error) => {
-      const errorMessage = error.response.data.errors;
-
-      onIsLoadingVisible(false);
-
-      errorMessage.map((message) => showErrorToast(message));
-    };
-
-    onIsLoadingVisible(true);
-
-    axiosPostCall(
-      MESSAGES_ENDPOINT,
-      object,
-      userHeaders,
-      onSendChannelMessageSuccess,
-      onSendChannelMessageError
-    );
   };
 
   const handleSelectedUser = (id) => {
@@ -226,40 +226,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     );
   };
 
-  const handleSendDirectMessage = (object) => {
-    const onSendDirectMessageSuccess = (response) => {
-      onIsLoadingVisible(false);
-
-      if (response.data.errors !== undefined) {
-        const errorMessage = response.data.errors;
-
-        errorMessage.map((message) => showErrorToast(message));
-
-        return false;
-      }
-
-      showSuccessToast(`Message successfully sent`);
-    };
-
-    const onSendDirectMessageError = (error) => {
-      const errorMessage = error.response.data.errors;
-
-      onIsLoadingVisible(false);
-
-      errorMessage.map((message) => showErrorToast(message));
-    };
-
-    onIsLoadingVisible(true);
-
-    axiosPostCall(
-      MESSAGES_ENDPOINT,
-      object,
-      userHeaders,
-      onSendDirectMessageSuccess,
-      onSendDirectMessageError
-    );
-  };
-
   const handleChannelDetailsModal = () =>
     setIsChannelDetailsShown((state) => !state);
 
@@ -272,25 +238,24 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
         navbar={
           <ClientNavbar
             hidden={opened}
+            channels={channels}
             onUserLogOut={onUserLogOut}
             onCreateChannelModalShown={handleCreateChannelModal}
             onSendDirectMessageModalShown={handleSendDirectMessageModal}
             onIsLoadingVisible={onIsLoadingVisible}
             onSelectedUser={handleSelectedUser}
             onSelectedChannel={handleSelectedChannel}
-            channels={channels}
           />
         }
         header={<ClientHeader opened={opened} onOpened={handleOpened} />}
       >
         <ClientMessage
-          onChannelDetailsModalShown={handleChannelDetailsModal}
-          onSendChannelMessage={handleSendChannelMessage}
-          onSendDirectMessage={handleSendDirectMessage}
           messageHeaderName={messageHeaderName}
           selectedId={selectedId}
           receiverClass={receiverClass}
           messages={messages}
+          onChannelDetailsModalShown={handleChannelDetailsModal}
+          onSendMessage={handleSendMessage}
         />
       </AppShell>
       <ClientCreateChannelModal
@@ -301,12 +266,12 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       <ClientSendDirectMessageModal
         opened={isSendDirectMessageModalShown}
         onSendDirectMessageModalShown={handleSendDirectMessageModal}
-        onSendDirectMessage={handleSendDirectMessage}
+        onSendMessage={handleSendMessage}
       />
       <ClientChannelDetails
         opened={isChannelDetailsShown}
-        onChannelDetailsModalShown={handleChannelDetailsModal}
         messageHeaderName={messageHeaderName}
+        onChannelDetailsModalShown={handleChannelDetailsModal}
       />
     </>
   );

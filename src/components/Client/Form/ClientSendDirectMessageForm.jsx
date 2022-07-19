@@ -4,8 +4,8 @@ import { getEmailList } from '../../../services/utils/EmailList';
 
 const ClientSendDirectMessageForm = ({
   opened,
-  onSendDirectMessage,
   onSendDirectMessageModalShown,
+  onSendMessage,
 }) => {
   const [emailData, setEmailData] = useState([]);
   const [receiverId, setReceiverId] = useState(null);
@@ -52,7 +52,7 @@ const ClientSendDirectMessageForm = ({
       };
     }
 
-    onSendDirectMessage(newDirectMessage);
+    onSendMessage(newDirectMessage);
     resetSendDirectMessageForm();
   };
 

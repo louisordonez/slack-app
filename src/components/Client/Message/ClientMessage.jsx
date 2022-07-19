@@ -6,8 +6,7 @@ import './ClientMessage.scss';
 
 const ClientMessage = ({
   onChannelDetailsModalShown,
-  onSendChannelMessage,
-  onSendDirectMessage,
+  onSendMessage,
   messageHeaderName,
   messages,
   selectedId,
@@ -28,9 +27,8 @@ const ClientMessage = ({
         <div className="client-message-input-container">
           <ClientMessageInput
             selectedId={selectedId}
-            onSendChannelMessage={onSendChannelMessage}
-            onSendDirectMessage={onSendDirectMessage}
             receiverClass={receiverClass}
+            onSendMessage={onSendMessage}
           />
         </div>
       </div>
