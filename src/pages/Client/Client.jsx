@@ -34,6 +34,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   const [messages, setMessages] = useState([]);
   const [emailList, setEmailList] = useState([]);
   const [selectedId, setSelectedId] = useState(undefined);
+  const [receiverClass, setReceiverClass] = useState('');
 
   useEffect(() => {
     handleShowChannels();
