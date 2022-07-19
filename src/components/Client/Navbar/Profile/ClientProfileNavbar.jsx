@@ -16,7 +16,7 @@ const ClientProfileNavbar = ({ onIsLoadingVisible, onUserLogOut }) => {
 
   return (
     <>
-      <Center className="client-stack-channels-header">
+      <Center className="client-stack-profile-header">
         <Avatar color="blue" size={100}>
           {getAvatartLetter()}
         </Avatar>
@@ -37,7 +37,7 @@ const ClientProfileNavbar = ({ onIsLoadingVisible, onUserLogOut }) => {
       </Button>
       <Divider
         my="sm"
-        className="client-stack-channels-header client-navbar-divider"
+        className="client-stack-profile-header client-navbar-divider"
       />
     </>
   );

@@ -31,16 +31,16 @@ const ClientNavbar = ({
           />
         </Stack>
         <Stack>
+          <ClientDirectMessagesNavbar
+            onSendDirectMessageModalShown={onSendDirectMessageModalShown}
+            onSelectedId={onSelectedId}
+          />
+        </Stack>
+        <Stack>
           <ClientChannelsNavbar
             onCreateChannelModalShown={onCreateChannelModalShown}
             channels={channels}
             onSelected={onSelected}
-          />
-        </Stack>
-        <Stack>
-          <ClientDirectMessagesNavbar
-            onSendDirectMessageModalShown={onSendDirectMessageModalShown}
-            onSelectedId={onSelectedId}
           />
         </Stack>
       </Navbar>

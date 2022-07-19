@@ -11,7 +11,7 @@ const ClientDirectMessagesNavbar = ({
 
   useEffect(() => {
     getEmailList().then((result) => setEmailData(result));
-  });
+  }, []);
 
   return (
     <>

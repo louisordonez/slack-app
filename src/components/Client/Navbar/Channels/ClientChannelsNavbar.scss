@@ -1,5 +1,5 @@
 .client-stack-channels-header {
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 .client-stack-channels {
@@ -10,5 +10,10 @@
 
 .client-stack-channels-container {
   overflow-y: auto;
-  height: 18vh;
+  max-height: 25vh;
+}
+
+.client-stack-channels-no-channels {
+  padding: 0.4rem;
+  border-radius: 0.4rem;
 }

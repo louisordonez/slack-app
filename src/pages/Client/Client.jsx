@@ -108,12 +108,19 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   };
 
   const handleSelectedId = (id) => {
+    onIsLoadingVisible(true);
+
     if (id.length !== 0) {
       const emailObj = emailList.find((user) => user.value === id[0]);
 
       setMessageHeaderName(emailObj.label);
       handleShowDirectMessages(id[0]);
+    } else {
+      setMessageHeaderName('');
+      setDirectMessages([]);
     }
+
+    onIsLoadingVisible(false);
   };
 
   const handleSendDirectMessageModal = () =>
@@ -132,7 +139,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
             date.getDay() < 10 ? `0${date.getDay()}` : date.getDay();
           const dateYear = date.getFullYear();
           const fullDate = `${dateMonth}-${dateDay}-${dateYear}`;
-          const regularTime = date.toLocaleTimeString([], {
+          const time = date.toLocaleTimeString([], {
             hour: '2-digit',
             minute: '2-digit',
           });
@@ -143,7 +150,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
             'receiver-id': object.receiver.id,
             'receiver-email': object.receiver.email,
             body: object.body,
-            timestamp: `${fullDate} ${regularTime}`,
+            timestamp: `${fullDate} ${time}`,
           };
 
           return newDirectMessagesArray.push(messageObj);

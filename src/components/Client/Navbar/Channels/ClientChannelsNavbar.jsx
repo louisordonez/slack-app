@@ -17,7 +17,11 @@ const ClientChannelsNavbar = ({
 
   const showNoChannelsMessage = () => {
     if (channels === undefined) {
-      return <Text>No channels available</Text>;
+      return (
+        <Text className="client-stack-channels-no-channels">
+          No channels available
+        </Text>
+      );
     }
   };
 
