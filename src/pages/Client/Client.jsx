@@ -189,7 +189,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
             hour: '2-digit',
             minute: '2-digit',
           });
-
           const messageObj = {
             'sender-id': object.sender.id,
             'sender-email': object.sender.email,
