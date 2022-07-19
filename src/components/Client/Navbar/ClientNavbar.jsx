@@ -7,11 +7,11 @@ import './ClientNavbar.scss';
 
 const ClientNavbar = ({
   hidden,
+  channels,
+  onIsLoadingVisible,
   onUserLogOut,
   onCreateChannelModalShown,
   onSendDirectMessageModalShown,
-  onIsLoadingVisible,
-  channels,
   onSelectedUser,
   onSelectedChannel,
 }) => {

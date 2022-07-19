@@ -5,12 +5,12 @@ import ClientMessageHeader from '../Message/MessageHeader/ClientMessageHeader';
 import './ClientMessage.scss';
 
 const ClientMessage = ({
-  onChannelDetailsModalShown,
-  onSendMessage,
   messageHeaderName,
-  messages,
   selectedId,
   receiverClass,
+  messages,
+  onChannelDetailsModalShown,
+  onSendMessage,
 }) => {
   return (
     <>

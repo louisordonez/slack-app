@@ -3,9 +3,9 @@ import { Text, Button, Group } from '@mantine/core';
 import './ClientChannelsNavbar.scss';
 
 const ClientChannelsNavbar = ({
+  channels,
   onCreateChannelModalShown,
   onSelectedChannel,
-  channels,
 }) => {
   const [channelsList, setChannels] = useState([]);
 

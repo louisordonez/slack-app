@@ -3,7 +3,7 @@ import { TextInput, ActionIcon, useMantineTheme } from '@mantine/core';
 import { Send } from 'tabler-icons-react';
 import './ClientMessageInput.scss';
 
-const ClientMessageInput = ({ selectedId, onSendMessage, receiverClass }) => {
+const ClientMessageInput = ({ selectedId, receiverClass, onSendMessage }) => {
   const theme = useMantineTheme();
 
   const [isDisabled, setIsDisabled] = useState(true);

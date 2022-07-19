@@ -3,8 +3,8 @@ import { Modal } from '@mantine/core';
 
 const ClientChannelDetails = ({
   opened,
-  onChannelDetailsModalShown,
   messageHeaderName,
+  onChannelDetailsModalShown,
 }) => {
   return (
     <Modal
