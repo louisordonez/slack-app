@@ -31,14 +31,14 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   const [isChannelDetailsShown, setIsChannelDetailsShown] = useState(false);
   const [isSendDirectMessageModalShown, setIsSendDirectMessageModalShown] =
     useState(false);
-  const [directMessages, setDirectMessages] = useState([]);
+  const [messages, setMessages] = useState([]);
   const [emailList, setEmailList] = useState([]);
   const [selectedId, setSelectedId] = useState(undefined);
 
   useEffect(() => {
     handleShowChannels();
     getEmailList().then((result) => setEmailList(result));
-  }, [directMessages]);
+  }, [messages]);
 
   const handleOpened = () => setOpened((state) => !state);
 
@@ -120,7 +120,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     } else {
       setSelectedId(null);
       setMessageHeaderName('');
-      setDirectMessages([]);
+      setMessages([]);
     }
 
     onIsLoadingVisible(false);
@@ -162,7 +162,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
         return newDirectMessagesArray;
       };
 
-      setDirectMessages(createDirectMessagesList(response.data.data));
+      setMessages(createDirectMessagesList(response.data.data));
       onIsLoadingVisible(false);
     };
 
@@ -243,7 +243,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
         <ClientMessage
           messageHeaderName={messageHeaderName}
           onChannelDetailsModalShown={handleChannelDetailsModal}
-          directMessages={directMessages}
+          messages={messages}
           selectedId={selectedId}
           onSendDirectMessage={handleSendDirectMessage}
         />
