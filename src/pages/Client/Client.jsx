@@ -113,17 +113,13 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       };
 
       setMessages(createDirectMessagesList(response.data.data));
-      onIsLoadingVisible(false);
     };
 
     const onShowDirectMessagesError = (error) => {
       const errorMessage = error.response.data.errors;
 
-      onIsLoadingVisible(false);
       errorMessage.map((message) => showErrorToast(message));
     };
-
-    onIsLoadingVisible(true);
 
     axiosGetCall(
       `${MESSAGES_ENDPOINT}?receiver_id=${id}&receiver_class=${receiver}`,
@@ -134,8 +130,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   };
 
   const handleSelectedUser = (id) => {
-    onIsLoadingVisible(true);
-
     if (id.length !== 0) {
       const emailObj = emailList.find((user) => user.value === id[0]);
 
@@ -149,8 +143,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       setMessageHeaderName('');
       setMessages([]);
     }
-
-    onIsLoadingVisible(false);
   };
 
   const handleCreateChannelModal = () =>
@@ -194,18 +186,14 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
 
   const handleShowChannels = () => {
     const onShowChannelsSuccess = (response) => {
-      onIsLoadingVisible(false);
       setChannels(response.data.data);
     };
 
     const onShowChannelsError = (error) => {
       const errorMessage = error.response.data.errors;
 
-      onIsLoadingVisible(false);
       errorMessage.map((message) => showErrorToast(message));
     };
-
-    onIsLoadingVisible(true);
 
     axiosGetCall(
       CHANNELS_ENDPOINT,
