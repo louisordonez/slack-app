@@ -6,7 +6,7 @@ import ClientHeader from '../../components/Client/Header/ClientHeader';
 import ClientMessage from '../../components/Client/Message/ClientMessage';
 import ClientCreateChannelModal from '../../components/Client/Modal/ClientCreateChannelModal';
 import ClientSendDirectMessageModal from '../../components/Client/Modal/ClientSendDirectMessageModal';
-import ClientChannelDetails from '../../components/Client/Modal/ClientChannelDetails';
+import ClientChannelDetailsModal from '../../components/Client/Modal/ChannelDetails/ClientChannelDetailsModal';
 import {
   CHANNELS_ENDPOINT,
   MESSAGES_ENDPOINT,
@@ -35,6 +35,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   const [messages, setMessages] = useState([]);
   const [selectedId, setSelectedId] = useState(undefined);
   const [receiverClass, setReceiverClass] = useState('');
+  const [channelDetails, setChannelDetails] = useState({});
 
   useEffect(() => {
     handleShowChannels();
@@ -217,7 +218,27 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   const handleChannelDetailsModal = () => {
     if (receiverClass === 'Channel') {
       setIsChannelDetailsShown((state) => !state);
+      showChannelDetails();
     }
+  };
+
+  const showChannelDetails = () => {
+    const onShowChannelDetailsSuccess = (response) => {
+      setChannelDetails(response.data.data);
+    };
+
+    const onShowChannelDetailsError = (error) => {
+      const errorMessage = error.response.data.errors;
+
+      errorMessage.map((message) => showErrorToast(message));
+    };
+
+    axiosGetCall(
+      `${CHANNELS_ENDPOINT}${selectedId}`,
+      userHeaders,
+      onShowChannelDetailsSuccess,
+      onShowChannelDetailsError
+    );
   };
 
   return (
@@ -259,9 +280,10 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
         onSendDirectMessageModalShown={handleSendDirectMessageModal}
         onSendMessage={handleSendMessage}
       />
-      <ClientChannelDetails
+      <ClientChannelDetailsModal
         opened={isChannelDetailsShown}
         messageHeaderName={messageHeaderName}
+        channelDetails={channelDetails}
         onChannelDetailsModalShown={handleChannelDetailsModal}
       />
     </>

@@ -1,0 +1,25 @@
+.channel-details-label {
+  color: var(--default);
+  font-size: small;
+  font-weight: 400;
+}
+
+.channel-details-multiselect {
+  width: 87%;
+  margin-bottom: 1rem;
+}
+
+.channel-details-button {
+  margin-top: 0.75rem;
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.channel-details-members-header {
+  margin-top: 1rem;
+}
+
+.channel-details-members-container {
+  height: 12rem;
+  overflow-y: auto;
+}
