@@ -17,6 +17,7 @@ const ClientSendDirectMessageModal = ({
       <ClientSendDirectMessageForm
         opened={opened}
         onSendDirectMessage={onSendDirectMessage}
+        onSendDirectMessageModalShown={onSendDirectMessageModalShown}
       />
     </Modal>
   );

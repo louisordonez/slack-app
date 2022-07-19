@@ -8,6 +8,8 @@ const ClientMessage = ({
   messageHeaderName,
   onChannelDetailsModalShown,
   directMessages,
+  selectedId,
+  onSendDirectMessage,
 }) => {
   return (
     <>
@@ -22,7 +24,10 @@ const ClientMessage = ({
           <ClientMessageBody directMessages={directMessages} />
         </div>
         <div className="client-message-input-container">
-          <ClientMessageInput />
+          <ClientMessageInput
+            selectedId={selectedId}
+            onSendDirectMessage={onSendDirectMessage}
+          />
         </div>
       </div>
     </>

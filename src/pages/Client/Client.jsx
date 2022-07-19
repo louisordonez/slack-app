@@ -33,6 +33,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     useState(false);
   const [directMessages, setDirectMessages] = useState([]);
   const [emailList, setEmailList] = useState([]);
+  const [selectedId, setSelectedId] = useState(undefined);
 
   useEffect(() => {
     handleShowChannels();
@@ -113,9 +114,11 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     if (id.length !== 0) {
       const emailObj = emailList.find((user) => user.value === id[0]);
 
+      setSelectedId(id[0]);
       setMessageHeaderName(emailObj.label);
       handleShowDirectMessages(id[0]);
     } else {
+      setSelectedId(null);
       setMessageHeaderName('');
       setDirectMessages([]);
     }
@@ -193,7 +196,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       }
 
       showSuccessToast(`Direct Message successfully sent`);
-      handleSendDirectMessageModal();
     };
 
     const onSendDirectMessageError = (error) => {
@@ -242,6 +244,8 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
           messageHeaderName={messageHeaderName}
           onChannelDetailsModalShown={handleChannelDetailsModal}
           directMessages={directMessages}
+          selectedId={selectedId}
+          onSendDirectMessage={handleSendDirectMessage}
         />
       </AppShell>
       <ClientCreateChannelModal

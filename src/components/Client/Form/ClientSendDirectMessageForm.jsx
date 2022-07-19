@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { TextInput, MultiSelect, Stack, Button, Group } from '@mantine/core';
 import { getEmailList } from '../../../services/utils/EmailList';
 
-const ClientSendDirectMessageForm = ({ opened, onSendDirectMessage }) => {
+const ClientSendDirectMessageForm = ({
+  opened,
+  onSendDirectMessage,
+  onSendDirectMessageModalShown,
+}) => {
   const [emailData, setEmailData] = useState([]);
   const [receiverId, setReceiverId] = useState(null);
   const [message, setMessage] = useState('');
@@ -16,6 +20,7 @@ const ClientSendDirectMessageForm = ({ opened, onSendDirectMessage }) => {
   const resetSendDirectMessageForm = () => {
     setReceiverId(null);
     setMessage('');
+    onSendDirectMessageModalShown();
   };
 
   const handleDirectMessage = () => {
