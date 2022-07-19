@@ -13,11 +13,6 @@ const LoginForm = ({ onUserInputSubmit }) => {
     setPassword(value);
   };
 
-  const resetLoginForm = () => {
-    setEmail('');
-    setPassword('');
-  };
-
   const handleSubmit = () => {
     const userInput = {
       email,
@@ -25,7 +20,6 @@ const LoginForm = ({ onUserInputSubmit }) => {
     };
 
     onUserInputSubmit(userInput);
-    resetLoginForm();
   };
 
   return (
