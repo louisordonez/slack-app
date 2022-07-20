@@ -57,6 +57,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       }
 
       showSuccessToast(`Message successfully sent`);
+      handleShowMessages(selectedId, receiverClass);
     };
 
     const onSendMessageError = (error) => {
@@ -136,10 +137,10 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       setMessageHeaderName(emailObj.label);
       handleShowMessages(id[0], 'User');
     } else {
+      setMessages([]);
       setSelectedId(null);
       setReceiverClass('');
       setMessageHeaderName('');
-      setMessages([]);
     }
   };
 
