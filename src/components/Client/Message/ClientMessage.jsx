@@ -9,17 +9,13 @@ const ClientMessage = ({
   selectedId,
   receiverClass,
   messages,
-  onChannelDetailsModalShown,
   onSendMessage,
 }) => {
   return (
     <>
       <div className="client-message-container">
         <div className="client-message-header-container">
-          <ClientMessageHeader
-            messageHeaderName={messageHeaderName}
-            onChannelDetailsModalShown={onChannelDetailsModalShown}
-          />
+          <ClientMessageHeader messageHeaderName={messageHeaderName} />
         </div>
         <div className="client-message-body-container">
           <ClientMessageBody messages={messages} />

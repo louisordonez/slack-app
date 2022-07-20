@@ -2,10 +2,7 @@ import React from 'react';
 import { Group, Divider, Text, Avatar } from '@mantine/core';
 import './ClientMessageHeader.scss';
 
-const ClientMessageHeader = ({
-  messageHeaderName,
-  onChannelDetailsModalShown,
-}) => {
+const ClientMessageHeader = ({ messageHeaderName }) => {
   const getAvatarLetter = () => {
     if (messageHeaderName) {
       return messageHeaderName.toUpperCase().charAt(0);
@@ -15,10 +12,7 @@ const ClientMessageHeader = ({
   return (
     <>
       <Group>
-        <Group
-          className="client-message-header-name"
-          onClick={onChannelDetailsModalShown}
-        >
+        <Group>
           <Avatar color="blue">{getAvatarLetter()}</Avatar>
           <Text className="bold-font"> {messageHeaderName}</Text>
         </Group>
