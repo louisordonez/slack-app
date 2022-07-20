@@ -9,17 +9,35 @@ const ClientChannelDetails = ({
   channelDetails,
   onChannelDetailsModalShown,
 }) => {
-  console.log(channelDetails);
   const [emailData, setEmailData] = useState([]);
   const [channelOwner, setChannelOwner] = useState('');
   const [userIds, setUserIds] = useState([]);
-  const [channelMembers, setChanelMembers] = useState([]);
+  const [channelMembers, setChannelMembers] = useState([]);
 
   useEffect(() => {
     if (opened === true) {
-      getEmailList().then((result) => setEmailData(result));
+      getEmailList().then((result) => {
+        setEmailData(result);
+        setChannelMembers(filterUsers(result));
+      });
     }
   }, [opened]);
+
+  const filterUsers = (result) => {
+    // console.log(result);
+    // if (Object.keys(channelDetails).length !== 0) {
+    //   const getChannelMembers = () => {
+    //     let members = [];
+    //     channelDetails['channel_members'].map((member) => {
+    //       return members.push(member['user_id']);
+    //     });
+    //     return members;
+    //   };
+    //   return getChannelMembers().map((id) =>
+    //     result.find((email) => email.value === id)
+    //   );
+    // }
+  };
 
   return (
     <Modal
@@ -50,7 +68,8 @@ const ClientChannelDetails = ({
       </Group>
       <Stack>
         <Text className="channel-details-members-header">Members:</Text>
-        <Stack className="channel-details-members-container">
+        {/* {channelMembers.map((member) => console.log(member))} */}
+        {/* <Stack className="channel-details-members-container">
           <Text>John Doe</Text>
           <Text>John Smith</Text>
           <Text>John Doe</Text>
@@ -63,7 +82,7 @@ const ClientChannelDetails = ({
           <Text>John Smith</Text>
           <Text>John Doe</Text>
           <Text>John Smith</Text>
-        </Stack>
+        </Stack> */}
       </Stack>
     </Modal>
   );

@@ -15,7 +15,7 @@ export const onEmailListSuccess = (response) => {
       return newEmailListArray.push(newEmailData);
     });
 
-    return newEmailListArray;
+    return newEmailListArray.sort((a, b) => a.value - b.value);
   };
 
   return createNewEmailList(response.data.data);
