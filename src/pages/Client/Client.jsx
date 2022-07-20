@@ -79,9 +79,9 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   };
 
   const handleShowMessages = (id, receiver) => {
-    const onShowDirectMessagesSuccess = (response) => {
-      const createDirectMessagesList = (list) => {
-        let newDirectMessagesArray = [];
+    const onShowMessagesSuccess = (response) => {
+      const createMessagesList = (list) => {
+        let newMessagesArray = [];
 
         list.map((object) => {
           const date = new Date(object.created_at);
@@ -104,16 +104,16 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
             timestamp: `${fullDate} ${time}`,
           };
 
-          return newDirectMessagesArray.push(messageObj);
+          return newMessagesArray.push(messageObj);
         });
 
-        return newDirectMessagesArray;
+        return newMessagesArray;
       };
 
-      setMessages(createDirectMessagesList(response.data.data));
+      setMessages(createMessagesList(response.data.data));
     };
 
-    const onShowDirectMessagesError = (error) => {
+    const onShowMessagesError = (error) => {
       const errorMessage = error.response.data.errors;
 
       errorMessage.map((message) => showErrorToast(message));
@@ -122,8 +122,8 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     axiosGetCall(
       `${MESSAGES_ENDPOINT}?receiver_id=${id}&receiver_class=${receiver}`,
       userHeaders,
-      onShowDirectMessagesSuccess,
-      onShowDirectMessagesError
+      onShowMessagesSuccess,
+      onShowMessagesError
     );
   };
 
