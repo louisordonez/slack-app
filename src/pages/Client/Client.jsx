@@ -25,7 +25,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   const [opened, setOpened] = useState(false);
   const [isCreateChannelModalShown, setIsCreateChannelModalShown] =
     useState(false);
-  const [isChannelDetailsShown, setIsChannelDetailsShown] = useState(false);
   const [isSendDirectMessageModalShown, setIsSendDirectMessageModalShown] =
     useState(false);
   const [emailList, setEmailList] = useState([]);
@@ -34,7 +33,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   const [messages, setMessages] = useState([]);
   const [selectedId, setSelectedId] = useState(undefined);
   const [receiverClass, setReceiverClass] = useState('');
-  const [channelDetails, setChannelDetails] = useState({});
 
   useEffect(() => {
     handleShowChannels();
