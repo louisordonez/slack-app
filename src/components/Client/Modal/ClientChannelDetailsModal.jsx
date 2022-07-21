@@ -8,7 +8,7 @@ const ClientChannelDetailsModal = ({
   onChannelDetailsModalShown,
 }) => {
   const showChannelOwnerDetails = () => {
-    if (channelDetails) {
+    if (channelDetails.length !== 0) {
       return (
         <>
           <Text>{channelDetails['owner_email']}</Text>
@@ -19,7 +19,7 @@ const ClientChannelDetailsModal = ({
   };
 
   const showChannelMembersDetails = () => {
-    if (channelDetails) {
+    if (channelDetails.length !== 0) {
       return (
         <>
           <Text>Members</Text>
@@ -41,8 +41,8 @@ const ClientChannelDetailsModal = ({
         onClose={() => onChannelDetailsModalShown(false)}
         title={`${messageHeaderName}`}
       >
-        {/* {showChannelOwnerDetails()}
-        {showChannelMembersDetails()} */}
+        {showChannelOwnerDetails()}
+        {showChannelMembersDetails()}
       </Modal>
     </>
   );
