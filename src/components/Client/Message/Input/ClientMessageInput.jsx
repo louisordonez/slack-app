@@ -15,7 +15,7 @@ const ClientMessageInput = ({
 
   useEffect(() => {
     handleDisabled();
-  }, [message]);
+  }, [selectedId]);
 
   const handleSubmitMessage = () => {
     const messageObj = {
@@ -29,9 +29,9 @@ const ClientMessageInput = ({
   };
 
   const handleDisabled = () => {
-    message !== '' && selectedId !== null
-      ? setIsDisabled(false)
-      : setIsDisabled(true);
+    selectedId === null || selectedId === undefined
+      ? setIsDisabled(true)
+      : setIsDisabled(false);
   };
 
   return (
@@ -42,6 +42,7 @@ const ClientMessageInput = ({
         size="md"
         value={message}
         icon={<Message size={16} />}
+        disabled={isDisabled}
         rightSection={
           <ActionIcon
             type="submit"
