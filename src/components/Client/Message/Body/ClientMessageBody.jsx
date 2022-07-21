@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Text, Avatar, Tooltip } from '@mantine/core';
 
 const ClientMessageBody = ({ messages }) => {
+  const bottomDiv = useRef(null);
+
+  useEffect(() => {
+    bottomDiv.current.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
   const getAvatarLetter = (email) => {
     return email.toUpperCase().charAt(0);
   };
@@ -30,6 +36,7 @@ const ClientMessageBody = ({ messages }) => {
           </div>
         );
       })}
+      <div ref={bottomDiv} />
     </>
   );
 };
