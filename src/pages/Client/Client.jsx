@@ -6,6 +6,7 @@ import ClientHeader from '../../components/Client/Header/ClientHeader';
 import ClientMessage from '../../components/Client/Message/ClientMessage';
 import ClientCreateChannelModal from '../../components/Client/Modal/ClientCreateChannelModal';
 import ClientSendDirectMessageModal from '../../components/Client/Modal/ClientSendDirectMessageModal';
+import ClientChannelDetailsModal from '../../components/Client/Modal/ClientChannelDetailsModal/ClientChannelDetailsModal';
 import {
   CHANNELS_ENDPOINT,
   MESSAGES_ENDPOINT,
@@ -27,12 +28,15 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     useState(false);
   const [isSendDirectMessageModalShown, setIsSendDirectMessageModalShown] =
     useState(false);
+  const [isChannelDetailsModalShown, setIsChannelDetailsModalShown] =
+    useState(false);
   const [emailList, setEmailList] = useState([]);
   const [channels, setChannels] = useState([]);
   const [messageHeaderName, setMessageHeaderName] = useState('');
   const [messages, setMessages] = useState([]);
   const [selectedId, setSelectedId] = useState(undefined);
   const [receiverClass, setReceiverClass] = useState('');
+  const [channelDetails, setChannelDetails] = useState([]);
 
   useEffect(() => {
     handleShowChannels();
@@ -213,6 +217,52 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     }
   };
 
+  const handleChannelDetails = () => {
+    const onChannelDetailsSuccess = (response) => {
+      let channelDetailsResponse = response.data.data;
+      let newChannelMembers = [];
+
+      channelDetailsResponse['owner_email'] = emailList.find(
+        (user) => user.value === channelDetailsResponse['owner_id']
+      ).label;
+
+      channelDetailsResponse['channel_members'].map((member) => {
+        const findMember = emailList.find(
+          (user) => user.value === member['user_id']
+        );
+
+        return newChannelMembers.push(findMember);
+      });
+
+      channelDetailsResponse['channel_members'] = newChannelMembers;
+
+      setChannelDetails(channelDetailsResponse);
+    };
+
+    const onChannelDetailsError = (error) => {
+      const errorMessage = error.response.data.errors;
+
+      errorMessage.map((message) => showErrorToast(message));
+    };
+
+    axiosGetCall(
+      `${CHANNELS_ENDPOINT}${selectedId}`,
+      userHeaders,
+      onChannelDetailsSuccess,
+      onChannelDetailsError
+    );
+  };
+
+  const handleChannelDetailsModalShown = () => {
+    if (receiverClass === 'Channel') {
+      setIsChannelDetailsModalShown((state) => !state);
+
+      if (isChannelDetailsModalShown === false) {
+        handleChannelDetails();
+      }
+    }
+  };
+
   return (
     <>
       <AppShell
@@ -239,6 +289,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
           receiverClass={receiverClass}
           messages={messages}
           onSendMessage={handleSendMessage}
+          onChannelDetailsModalShown={handleChannelDetailsModalShown}
         />
       </AppShell>
       <ClientCreateChannelModal
@@ -250,6 +301,12 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
         opened={isSendDirectMessageModalShown}
         onSendDirectMessageModalShown={handleSendDirectMessageModal}
         onSendMessage={handleSendMessage}
+      />
+      <ClientChannelDetailsModal
+        opened={isChannelDetailsModalShown}
+        messageHeaderName={messageHeaderName}
+        channelDetails={channelDetails}
+        onChannelDetailsModalShown={handleChannelDetailsModalShown}
       />
     </>
   );

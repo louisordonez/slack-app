@@ -10,12 +10,16 @@ const ClientMessage = ({
   receiverClass,
   messages,
   onSendMessage,
+  onChannelDetailsModalShown,
 }) => {
   return (
     <>
       <div className="client-message-container">
         <div className="client-message-header-container">
-          <ClientMessageHeader messageHeaderName={messageHeaderName} />
+          <ClientMessageHeader
+            messageHeaderName={messageHeaderName}
+            onChannelDetailsModalShown={onChannelDetailsModalShown}
+          />
         </div>
         <div className="client-message-body-container">
           <ClientMessageBody messages={messages} />
