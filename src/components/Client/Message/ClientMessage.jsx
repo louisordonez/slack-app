@@ -2,7 +2,7 @@ import React from 'react';
 import ClientMessageBody from './Body/ClientMessageBody';
 import ClientMessageInput from './Input/ClientMessageInput';
 import ClientMessageHeader from './Header/ClientMessageHeader';
-import '../../../assets/styles/components/Client/Message/ClientMessage.scss';
+import '../../../assets/styles/components/Client/ClientMessage.scss';
 
 const ClientMessage = ({
   messageHeaderName,
