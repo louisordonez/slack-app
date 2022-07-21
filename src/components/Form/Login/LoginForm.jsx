@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { TextInput, PasswordInput, Paper, Button } from '@mantine/core';
+import { Mail, Lock } from 'tabler-icons-react';
 
 const LoginForm = ({ onUserInputSubmit }) => {
   const [email, setEmail] = useState('');
@@ -39,12 +40,14 @@ const LoginForm = ({ onUserInputSubmit }) => {
         <TextInput
           required
           label="Email"
+          icon={<Mail size={16} />}
           value={email}
           onChange={(e) => handleEmail(e.target.value)}
         />
         <PasswordInput
           required
           label="Password"
+          icon={<Lock size={16} />}
           value={password}
           onChange={(e) => handlePassword(e.target.value)}
           mt="md"

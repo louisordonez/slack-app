@@ -105,7 +105,9 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
             'receiver-id': object.receiver.id,
             'receiver-email': object.receiver.email,
             body: object.body,
-            timestamp: `${fullDate} ${time}`,
+            date: fullDate,
+            time: time,
+            // timestamp: `${fullDate} ${time}`,
           };
 
           return newMessagesArray.push(messageObj);

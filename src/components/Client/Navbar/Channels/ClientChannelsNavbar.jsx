@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text, Button, Group } from '@mantine/core';
+import { Hash } from 'tabler-icons-react';
 
 const ClientChannelsNavbar = ({
   channels,
@@ -45,7 +46,10 @@ const ClientChannelsNavbar = ({
                 onSelectedChannel(channel.id, channel.name);
               }}
             >
-              {channel.name}
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Hash size={16} style={{ marginRight: '.2rem' }} />
+                {channel.name}
+              </div>
             </Text>
           );
         })}

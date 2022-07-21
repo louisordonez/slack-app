@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, Button, Group, MultiSelect } from '@mantine/core';
+import { User } from 'tabler-icons-react';
 import { getEmailList } from '../../../../services/utils/EmailList';
 
 const ClientDirectMessagesNavbar = ({
@@ -30,6 +31,7 @@ const ClientDirectMessagesNavbar = ({
         <MultiSelect
           searchable
           label="Select user"
+          icon={<User size={16} />}
           nothingFound="Nothing found"
           maxDropdownHeight={160}
           limit={20}

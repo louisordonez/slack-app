@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { MultiSelect, Button } from '@mantine/core';
-import { UserPlus, Plus } from 'tabler-icons-react';
+import { UserPlus } from 'tabler-icons-react';
 import { getEmailList } from '../../../services/utils/EmailList';
 
 const ClientAddChannelMemberForm = () => {

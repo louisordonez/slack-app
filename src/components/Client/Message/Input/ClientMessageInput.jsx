@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TextInput, ActionIcon, useMantineTheme } from '@mantine/core';
+import { Message } from 'tabler-icons-react';
 import { Send } from 'tabler-icons-react';
 
 const ClientMessageInput = ({ selectedId, receiverClass, onSendMessage }) => {
@@ -36,6 +37,7 @@ const ClientMessageInput = ({ selectedId, receiverClass, onSendMessage }) => {
         radius="xl"
         size="md"
         value={message}
+        icon={<Message size={16} />}
         rightSection={
           <ActionIcon
             type="submit"

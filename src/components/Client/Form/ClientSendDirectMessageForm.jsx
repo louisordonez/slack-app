@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TextInput, MultiSelect, Stack, Button, Group } from '@mantine/core';
+import { User, Message } from 'tabler-icons-react';
 import { getEmailList } from '../../../services/utils/EmailList';
 
 const ClientSendDirectMessageForm = ({
@@ -63,6 +64,7 @@ const ClientSendDirectMessageForm = ({
           required
           searchable
           label="Select user"
+          icon={<User size={16} />}
           nothingFound="Nothing found"
           maxDropdownHeight={160}
           limit={20}
@@ -74,6 +76,7 @@ const ClientSendDirectMessageForm = ({
         <TextInput
           required
           label="Message"
+          icon={<Message size={16} />}
           onChange={(e) => setMessage(e.target.value)}
         ></TextInput>
       </Stack>

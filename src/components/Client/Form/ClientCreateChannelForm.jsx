@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { TextInput, MultiSelect, Stack, Button, Group } from '@mantine/core';
+import { Hash, Users } from 'tabler-icons-react';
 import { getEmailList } from '../../../services/utils/EmailList';
 
 const ClientCreateChannelForm = ({ opened, onCreateChannel }) => {
@@ -34,6 +35,7 @@ const ClientCreateChannelForm = ({ opened, onCreateChannel }) => {
       <Stack>
         <TextInput
           required
+          icon={<Hash size={16} />}
           label="Channel name"
           onChange={(e) => setChannelName(e.target.value)}
           value={channelName}
@@ -42,6 +44,7 @@ const ClientCreateChannelForm = ({ opened, onCreateChannel }) => {
           required
           searchable
           clearable
+          icon={<Users size={16} />}
           label="Select users"
           nothingFound="Nothing found"
           maxDropdownHeight={160}

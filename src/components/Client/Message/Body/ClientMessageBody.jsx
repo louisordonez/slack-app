@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Avatar } from '@mantine/core';
+import { Text, Avatar, Tooltip } from '@mantine/core';
 
 const ClientMessageBody = ({ messages }) => {
   const getAvatarLetter = (email) => {
@@ -17,15 +17,15 @@ const ClientMessageBody = ({ messages }) => {
               </Avatar>
               <div className="client-message-body-name-timestamp-container">
                 <Text className="client-message-body-name bold-font">
-                  {message['sender-email']}
+                  {message['sender-email']}{' '}
+                  <span className="client-message-body-timestamp">
+                    <Tooltip label={message['date']}>{message['time']}</Tooltip>
+                  </span>
                 </Text>
-                <Text className="client-message-body-timestamp">
-                  {message['timestamp']}
+                <Text className="client-message-body-text">
+                  {message['body']}
                 </Text>
               </div>
-            </div>
-            <div className="client-message-body-text">
-              <Text>{message['body']}</Text>
             </div>
           </div>
         );
