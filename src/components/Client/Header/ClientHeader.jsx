@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   useMantineTheme,
   Header,
@@ -7,8 +8,7 @@ import {
   Text,
 } from '@mantine/core';
 import { FaSlack } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import './ClientHeader.scss';
+import '../../../assets/styles/components/Client/ClientHeader.scss';
 
 export const ClientHeader = ({ opened, onOpened }) => {
   const theme = useMantineTheme();

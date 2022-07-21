@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, Avatar } from '@mantine/core';
-import './ClientMessageBody.scss';
+import '../../../../assets/styles/components/Client/Message/ClientMessageBody.scss';
 
 const ClientMessageBody = ({ messages }) => {
   const getAvatarLetter = (email) => {
