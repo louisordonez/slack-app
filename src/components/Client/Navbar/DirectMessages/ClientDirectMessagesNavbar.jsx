@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Text, Button, Group, MultiSelect } from '@mantine/core';
-import './ClientDirectMessagesNavbar.scss';
+import '../../../../assets/styles/components/Client/ClientNavbar.scss';
 import { getEmailList } from '../../../../services/utils/EmailList';
 
 const ClientDirectMessagesNavbar = ({

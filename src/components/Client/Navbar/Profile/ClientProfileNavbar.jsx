@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, Button, Avatar, Divider, Center } from '@mantine/core';
-import './ClientProfileNavbar.scss';
+import '../../../../assets/styles/components/Client/ClientNavbar.scss';
 import { getLocalStorageItem } from '../../../../services/utils/LocalStorage';
 
 const ClientProfileNavbar = ({ onIsLoadingVisible, onUserLogOut }) => {
