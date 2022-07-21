@@ -46,6 +46,14 @@
   color: var(--default);
   font-size: small;
   font-weight: 400;
+
+  div {
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .client-message-body-text {
