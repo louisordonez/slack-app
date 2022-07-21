@@ -36,7 +36,7 @@ const ClientMessageBody = ({ messages }) => {
           </div>
         );
       })}
-      <div ref={bottomDiv} />
+      <div ref={bottomDiv}></div>
     </>
   );
 };
