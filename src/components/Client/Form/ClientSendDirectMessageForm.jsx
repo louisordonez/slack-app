@@ -3,13 +3,9 @@ import { TextInput, MultiSelect, Stack, Button, Group } from '@mantine/core';
 import { User, Message } from 'tabler-icons-react';
 import { getEmailList } from '../../../services/utils/EmailList';
 
-const ClientSendDirectMessageForm = ({
-  opened,
-  onSendDirectMessageModalShown,
-  onSendMessage,
-}) => {
+const ClientSendDirectMessageForm = ({ opened, onSendMessage }) => {
   const [emailData, setEmailData] = useState([]);
-  const [receiverId, setReceiverId] = useState(null);
+  const [receiverId, setReceiverId] = useState([]);
   const [message, setMessage] = useState('');
 
   useEffect(() => {
@@ -19,42 +15,47 @@ const ClientSendDirectMessageForm = ({
   }, [opened]);
 
   const resetSendDirectMessageForm = () => {
-    setReceiverId(null);
+    setReceiverId([]);
     setMessage('');
-    onSendDirectMessageModalShown();
   };
 
   const handleDirectMessage = () => {
     let newDirectMessage;
 
-    if (receiverId === null && message !== '') {
+    if (receiverId.length === 0 && message !== '') {
       newDirectMessage = {
         receiver_id: '',
         receiver_class: 'User',
         body: message,
       };
-    } else if (receiverId !== null && message === '') {
+
+      onSendMessage(newDirectMessage);
+    } else if (receiverId.length !== 0 && message === '') {
       newDirectMessage = {
         receiver_id: receiverId[0],
         receiver_class: 'User',
         body: '',
       };
-    } else if (receiverId === null && message === '') {
+
+      onSendMessage(newDirectMessage);
+    } else if (receiverId.length === 0 && message === '') {
       newDirectMessage = {
         receiver_id: '',
         receiver_class: 'User',
         body: '',
       };
+
+      onSendMessage(newDirectMessage);
     } else {
       newDirectMessage = {
         receiver_id: receiverId[0],
         receiver_class: 'User',
         body: message,
       };
-    }
 
-    onSendMessage(newDirectMessage);
-    resetSendDirectMessageForm();
+      onSendMessage(newDirectMessage);
+      resetSendDirectMessageForm();
+    }
   };
 
   return (

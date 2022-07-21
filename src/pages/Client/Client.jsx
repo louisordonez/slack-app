@@ -60,6 +60,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       }
 
       showSuccessToast(`Message successfully sent`);
+      handleSendDirectMessageModal();
       handleShowMessages(selectedId, receiverClass);
     };
 

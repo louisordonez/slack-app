@@ -6,7 +6,7 @@ import { getEmailList } from '../../../services/utils/EmailList';
 const ClientCreateChannelForm = ({ opened, onCreateChannel }) => {
   const [emailData, setEmailData] = useState([]);
   const [channelName, setChannelName] = useState('');
-  const [userIds, setUserIds] = useState(null);
+  const [userIds, setUserIds] = useState([]);
 
   useEffect(() => {
     if (opened === true) {
@@ -22,7 +22,7 @@ const ClientCreateChannelForm = ({ opened, onCreateChannel }) => {
   const handleChannel = () => {
     let newChannel = { name: channelName, user_ids: userIds };
 
-    if (userIds === null) {
+    if (userIds.length === 0) {
       newChannel = { name: channelName, user_ids: [] };
     }
 
