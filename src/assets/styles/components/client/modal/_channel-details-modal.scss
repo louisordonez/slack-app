@@ -1,3 +1,11 @@
+.client-channel-details-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 .client-channel-details-label {
   color: var(--default);
   font-size: small;
@@ -7,4 +15,8 @@
 .client-channel-details-members-container {
   height: 8rem;
   overflow-y: auto;
+}
+
+.client-channel-details-add-member-multiselect {
+  width: 85%;
 }

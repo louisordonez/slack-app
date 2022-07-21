@@ -23,7 +23,7 @@ const ClientChannelDetailsModal = ({
     if (channelDetails.length !== 0) {
       return (
         <>
-          <Text>Members</Text>
+          <Text style={{ marginTop: '1.4rem' }}>Members</Text>
           <div className="client-channel-details-members-container">
             {channelDetails['channel_members'].map((member, key) => {
               return <Text key={key}>{member.label}</Text>;

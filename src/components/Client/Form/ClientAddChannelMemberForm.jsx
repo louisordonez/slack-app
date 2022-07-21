@@ -13,15 +13,7 @@ const ClientAddChannelMemberForm = () => {
 
   return (
     <>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          marginTop: '1rem',
-          marginBottom: '1rem',
-        }}
-      >
+      <div className="client-channel-details-container">
         <MultiSelect
           required
           searchable
@@ -34,16 +26,9 @@ const ClientAddChannelMemberForm = () => {
           value={userIds}
           onChange={setUserIds}
           data={emailData}
-          style={{ width: '85%' }}
+          className="client-channel-details-add-member-multiselect"
         />
-        <Button
-          compact
-          style={{
-            marginTop: '1.75rem',
-            height: '2.25rem',
-            width: '2.25rem',
-          }}
-        >
+        <Button compact className="client-channel-details-add-member-button">
           +
         </Button>
       </div>

@@ -107,7 +107,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
             body: object.body,
             date: fullDate,
             time: time,
-            // timestamp: `${fullDate} ${time}`,
           };
 
           return newMessagesArray.push(messageObj);
@@ -256,9 +255,14 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
 
   const handleChannelDetailsModalShown = () => {
     if (receiverClass === 'Channel') {
-      setIsChannelDetailsModalShown((state) => !state);
-
-      if (isChannelDetailsModalShown === false) {
+      if (isChannelDetailsModalShown === true) {
+        setIsChannelDetailsModalShown((state) => !state);
+      } else {
+        onIsLoadingVisible(true);
+        setTimeout(() => {
+          setIsChannelDetailsModalShown((state) => !state);
+          onIsLoadingVisible(false);
+        }, 1000);
         handleChannelDetails();
       }
     }
