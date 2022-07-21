@@ -3,13 +3,34 @@ import { MultiSelect, Button } from '@mantine/core';
 import { UserPlus } from 'tabler-icons-react';
 import { getEmailList } from '../../../services/utils/EmailList';
 
-const ClientAddChannelMemberForm = () => {
+const ClientAddChannelMemberForm = ({ selectedId, onAddChannelMember }) => {
   const [emailData, setEmailData] = useState([]);
-  const [userIds, setUserIds] = useState(null);
+  const [userId, setUserId] = useState([]);
 
   useEffect(() => {
     getEmailList().then((result) => setEmailData(result));
   }, []);
+
+  const handleAdd = () => {
+    let newMember;
+
+    if (userId.length === 0) {
+      newMember = {
+        id: selectedId,
+        member_id: '',
+      };
+
+      onAddChannelMember(newMember);
+    } else {
+      newMember = {
+        id: selectedId,
+        member_id: userId[0],
+      };
+
+      onAddChannelMember(newMember);
+      setUserId([]);
+    }
+  };
 
   return (
     <>
@@ -23,12 +44,17 @@ const ClientAddChannelMemberForm = () => {
           nothingFound="Nothing found"
           maxDropdownHeight={160}
           limit={20}
-          value={userIds}
-          onChange={setUserIds}
+          value={userId}
+          onChange={setUserId}
           data={emailData}
           className="client-channel-details-add-member-multiselect"
+          maxSelectedValues={1}
         />
-        <Button compact className="client-channel-details-add-member-button">
+        <Button
+          compact
+          className="client-channel-details-add-member-button"
+          onClick={handleAdd}
+        >
           +
         </Button>
       </div>

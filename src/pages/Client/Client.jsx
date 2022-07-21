@@ -8,6 +8,7 @@ import ClientSendDirectMessageModal from '../../components/Client/Modal/ClientSe
 import ClientChannelDetailsModal from '../../components/Client/Modal/ClientChannelDetailsModal';
 import {
   CHANNELS_ENDPOINT,
+  ADD_MEMBER_ENDPOINT,
   MESSAGES_ENDPOINT,
 } from '../../services/constants/SlackAvionApiUrl';
 import { getLocalStorageItem } from '../../services/utils/LocalStorage';
@@ -266,7 +267,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
 
         setChannelDetails(channelDetailsResponse);
         onIsLoadingVisible(false);
-        setIsChannelDetailsModalShown((state) => !state);
       });
     };
 
@@ -288,8 +288,40 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
         setIsChannelDetailsModalShown((state) => !state);
       } else {
         handleChannelDetails();
+        setIsChannelDetailsModalShown((state) => !state);
       }
     }
+  };
+
+  const handleAddChannelMember = (object) => {
+    const onAddChannelSuccess = (response) => {
+      onIsLoadingVisible(false);
+
+      if (response.data.errors !== undefined) {
+        const errorMessage = response.data.errors;
+
+        showErrorToast(errorMessage);
+
+        return false;
+      }
+
+      showSuccessToast(`User successfully added`);
+      handleChannelDetails();
+    };
+
+    const onAddChannelError = (error) => {
+      return false;
+    };
+
+    onIsLoadingVisible(true);
+
+    axiosPostCall(
+      ADD_MEMBER_ENDPOINT,
+      object,
+      userHeaders,
+      onAddChannelSuccess,
+      onAddChannelError
+    );
   };
 
   return (
@@ -333,9 +365,11 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       />
       <ClientChannelDetailsModal
         opened={isChannelDetailsModalShown}
+        selectedId={selectedId}
         messageHeaderName={messageHeaderName}
         channelDetails={channelDetails}
         onChannelDetailsModalShown={handleChannelDetailsModalShown}
+        onAddChannelMember={handleAddChannelMember}
       />
     </>
   );

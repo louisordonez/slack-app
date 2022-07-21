@@ -4,9 +4,11 @@ import ClientAddChannelMemberForm from '../Form/ClientAddChannelMemberForm';
 
 const ClientChannelDetailsModal = ({
   opened,
+  selectedId,
   messageHeaderName,
   channelDetails,
   onChannelDetailsModalShown,
+  onAddChannelMember,
 }) => {
   const showChannelOwnerDetails = () => {
     if (channelDetails.length !== 0) {
@@ -43,7 +45,10 @@ const ClientChannelDetailsModal = ({
         title={`${messageHeaderName}`}
       >
         {showChannelOwnerDetails()}
-        <ClientAddChannelMemberForm />
+        <ClientAddChannelMemberForm
+          selectedId={selectedId}
+          onAddChannelMember={onAddChannelMember}
+        />
         {showChannelMembersDetails()}
       </Modal>
     </>
