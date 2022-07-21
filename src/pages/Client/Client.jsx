@@ -41,6 +41,12 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   useEffect(() => {
     handleShowChannels();
     getEmailList().then((result) => setEmailList(result));
+
+    const interval = setInterval(() => {
+      handleShowMessages(selectedId, receiverClass);
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, [messages]);
 
   const handleOpened = () => setOpened((state) => !state);
