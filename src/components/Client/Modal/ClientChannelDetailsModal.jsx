@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, Text } from '@mantine/core';
+import ClientAddChannelMemberForm from '../Form/ClientAddChannelMemberForm';
 
 const ClientChannelDetailsModal = ({
   opened,
@@ -42,6 +43,7 @@ const ClientChannelDetailsModal = ({
         title={`${messageHeaderName}`}
       >
         {showChannelOwnerDetails()}
+        <ClientAddChannelMemberForm />
         {showChannelMembersDetails()}
       </Modal>
     </>

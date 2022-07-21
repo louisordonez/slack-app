@@ -35,7 +35,6 @@ const ClientMessageInput = ({ selectedId, receiverClass, onSendMessage }) => {
         required
         radius="xl"
         size="md"
-        className="client-message-text-input"
         value={message}
         rightSection={
           <ActionIcon
