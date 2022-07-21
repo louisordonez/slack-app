@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TextInput, ActionIcon, useMantineTheme } from '@mantine/core';
 import { Send } from 'tabler-icons-react';
-import '../../../../assets/styles/components/Client/ClientMessageInput.scss';
 
 const ClientMessageInput = ({ selectedId, receiverClass, onSendMessage }) => {
   const theme = useMantineTheme();

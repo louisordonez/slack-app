@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Text, Button, Group } from '@mantine/core';
-import '../../../../assets/styles/components/Client/ClientNavbar.scss';
 
 const ClientChannelsNavbar = ({
   channels,

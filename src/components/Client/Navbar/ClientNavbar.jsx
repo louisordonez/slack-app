@@ -3,7 +3,6 @@ import { Navbar, Stack } from '@mantine/core';
 import ClientProfileNavbar from './Profile/ClientProfileNavbar';
 import ClientChannelsNavbar from './Channels/ClientChannelsNavbar';
 import ClientDirectMessagesNavbar from './DirectMessages/ClientDirectMessagesNavbar';
-import '../../../assets/styles/components/Client/ClientNavbar.scss';
 
 const ClientNavbar = ({
   hidden,

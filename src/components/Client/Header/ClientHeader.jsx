@@ -8,7 +8,6 @@ import {
   Text,
 } from '@mantine/core';
 import { FaSlack } from 'react-icons/fa';
-import '../../../assets/styles/components/Client/ClientHeader.scss';
 
 export const ClientHeader = ({ opened, onOpened }) => {
   const theme = useMantineTheme();

@@ -1,3 +1,25 @@
+.client-message-container {
+  height: 82vh;
+  position: relative;
+}
+
+.client-message-header-container {
+  background-color: var(--white);
+}
+
+.client-message-body-container {
+  height: 64vh;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  overflow-y: scroll;
+}
+
+.client-message-input-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
 .client-message-body {
   padding: 1rem;
 
@@ -29,4 +51,14 @@
 .client-message-body-text {
   margin-top: 0.3rem;
   margin-left: 4rem;
+}
+
+.client-message-text-input {
+  textarea {
+    height: 6rem;
+  }
+}
+
+.client-message-send-button-container {
+  margin-left: 1rem;
 }

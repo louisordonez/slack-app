@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import './assets/styles/index.scss';
+import './assets/styles/styles.scss';
 import App from './App';
 import Toast from './components/Toast/Toast';
 

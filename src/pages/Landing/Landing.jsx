@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Group, Text, Button, Center } from '@mantine/core';
-import '../../assets/styles/pages/Landing.scss';
 import HeaderLogo from '../../components/Header/Logo/HeaderLogo';
 import { useRedirectToClient } from '../../services/utils/UseRedirectToClient';
 

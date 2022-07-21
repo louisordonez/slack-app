@@ -1,6 +1,5 @@
 import React from 'react';
 import { Modal, Text } from '@mantine/core';
-import '../../../assets/styles/components/Client/ClientChannelDetailsModal.scss';
 
 const ClientChannelDetailsModal = ({
   opened,
@@ -42,8 +41,8 @@ const ClientChannelDetailsModal = ({
         onClose={() => onChannelDetailsModalShown(false)}
         title={`${messageHeaderName}`}
       >
-        {showChannelOwnerDetails()}
-        {showChannelMembersDetails()}
+        {/* {showChannelOwnerDetails()}
+        {showChannelMembersDetails()} */}
       </Modal>
     </>
   );

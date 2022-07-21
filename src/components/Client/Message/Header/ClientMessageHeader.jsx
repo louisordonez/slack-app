@@ -1,6 +1,5 @@
 import React from 'react';
 import { Group, Divider, Text, Avatar } from '@mantine/core';
-import '../../../../assets/styles/components/Client/ClientMessageHeader.scss';
 
 const ClientMessageHeader = ({
   messageHeaderName,

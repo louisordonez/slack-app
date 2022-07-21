@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { LoadingOverlay } from '@mantine/core';
-import './assets/styles/App.scss';
 import Landing from './pages/Landing/Landing';
 import Login from './pages/Login/Login';
 import SignUp from './pages/SignUp/SignUp';
