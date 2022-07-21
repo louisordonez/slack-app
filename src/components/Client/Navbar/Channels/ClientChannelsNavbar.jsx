@@ -47,7 +47,7 @@ const ClientChannelsNavbar = ({
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center' }}>
-                <Hash size={16} style={{ marginRight: '.2rem' }} />
+                <Hash size={16} />
                 {channel.name}
               </div>
             </Text>

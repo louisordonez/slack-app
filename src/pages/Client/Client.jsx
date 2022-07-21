@@ -44,6 +44,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
 
     const interval = setInterval(() => {
       handleShowMessages(selectedId, receiverClass);
+      handleShowChannels();
     }, 1000);
 
     return () => clearInterval(interval);
@@ -311,8 +312,8 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
         return false;
       }
 
-      showSuccessToast(`User successfully added`);
       handleChannelDetails();
+      showSuccessToast(`User successfully added`);
     };
 
     const onAddChannelError = (error) => {
