@@ -260,10 +260,10 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       } else {
         onIsLoadingVisible(true);
         setTimeout(() => {
-          setIsChannelDetailsModalShown((state) => !state);
+          handleChannelDetails();
           onIsLoadingVisible(false);
+          setIsChannelDetailsModalShown((state) => !state);
         }, 1000);
-        handleChannelDetails();
       }
     }
   };
