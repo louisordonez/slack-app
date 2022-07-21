@@ -148,9 +148,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     };
 
     const onShowMessagesError = (error) => {
-      const errorMessage = error.response.data.errors;
-
-      errorMessage.map((message) => showErrorToast(message));
+      return false;
     };
 
     axiosGetCall(
@@ -222,9 +220,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     };
 
     const onShowChannelsError = (error) => {
-      const errorMessage = error.response.data.errors;
-
-      errorMessage.map((message) => showErrorToast(message));
+      return false;
     };
 
     axiosGetCall(
@@ -247,31 +243,35 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   };
 
   const handleChannelDetails = () => {
+    onIsLoadingVisible(true);
+
     const onChannelDetailsSuccess = (response) => {
       let channelDetailsResponse = response.data.data;
       let newChannelMembers = [];
 
-      channelDetailsResponse['owner_email'] = emailList.find(
-        (user) => user.value === channelDetailsResponse['owner_id']
-      ).label;
+      getEmailList().then((result) => {
+        channelDetailsResponse['owner_email'] = result.find(
+          (user) => user.value === channelDetailsResponse['owner_id']
+        ).label;
 
-      channelDetailsResponse['channel_members'].map((member) => {
-        const findMember = emailList.find(
-          (user) => user.value === member['user_id']
-        );
+        channelDetailsResponse['channel_members'].map((member) => {
+          const findMember = result.find(
+            (user) => user.value === member['user_id']
+          );
 
-        return newChannelMembers.push(findMember);
+          return newChannelMembers.push(findMember);
+        });
+
+        channelDetailsResponse['channel_members'] = newChannelMembers;
+
+        setChannelDetails(channelDetailsResponse);
+        onIsLoadingVisible(false);
+        setIsChannelDetailsModalShown((state) => !state);
       });
-
-      channelDetailsResponse['channel_members'] = newChannelMembers;
-
-      setChannelDetails(channelDetailsResponse);
     };
 
     const onChannelDetailsError = (error) => {
-      const errorMessage = error.response.data.errors;
-
-      errorMessage.map((message) => showErrorToast(message));
+      onIsLoadingVisible(false);
     };
 
     axiosGetCall(
@@ -287,12 +287,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       if (isChannelDetailsModalShown === true) {
         setIsChannelDetailsModalShown((state) => !state);
       } else {
-        onIsLoadingVisible(true);
-        setTimeout(() => {
-          handleChannelDetails();
-          onIsLoadingVisible(false);
-          setIsChannelDetailsModalShown((state) => !state);
-        }, 1000);
+        handleChannelDetails();
       }
     }
   };
