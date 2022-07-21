@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal, Text } from '@mantine/core';
-import './ClientChannelDetailsModal.scss';
+import '../../../assets/styles/components/Client/ClientChannelDetailsModal.scss';
 
 const ClientChannelDetailsModal = ({
   opened,

@@ -6,7 +6,7 @@ import ClientHeader from '../../components/Client/Header/ClientHeader';
 import ClientMessage from '../../components/Client/Message/ClientMessage';
 import ClientCreateChannelModal from '../../components/Client/Modal/ClientCreateChannelModal';
 import ClientSendDirectMessageModal from '../../components/Client/Modal/ClientSendDirectMessageModal';
-import ClientChannelDetailsModal from '../../components/Client/Modal/ClientChannelDetailsModal/ClientChannelDetailsModal';
+import ClientChannelDetailsModal from '../../components/Client/Modal/ClientChannelDetailsModal';
 import {
   CHANNELS_ENDPOINT,
   MESSAGES_ENDPOINT,
