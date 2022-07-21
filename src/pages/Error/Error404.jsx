@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Text, Button, Center } from '@mantine/core';
-import './Error404.scss';
+import '../../assets/styles/pages/Error404.scss';
 import Header from '../../components/Header/Header';
 
 const Error404 = () => {
