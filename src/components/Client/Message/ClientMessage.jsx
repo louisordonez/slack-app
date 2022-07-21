@@ -8,7 +8,7 @@ const ClientMessage = ({
   selectedId,
   receiverClass,
   messages,
-  onSendMessage,
+  onSendChatMessage,
   onChannelDetailsModalShown,
 }) => {
   return (
@@ -27,7 +27,7 @@ const ClientMessage = ({
           <ClientMessageInput
             selectedId={selectedId}
             receiverClass={receiverClass}
-            onSendMessage={onSendMessage}
+            onSendChatMessage={onSendChatMessage}
           />
         </div>
       </div>

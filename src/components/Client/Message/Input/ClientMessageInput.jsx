@@ -3,7 +3,11 @@ import { TextInput, ActionIcon, useMantineTheme } from '@mantine/core';
 import { Message } from 'tabler-icons-react';
 import { Send } from 'tabler-icons-react';
 
-const ClientMessageInput = ({ selectedId, receiverClass, onSendMessage }) => {
+const ClientMessageInput = ({
+  selectedId,
+  receiverClass,
+  onSendChatMessage,
+}) => {
   const theme = useMantineTheme();
 
   const [isDisabled, setIsDisabled] = useState(true);
@@ -20,7 +24,7 @@ const ClientMessageInput = ({ selectedId, receiverClass, onSendMessage }) => {
       body: message,
     };
 
-    onSendMessage(messageObj);
+    onSendChatMessage(messageObj);
     setMessage('');
   };
 

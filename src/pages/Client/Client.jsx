@@ -82,6 +82,34 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     );
   };
 
+  const handleSendChatMessage = (object) => {
+    const onSendChatMessageSuccess = (response) => {
+      if (response.data.errors !== undefined) {
+        const errorMessage = response.data.errors;
+
+        errorMessage.map((message) => showErrorToast(message));
+
+        return false;
+      }
+
+      handleShowMessages(selectedId, receiverClass);
+    };
+
+    const onSendChatMessageError = (error) => {
+      const errorMessage = error.response.data.errors;
+
+      errorMessage.map((message) => showErrorToast(message));
+    };
+
+    axiosPostCall(
+      MESSAGES_ENDPOINT,
+      object,
+      userHeaders,
+      onSendChatMessageSuccess,
+      onSendChatMessageError
+    );
+  };
+
   const handleShowMessages = (id, receiver) => {
     const onShowMessagesSuccess = (response) => {
       const createMessagesList = (list) => {
@@ -293,7 +321,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
           selectedId={selectedId}
           receiverClass={receiverClass}
           messages={messages}
-          onSendMessage={handleSendMessage}
+          onSendChatMessage={handleSendChatMessage}
           onChannelDetailsModalShown={handleChannelDetailsModalShown}
         />
       </AppShell>
