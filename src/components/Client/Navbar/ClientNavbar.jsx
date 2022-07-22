@@ -19,9 +19,9 @@ const ClientNavbar = ({
       <Navbar
         p="md"
         hiddenBreakpoint="sm"
+        className="client-navbar"
         hidden={!hidden}
         width={{ sm: 210, lg: 300 }}
-        className="client-navbar"
       >
         <Stack>
           <ClientProfileNavbar
@@ -37,9 +37,9 @@ const ClientNavbar = ({
         </Stack>
         <Stack>
           <ClientChannelsNavbar
+            channels={channels}
             onCreateChannelModalShown={onCreateChannelModalShown}
             onSelectedChannel={onSelectedChannel}
-            channels={channels}
           />
         </Stack>
       </Navbar>
