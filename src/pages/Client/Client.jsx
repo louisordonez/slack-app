@@ -14,6 +14,7 @@ import { getLocalStorageItem } from '../../services/utils/LocalStorage';
 import { axiosGetCall, axiosPostCall } from '../../services/utils/AxiosApiCall';
 import { showSuccessToast, showErrorToast } from '../../components/Toast/Toast';
 import { getEmailList } from '../../services/utils/EmailList';
+import { convertDatetime } from '../../services/utils/DatetimeFormat';
 
 const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   if (getLocalStorageItem('userHeaders') === null) {
@@ -82,23 +83,13 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
         let newMessagesArray = [];
 
         list.map((object) => {
-          const date = new Date(object.created_at);
-          const dateMonth =
-            date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth();
-          const dateDay =
-            date.getDay() < 10 ? `0${date.getDay()}` : date.getDay();
-          const dateYear = date.getFullYear();
-          const fullDate = `${dateMonth}-${dateDay}-${dateYear}`;
-          const time = date.toLocaleTimeString([], {
-            hour: '2-digit',
-            minute: '2-digit',
-          });
+          const { date, time } = convertDatetime(object.created_at);
           const messageObj = {
             'sender-id': object.sender.id,
             'sender-email': object.sender.email,
             body: object.body,
-            date: fullDate,
-            time: time,
+            date,
+            time,
           };
 
           return newMessagesArray.push(messageObj);
