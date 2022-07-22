@@ -96,8 +96,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
           const messageObj = {
             'sender-id': object.sender.id,
             'sender-email': object.sender.email,
-            'receiver-id': object.receiver.id,
-            'receiver-email': object.receiver.email,
             body: object.body,
             date: fullDate,
             time: time,
