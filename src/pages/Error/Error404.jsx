@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Text, Button, Center } from '@mantine/core';
-import Header from '../../components/Header/Header';
+import LandingHeader from '../../components/Header/Landing/LandingHeader';
 
 const Error404 = () => {
   return (
     <>
-      <Header />
+      <LandingHeader />
       <Center className="error404-container">
         <div className="error404-text-container white-text">
           <Text align="center" className="error404-heading-text">

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { AppShell } from '@mantine/core';
-import ClientNavbar from '../../components/Client/Navbar/ClientNavbar';
-import ClientHeader from '../../components/Client/Header/ClientHeader';
-import ClientMessage from '../../components/Client/Message/ClientMessage';
-import ClientCreateChannelModal from '../../components/Client/Modal/ClientCreateChannelModal';
-import ClientChannelDetailsModal from '../../components/Client/Modal/ClientChannelDetailsModal';
+import ClientNavbar from '../../components/Navbar/Client/ClientNavbar';
+import ClientHeader from '../../components/Header/Client/ClientHeader';
+import ClientMessage from '../../components/Message/ClientMessage';
+import ClientCreateChannelModal from '../../components/Modal/Client/ClientCreateChannelModal';
+import ClientChannelDetailsModal from '../../components/Modal/Client/ClientChannelDetailsModal';
 import {
   CHANNELS_ENDPOINT,
   ADD_MEMBER_ENDPOINT,

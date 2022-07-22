@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Group, Text, Button, Center } from '@mantine/core';
-import HeaderLogo from '../../components/Header/Logo/HeaderLogo';
+import LandingLogo from '../../components/Logo/Landing/LandingLogo';
 import { useRedirectToClient } from '../../services/utils/UseRedirectToClient';
 
 const Landing = () => {
@@ -10,7 +10,7 @@ const Landing = () => {
   return (
     <>
       <Group position="apart" className="header-container header-text-color">
-        <HeaderLogo />
+        <LandingLogo />
         <Link to="/login">
           <Button>Login</Button>
         </Link>

@@ -3,7 +3,7 @@ import { Text } from '@mantine/core';
 import { FaSlack } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-const HeaderLogo = () => {
+const LandingLogo = () => {
   return (
     <Link to="/" className="header-logo-text-decoration white-text">
       <div className="header-logo-container">
@@ -20,4 +20,4 @@ const HeaderLogo = () => {
   );
 };
 
-export default HeaderLogo;
+export default LandingLogo;

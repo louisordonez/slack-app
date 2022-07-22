@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Anchor, Title, Text, Container } from '@mantine/core';
-import Header from '../../components/Header/Header';
+import Header from '../../components/Header/Landing/LandingHeader';
 import SignUpForm from '../../components/Form/SignUp/SignUpForm';
 import { axiosPostCall } from '../../services/utils/AxiosApiCall';
 import { SIGN_UP_ENDPOINT } from '../../services/constants/SlackAvionApiUrl';

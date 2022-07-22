@@ -1,13 +1,13 @@
 import React from 'react';
 import { Group } from '@mantine/core';
-import HeaderLogo from './Logo/HeaderLogo';
+import LandingLogo from '../../Logo/Landing/LandingLogo';
 
-const Header = () => {
+const LandingHeader = () => {
   return (
     <Group position="apart" className="header-container header-text-color">
-      <HeaderLogo />
+      <LandingLogo />
     </Group>
   );
 };
 
-export default Header;
+export default LandingHeader;

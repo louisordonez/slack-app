@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { Modal, Text, Stack } from '@mantine/core';
 import { User } from 'tabler-icons-react';
-import ClientAddChannelMemberForm from '../Form/ClientAddChannelMemberForm';
+import ClientAddChannelMemberForm from '../../Form/Client/ClientAddChannelMemberForm';
 
 const ClientChannelDetailsModal = ({
   opened,

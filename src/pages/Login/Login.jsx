@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Anchor, Title, Text, Container } from '@mantine/core';
-import Header from '../../components/Header/Header';
+import Header from '../../components/Header/Landing/LandingHeader';
 import LoginForm from '../../components/Form/Login/LoginForm';
 import { useRedirectToClient } from '../../services/utils/UseRedirectToClient';
 import { axiosPostCall } from '../../services/utils/AxiosApiCall';

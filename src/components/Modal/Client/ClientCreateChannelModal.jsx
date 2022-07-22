@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal } from '@mantine/core';
-import ClientCreateChannelForm from '../Form/ClientCreateChannelForm';
+import ClientCreateChannelForm from '../../Form/Client/ClientCreateChannelForm';
 
 const ClientCreateChannelModal = ({
   opened,
