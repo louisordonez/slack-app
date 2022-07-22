@@ -4,6 +4,7 @@ import ClientCreateChannelForm from '../Form/ClientCreateChannelForm';
 
 const ClientCreateChannelModal = ({
   opened,
+  emailList,
   onCreateChannelModalShown,
   onCreateChannel,
 }) => {
@@ -16,6 +17,7 @@ const ClientCreateChannelModal = ({
     >
       <ClientCreateChannelForm
         opened={opened}
+        emailList={emailList}
         onCreateChannel={onCreateChannel}
       />
     </Modal>

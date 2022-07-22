@@ -36,16 +36,15 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   const [channelDetails, setChannelDetails] = useState([]);
 
   useEffect(() => {
-    getEmailList().then((result) => setEmailList(result));
-
     const interval = setInterval(() => {
+      getEmailList().then((result) => setEmailList(result));
       handleShowChannels();
       handleShowMessages(selectedId, receiverClass);
       handleChannelDetails();
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [messages, channels, channelDetails]);
+  }, [messages, channels, channelDetails, emailList]);
 
   const handleOpened = () => setOpened((state) => !state);
 
@@ -316,6 +315,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       </AppShell>
       <ClientCreateChannelModal
         opened={isCreateChannelModalShown}
+        emailList={emailList}
         onCreateChannelModalShown={handleCreateChannelModal}
         onCreateChannel={handleCreateChannel}
       />

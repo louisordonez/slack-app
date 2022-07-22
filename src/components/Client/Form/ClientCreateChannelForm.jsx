@@ -1,18 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { TextInput, MultiSelect, Stack, Button, Group } from '@mantine/core';
 import { Hash, Users } from 'tabler-icons-react';
-import { getEmailList } from '../../../services/utils/EmailList';
 
-const ClientCreateChannelForm = ({ opened, onCreateChannel }) => {
-  const [emailData, setEmailData] = useState([]);
+const ClientCreateChannelForm = ({ opened, emailList, onCreateChannel }) => {
   const [channelName, setChannelName] = useState('');
   const [userIds, setUserIds] = useState([]);
-
-  useEffect(() => {
-    if (opened === true) {
-      getEmailList().then((result) => setEmailData(result));
-    }
-  }, [opened]);
 
   const resetCreateChannelForm = () => {
     setChannelName('');
@@ -51,7 +43,7 @@ const ClientCreateChannelForm = ({ opened, onCreateChannel }) => {
           limit={20}
           value={userIds}
           onChange={setUserIds}
-          data={emailData}
+          data={emailList}
         />
       </Stack>
       <Group position="right" mt="xl">
