@@ -117,12 +117,12 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     if (id.length !== 0) {
       const emailObj = emailList.find((user) => user.value === id[0]);
 
-      setOpened(false);
       setSelectedId(id[0]);
       setReceiverClass('User');
       setMessageHeaderName(emailObj.label);
       setMessages([]);
       handleShowMessages(id[0], 'User');
+      setOpened(false);
     } else {
       setMessages([]);
       setSelectedId(null);
@@ -146,10 +146,10 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
         return false;
       }
 
-      setOpened(false);
       handleShowChannels();
       handleCreateChannelModal();
       showSuccessToast(`Channel successfully created`);
+      setOpened(false);
     };
 
     const onCreateChannelError = (error) => {
@@ -193,8 +193,8 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     setMessageHeaderName(channelName);
     setReceiverClass('Channel');
     setMessages([]);
-    setOpened(false);
     handleShowMessages(channelId, 'Channel');
+    setOpened(false);
   };
 
   const handleChannelDetails = () => {
