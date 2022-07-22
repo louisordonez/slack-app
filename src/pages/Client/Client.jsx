@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { AppShell } from '@mantine/core';
 import ClientNavbar from '../../components/Navbar/Client/ClientNavbar';
 import ClientHeader from '../../components/Header/Client/ClientHeader';
+import ClientSearchUserModal from '../../components/Modal/Client/ClientSearchUserModal';
 import ClientMessage from '../../components/Message/ClientMessage';
 import ClientCreateChannelModal from '../../components/Modal/Client/ClientCreateChannelModal';
 import ClientChannelDetailsModal from '../../components/Modal/Client/ClientChannelDetailsModal';
@@ -15,7 +16,6 @@ import { axiosGetCall, axiosPostCall } from '../../services/utils/AxiosApiCall';
 import { showSuccessToast, showErrorToast } from '../../components/Toast/Toast';
 import { getEmailList } from '../../services/utils/EmailList';
 import { convertDatetime } from '../../services/utils/DatetimeFormat';
-import ClientSearchUserModal from '../../components/Modal/Client/ClientSearchUserModal';
 
 const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   if (getLocalStorageItem('userHeaders') === null) {
@@ -281,15 +281,12 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
         navbar={
           <ClientNavbar
             hidden={opened}
-            emailList={emailList}
             channels={channels}
-            receiverClass={receiverClass}
+            onIsLoadingVisible={onIsLoadingVisible}
             onUserLogOut={onUserLogOut}
+            onSelectedChannel={handleSelectedChannel}
             onSearchUserModalShown={handleSearchUserModal}
             onCreateChannelModalShown={handleCreateChannelModal}
-            onIsLoadingVisible={onIsLoadingVisible}
-            onSelectedUser={handleSelectedUser}
-            onSelectedChannel={handleSelectedChannel}
           />
         }
         header={<ClientHeader opened={opened} onOpened={handleOpened} />}

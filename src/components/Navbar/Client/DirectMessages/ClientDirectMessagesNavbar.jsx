@@ -1,50 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Text, Group, MultiSelect, Button } from '@mantine/core';
-import { User } from 'tabler-icons-react';
+import React from 'react';
+import { Text, Group, Button } from '@mantine/core';
+import { Message } from 'tabler-icons-react';
 
-const ClientDirectMessagesNavbar = ({
-  emailList,
-  receiverClass,
-  onSelectedUser,
-  onSearchUserModalShown,
-}) => {
-  const [userId, setUserId] = useState([]);
-
-  useEffect(() => {
-    if (receiverClass === 'Channel') {
-      setUserId([]);
-    }
-  }, [receiverClass]);
-
-  const handleSelected = (e) => {
-    setUserId(e);
-    onSelectedUser(e);
-  };
-
+const ClientDirectMessagesNavbar = ({ onSearchUserModalShown }) => {
   return (
     <>
       <Text className="client-stack-direct-messages-header bold-font">
         <Group position="apart">
           Direct Messages
           <Button variant="default" compact onClick={onSearchUserModalShown}>
-            +
+            <Message size={16} />
           </Button>
         </Group>
       </Text>
-      <div className="client-stack-direct-messages-container">
-        <MultiSelect
-          searchable
-          label="Select user"
-          icon={<User size={16} />}
-          nothingFound="Nothing found"
-          maxDropdownHeight={160}
-          limit={20}
-          value={userId}
-          onChange={(e) => handleSelected(e)}
-          data={emailList}
-          maxSelectedValues={1}
-        />
-      </div>
     </>
   );
 };

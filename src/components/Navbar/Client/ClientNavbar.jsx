@@ -6,15 +6,12 @@ import ClientDirectMessagesNavbar from './DirectMessages/ClientDirectMessagesNav
 
 const ClientNavbar = ({
   hidden,
-  emailList,
   channels,
-  receiverClass,
   onIsLoadingVisible,
   onUserLogOut,
+  onSelectedChannel,
   onSearchUserModalShown,
   onCreateChannelModalShown,
-  onSelectedUser,
-  onSelectedChannel,
 }) => {
   return (
     <>
@@ -33,9 +30,6 @@ const ClientNavbar = ({
         </Stack>
         <Stack>
           <ClientDirectMessagesNavbar
-            emailList={emailList}
-            receiverClass={receiverClass}
-            onSelectedUser={onSelectedUser}
             onSearchUserModalShown={onSearchUserModalShown}
           />
         </Stack>
