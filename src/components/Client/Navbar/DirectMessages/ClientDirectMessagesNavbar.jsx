@@ -22,6 +22,7 @@ const ClientDirectMessagesNavbar = ({
             variant="default"
             compact
             onClick={onSendDirectMessageModalShown}
+            style={{ visibility: 'hidden' }}
           >
             +
           </Button>
