@@ -3,10 +3,7 @@ import { Text, Button, Group, MultiSelect } from '@mantine/core';
 import { User } from 'tabler-icons-react';
 import { getEmailList } from '../../../../services/utils/EmailList';
 
-const ClientDirectMessagesNavbar = ({
-  onSendDirectMessageModalShown,
-  onSelectedUser,
-}) => {
+const ClientDirectMessagesNavbar = ({ onSelectedUser }) => {
   const [emailData, setEmailData] = useState([]);
 
   useEffect(() => {
@@ -16,17 +13,7 @@ const ClientDirectMessagesNavbar = ({
   return (
     <>
       <Text className="client-stack-direct-messages-header bold-font">
-        <Group position="apart">
-          Direct Messages
-          <Button
-            variant="default"
-            compact
-            onClick={onSendDirectMessageModalShown}
-            style={{ visibility: 'hidden' }}
-          >
-            +
-          </Button>
-        </Group>
+        <Group position="apart">Direct Messages</Group>
       </Text>
       <div className="client-stack-direct-messages-container">
         <MultiSelect

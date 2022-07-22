@@ -4,7 +4,6 @@ import ClientNavbar from '../../components/Client/Navbar/ClientNavbar';
 import ClientHeader from '../../components/Client/Header/ClientHeader';
 import ClientMessage from '../../components/Client/Message/ClientMessage';
 import ClientCreateChannelModal from '../../components/Client/Modal/ClientCreateChannelModal';
-import ClientSendDirectMessageModal from '../../components/Client/Modal/ClientSendDirectMessageModal';
 import ClientChannelDetailsModal from '../../components/Client/Modal/ClientChannelDetailsModal';
 import {
   CHANNELS_ENDPOINT,
@@ -25,8 +24,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
 
   const [opened, setOpened] = useState(false);
   const [isCreateChannelModalShown, setIsCreateChannelModalShown] =
-    useState(false);
-  const [isSendDirectMessageModalShown, setIsSendDirectMessageModalShown] =
     useState(false);
   const [isChannelDetailsModalShown, setIsChannelDetailsModalShown] =
     useState(false);
@@ -50,45 +47,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   }, [messages]);
 
   const handleOpened = () => setOpened((state) => !state);
-
-  const handleSendDirectMessageModal = () =>
-    setIsSendDirectMessageModalShown((state) => !state);
-
-  const handleSendMessage = (object) => {
-    const onSendMessageSuccess = (response) => {
-      onIsLoadingVisible(false);
-
-      if (response.data.errors !== undefined) {
-        const errorMessage = response.data.errors;
-
-        errorMessage.map((message) => showErrorToast(message));
-
-        return false;
-      }
-
-      showSuccessToast(`Message successfully sent`);
-      handleSendDirectMessageModal();
-      handleShowMessages(selectedId, receiverClass);
-    };
-
-    const onSendMessageError = (error) => {
-      const errorMessage = error.response.data.errors;
-
-      onIsLoadingVisible(false);
-
-      errorMessage.map((message) => showErrorToast(message));
-    };
-
-    onIsLoadingVisible(true);
-
-    axiosPostCall(
-      MESSAGES_ENDPOINT,
-      object,
-      userHeaders,
-      onSendMessageSuccess,
-      onSendMessageError
-    );
-  };
 
   const handleSendChatMessage = (object) => {
     const onSendChatMessageSuccess = (response) => {
@@ -342,7 +300,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
             channels={channels}
             onUserLogOut={onUserLogOut}
             onCreateChannelModalShown={handleCreateChannelModal}
-            onSendDirectMessageModalShown={handleSendDirectMessageModal}
             onIsLoadingVisible={onIsLoadingVisible}
             onSelectedUser={handleSelectedUser}
             onSelectedChannel={handleSelectedChannel}
@@ -363,11 +320,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
         opened={isCreateChannelModalShown}
         onCreateChannelModalShown={handleCreateChannelModal}
         onCreateChannel={handleCreateChannel}
-      />
-      <ClientSendDirectMessageModal
-        opened={isSendDirectMessageModalShown}
-        onSendDirectMessageModalShown={handleSendDirectMessageModal}
-        onSendMessage={handleSendMessage}
       />
       <ClientChannelDetailsModal
         opened={isChannelDetailsModalShown}

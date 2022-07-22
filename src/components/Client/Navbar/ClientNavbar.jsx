@@ -30,10 +30,7 @@ const ClientNavbar = ({
           />
         </Stack>
         <Stack>
-          <ClientDirectMessagesNavbar
-            onSendDirectMessageModalShown={onSendDirectMessageModalShown}
-            onSelectedUser={onSelectedUser}
-          />
+          <ClientDirectMessagesNavbar onSelectedUser={onSelectedUser} />
         </Stack>
         <Stack>
           <ClientChannelsNavbar
