@@ -20,7 +20,7 @@ const ClientNavbar = ({
         hiddenBreakpoint="sm"
         className="client-navbar"
         hidden={!hidden}
-        width={{ sm: 210, lg: 300 }}
+        width={{ sm: 220, lg: 300 }}
       >
         <Stack>
           <ClientProfileNavbar

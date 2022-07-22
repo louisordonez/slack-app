@@ -30,7 +30,7 @@ const ClientSearchUserModal = ({
       opened={opened}
       withCloseButton={false}
       onClose={() => onSearchUserModalShown(false)}
-      styles={{ modal: { background: 'none' } }}
+      styles={{ modal: { background: 'none', boxShadow: 'none' } }}
     >
       <MultiSelect
         searchable
