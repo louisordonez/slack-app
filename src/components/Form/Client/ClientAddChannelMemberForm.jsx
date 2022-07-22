@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MultiSelect, Button } from '@mantine/core';
+import { MultiSelect, ActionIcon } from '@mantine/core';
 import { UserPlus } from 'tabler-icons-react';
 
 const ClientAddChannelMemberForm = ({
@@ -34,27 +34,27 @@ const ClientAddChannelMemberForm = ({
     <>
       <div className="client-channel-details-container">
         <MultiSelect
+          className="client-channel-details-add-member-multiselect"
+          label="Select users"
+          nothingFound="Nothing found"
+          icon={<UserPlus size={16} />}
           required
           searchable
           clearable
-          icon={<UserPlus size={16} />}
-          label="Select users"
-          nothingFound="Nothing found"
           maxDropdownHeight={160}
           limit={20}
           value={userId}
           onChange={setUserId}
           data={emailList}
-          className="client-channel-details-add-member-multiselect"
           maxSelectedValues={1}
         />
-        <Button
-          compact
+        <ActionIcon
           className="client-channel-details-add-member-button"
+          variant="default"
           onClick={handleAdd}
         >
-          +
-        </Button>
+          <span className="bold-font">+</span>
+        </ActionIcon>
       </div>
     </>
   );

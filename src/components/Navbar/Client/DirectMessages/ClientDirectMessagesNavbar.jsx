@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Group, Button } from '@mantine/core';
+import { Text, Group, ActionIcon } from '@mantine/core';
 import { Message } from 'tabler-icons-react';
 
 const ClientDirectMessagesNavbar = ({ onSearchUserModalShown }) => {
@@ -8,9 +8,9 @@ const ClientDirectMessagesNavbar = ({ onSearchUserModalShown }) => {
       <Text className="client-stack-direct-messages-header bold-font">
         <Group position="apart">
           Direct Messages
-          <Button variant="default" compact onClick={onSearchUserModalShown}>
+          <ActionIcon variant="default" onClick={onSearchUserModalShown}>
             <Message size={16} />
-          </Button>
+          </ActionIcon>
         </Group>
       </Text>
     </>
