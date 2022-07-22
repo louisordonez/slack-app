@@ -46,7 +46,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       handleChannelDetails();
     }, 1000);
 
-    return () => clearInterval(interval);
+    return () => clearInterval(interval); // eslint-disable-next-line
   }, [emailList, channels, messages, channelDetails]);
 
   const handleSearchUserModal = () =>

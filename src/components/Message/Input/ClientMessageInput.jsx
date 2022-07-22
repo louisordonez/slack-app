@@ -14,7 +14,7 @@ const ClientMessageInput = ({
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    handleDisabled();
+    handleDisabled(); // eslint-disable-next-line
   }, [selectedId]);
 
   const handleSubmitMessage = () => {
