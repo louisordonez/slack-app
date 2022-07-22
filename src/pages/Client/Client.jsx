@@ -39,12 +39,13 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     getEmailList().then((result) => setEmailList(result));
 
     const interval = setInterval(() => {
-      handleShowMessages(selectedId, receiverClass);
       handleShowChannels();
+      handleShowMessages(selectedId, receiverClass);
+      handleChannelDetails();
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [messages]);
+  }, [messages, channels, channelDetails]);
 
   const handleOpened = () => setOpened((state) => !state);
 
@@ -204,42 +205,42 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   };
 
   const handleChannelDetails = () => {
-    onIsLoadingVisible(true);
+    if (receiverClass === 'Channel') {
+      const onChannelDetailsSuccess = (response) => {
+        let channelDetailsResponse = response.data.data;
+        let newChannelMembers = [];
 
-    const onChannelDetailsSuccess = (response) => {
-      let channelDetailsResponse = response.data.data;
-      let newChannelMembers = [];
+        getEmailList().then((result) => {
+          channelDetailsResponse['owner_email'] = result.find(
+            (user) => user.value === channelDetailsResponse['owner_id']
+          ).label;
 
-      getEmailList().then((result) => {
-        channelDetailsResponse['owner_email'] = result.find(
-          (user) => user.value === channelDetailsResponse['owner_id']
-        ).label;
+          channelDetailsResponse['channel_members'].map((member) => {
+            const findMember = result.find(
+              (user) => user.value === member['user_id']
+            );
 
-        channelDetailsResponse['channel_members'].map((member) => {
-          const findMember = result.find(
-            (user) => user.value === member['user_id']
-          );
+            return newChannelMembers.push(findMember);
+          });
 
-          return newChannelMembers.push(findMember);
+          channelDetailsResponse['channel_members'] =
+            newChannelMembers.reverse();
+
+          setChannelDetails(channelDetailsResponse);
         });
+      };
 
-        channelDetailsResponse['channel_members'] = newChannelMembers.reverse();
+      const onChannelDetailsError = (error) => {
+        return false;
+      };
 
-        setChannelDetails(channelDetailsResponse);
-        onIsLoadingVisible(false);
-      });
-    };
-
-    const onChannelDetailsError = (error) => {
-      onIsLoadingVisible(false);
-    };
-
-    axiosGetCall(
-      `${CHANNELS_ENDPOINT}${selectedId}`,
-      userHeaders,
-      onChannelDetailsSuccess,
-      onChannelDetailsError
-    );
+      axiosGetCall(
+        `${CHANNELS_ENDPOINT}${selectedId}`,
+        userHeaders,
+        onChannelDetailsSuccess,
+        onChannelDetailsError
+      );
+    }
   };
 
   const handleChannelDetailsModalShown = () => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Modal, Text } from '@mantine/core';
 import ClientAddChannelMemberForm from '../Form/ClientAddChannelMemberForm';
 
@@ -10,6 +10,14 @@ const ClientChannelDetailsModal = ({
   onChannelDetailsModalShown,
   onAddChannelMember,
 }) => {
+  const bottomDiv = useRef(null);
+
+  useEffect(() => {
+    if (bottomDiv.current !== null) {
+      bottomDiv.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [channelDetails]);
+
   const showChannelOwnerDetails = () => {
     if (channelDetails.length !== 0) {
       return (
@@ -30,6 +38,7 @@ const ClientChannelDetailsModal = ({
             {channelDetails['channel_members'].map((member, key) => {
               return <Text key={key}>{member.label}</Text>;
             })}
+            <div ref={bottomDiv}></div>
           </div>
         </>
       );
