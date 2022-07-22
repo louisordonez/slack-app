@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
-import { Modal, Text } from '@mantine/core';
+import { Modal, Text, Stack } from '@mantine/core';
+import { User } from 'tabler-icons-react';
 import ClientAddChannelMemberForm from '../Form/ClientAddChannelMemberForm';
 
 const ClientChannelDetailsModal = ({
@@ -34,13 +35,22 @@ const ClientChannelDetailsModal = ({
     if (channelDetails.length !== 0) {
       return (
         <>
-          <Text style={{ marginTop: '1.4rem' }}>Members</Text>
-          <div className="client-channel-details-members-container">
+          <Text style={{ marginTop: '1rem', marginBottom: '1rem' }}>
+            Members
+          </Text>
+          <Stack
+            spacing="xs"
+            className="client-channel-details-members-container"
+          >
             {channelDetails['channel_members'].map((member, key) => {
-              return <Text key={key}>{member.label}</Text>;
+              return (
+                <Text key={key}>
+                  <User size={16} /> {member.label}
+                </Text>
+              );
             })}
             <div ref={bottomDiv}></div>
-          </div>
+          </Stack>
         </>
       );
     }

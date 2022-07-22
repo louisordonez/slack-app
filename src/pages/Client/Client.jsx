@@ -124,10 +124,11 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       handleShowMessages(id[0], 'User');
       setOpened(false);
     } else {
-      setMessages([]);
       setSelectedId(null);
       setReceiverClass('');
       setMessageHeaderName('');
+      setMessages([]);
+      handleShowMessages(null, 'User');
     }
   };
 
@@ -280,6 +281,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
         navbar={
           <ClientNavbar
             hidden={opened}
+            emailList={emailList}
             channels={channels}
             receiverClass={receiverClass}
             onUserLogOut={onUserLogOut}

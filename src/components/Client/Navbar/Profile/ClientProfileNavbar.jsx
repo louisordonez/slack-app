@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, Button, Avatar, Divider, Center } from '@mantine/core';
+import { Text, Button, Avatar, Divider, Center, Group } from '@mantine/core';
+import { Logout } from 'tabler-icons-react';
 import { getLocalStorageItem } from '../../../../services/utils/LocalStorage';
 
 const ClientProfileNavbar = ({ onIsLoadingVisible, onUserLogOut }) => {
@@ -32,7 +33,10 @@ const ClientProfileNavbar = ({ onIsLoadingVisible, onUserLogOut }) => {
           onUserLogOut();
         }}
       >
-        Logout
+        <Group spacing="xs">
+          <Logout size={16} />
+          Logout
+        </Group>
       </Button>
       <Divider
         my="sm"

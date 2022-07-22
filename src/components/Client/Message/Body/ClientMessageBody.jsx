@@ -1,7 +1,9 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Text, Avatar, Tooltip } from '@mantine/core';
+import { getCurrentDatetime } from '../../../../services/utils/DatetimeFormat';
 
 const ClientMessageBody = ({ messages }) => {
+  // const [chatMessages, setChatMessages] = useState(messages);
   const bottomDiv = useRef(null);
 
   useEffect(() => {
@@ -10,6 +12,16 @@ const ClientMessageBody = ({ messages }) => {
 
   const getAvatarLetter = (email) => {
     return email.toUpperCase().charAt(0);
+  };
+
+  const handleDatetime = (message) => {
+    const { date, time } = getCurrentDatetime();
+    const currentDatetime = `${date}${time}`;
+    const messageDatetime = `${message['date']}${message['time']}`;
+
+    return currentDatetime > messageDatetime
+      ? message['date']
+      : message['time'];
   };
 
   return (
@@ -25,7 +37,9 @@ const ClientMessageBody = ({ messages }) => {
                 <Text className="client-message-body-name bold-font">
                   {message['sender-email']}{' '}
                   <span className="client-message-body-timestamp">
-                    <Tooltip label={message['date']}>{message['time']}</Tooltip>
+                    <Tooltip label={`${message['date']} at ${message['time']}`}>
+                      {handleDatetime(message)}
+                    </Tooltip>
                   </span>
                 </Text>
                 <Text className="client-message-body-text">
