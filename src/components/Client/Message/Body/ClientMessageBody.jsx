@@ -1,9 +1,17 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Text, Avatar, Tooltip } from '@mantine/core';
-import { getCurrentDatetime } from '../../../../services/utils/DatetimeFormat';
+import { usePrevious } from '../../../../services/utils/UsePrevious';
 
 const ClientMessageBody = ({ messages }) => {
-  // const [chatMessages, setChatMessages] = useState(messages);
+  // const [chatMessages, setChatMessages] = useState([]);
+  // const prevMessages = usePrevious(messages);
+  // useEffect(() => {
+  //   if (prevMessages !== messages) {
+  //     setChatMessages(messages);
+  //     console.log(`updated`);
+  //   }
+  // }, [chatMessages]);
+
   const bottomDiv = useRef(null);
 
   useEffect(() => {
@@ -12,16 +20,6 @@ const ClientMessageBody = ({ messages }) => {
 
   const getAvatarLetter = (email) => {
     return email.toUpperCase().charAt(0);
-  };
-
-  const handleDatetime = (message) => {
-    const { date, time } = getCurrentDatetime();
-    const currentDatetime = `${date}${time}`;
-    const messageDatetime = `${message['date']}${message['time']}`;
-
-    return currentDatetime > messageDatetime
-      ? message['date']
-      : message['time'];
   };
 
   return (
@@ -38,7 +36,7 @@ const ClientMessageBody = ({ messages }) => {
                   {message['sender-email']}{' '}
                   <span className="client-message-body-timestamp">
                     <Tooltip label={`${message['date']} at ${message['time']}`}>
-                      {handleDatetime(message)}
+                      {message['time']}
                     </Tooltip>
                   </span>
                 </Text>
