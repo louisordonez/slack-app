@@ -39,7 +39,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   const [channelDetails, setChannelDetails] = useState([]);
 
   useEffect(() => {
-    handleShowChannels();
     getEmailList().then((result) => setEmailList(result));
 
     const interval = setInterval(() => {
