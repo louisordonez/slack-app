@@ -211,24 +211,21 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
         let channelDetailsResponse = response.data.data;
         let newChannelMembers = [];
 
-        getEmailList().then((result) => {
-          channelDetailsResponse['owner_email'] = result.find(
-            (user) => user.value === channelDetailsResponse['owner_id']
-          ).label;
+        channelDetailsResponse['owner_email'] = emailList.find(
+          (user) => user.value === channelDetailsResponse['owner_id']
+        ).label;
 
-          channelDetailsResponse['channel_members'].map((member) => {
-            const findMember = result.find(
-              (user) => user.value === member['user_id']
-            );
+        channelDetailsResponse['channel_members'].map((member) => {
+          const findMember = emailList.find(
+            (user) => user.value === member['user_id']
+          );
 
-            return newChannelMembers.push(findMember);
-          });
-
-          channelDetailsResponse['channel_members'] =
-            newChannelMembers.reverse();
-
-          setChannelDetails(channelDetailsResponse);
+          return newChannelMembers.push(findMember);
         });
+
+        channelDetailsResponse['channel_members'] = newChannelMembers.reverse();
+
+        setChannelDetails(channelDetailsResponse);
       };
 
       const onChannelDetailsError = (error) => {
