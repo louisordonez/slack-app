@@ -147,9 +147,9 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       }
 
       setOpened(false);
-      showSuccessToast(`Channel successfully created`);
       handleShowChannels();
       handleCreateChannelModal();
+      showSuccessToast(`Channel successfully created`);
     };
 
     const onCreateChannelError = (error) => {
