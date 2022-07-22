@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { MultiSelect, Button } from '@mantine/core';
 import { UserPlus } from 'tabler-icons-react';
-import { getEmailList } from '../../../services/utils/EmailList';
 
-const ClientAddChannelMemberForm = ({ selectedId, onAddChannelMember }) => {
-  const [emailData, setEmailData] = useState([]);
+const ClientAddChannelMemberForm = ({
+  selectedId,
+  emailList,
+  onAddChannelMember,
+}) => {
   const [userId, setUserId] = useState([]);
-
-  useEffect(() => {
-    getEmailList().then((result) => setEmailData(result));
-  }, []);
 
   const handleAdd = () => {
     let newMember;
@@ -46,7 +44,7 @@ const ClientAddChannelMemberForm = ({ selectedId, onAddChannelMember }) => {
           limit={20}
           value={userId}
           onChange={setUserId}
-          data={emailData}
+          data={emailList}
           className="client-channel-details-add-member-multiselect"
           maxSelectedValues={1}
         />

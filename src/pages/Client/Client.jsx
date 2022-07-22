@@ -44,7 +44,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [messages, channels, channelDetails, emailList]);
+  }, [emailList, channels, messages, channelDetails]);
 
   const handleOpened = () => setOpened((state) => !state);
 
@@ -131,6 +131,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
       setSelectedId(id[0]);
       setReceiverClass('User');
       setMessageHeaderName(emailObj.label);
+      setMessages([]);
       handleShowMessages(id[0], 'User');
     } else {
       setMessages([]);
@@ -200,6 +201,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     setSelectedId(channelId);
     setMessageHeaderName(channelName);
     setReceiverClass('Channel');
+    setMessages([]);
     handleShowMessages(channelId, 'Channel');
   };
 
@@ -244,12 +246,8 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
 
   const handleChannelDetailsModalShown = () => {
     if (receiverClass === 'Channel') {
-      if (isChannelDetailsModalShown === true) {
-        setIsChannelDetailsModalShown((state) => !state);
-      } else {
-        handleChannelDetails();
-        setIsChannelDetailsModalShown((state) => !state);
-      }
+      setChannelDetails([]);
+      setIsChannelDetailsModalShown((state) => !state);
     }
   };
 
@@ -323,6 +321,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
         opened={isChannelDetailsModalShown}
         selectedId={selectedId}
         messageHeaderName={messageHeaderName}
+        emailList={emailList}
         channelDetails={channelDetails}
         onChannelDetailsModalShown={handleChannelDetailsModalShown}
         onAddChannelMember={handleAddChannelMember}

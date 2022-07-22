@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Modal, Text } from '@mantine/core';
 import ClientAddChannelMemberForm from '../Form/ClientAddChannelMemberForm';
 
@@ -6,27 +6,24 @@ const ClientChannelDetailsModal = ({
   opened,
   selectedId,
   messageHeaderName,
+  emailList,
   channelDetails,
   onChannelDetailsModalShown,
   onAddChannelMember,
 }) => {
-  const [details, setDetails] = useState([]);
-
   const bottomDiv = useRef(null);
 
   useEffect(() => {
-    setDetails(channelDetails);
-
     if (bottomDiv.current !== null) {
       bottomDiv.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [channelDetails]);
 
   const showChannelOwnerDetails = () => {
-    if (details.length !== 0) {
+    if (channelDetails.length !== 0) {
       return (
         <>
-          <Text>{details['owner_email']}</Text>
+          <Text>{channelDetails['owner_email']}</Text>
           <Text className="client-channel-details-label">Owner</Text>
         </>
       );
@@ -34,12 +31,12 @@ const ClientChannelDetailsModal = ({
   };
 
   const showChannelMembersDetails = () => {
-    if (details.length !== 0) {
+    if (channelDetails.length !== 0) {
       return (
         <>
           <Text style={{ marginTop: '1.4rem' }}>Members</Text>
           <div className="client-channel-details-members-container">
-            {details['channel_members'].map((member, key) => {
+            {channelDetails['channel_members'].map((member, key) => {
               return <Text key={key}>{member.label}</Text>;
             })}
             <div ref={bottomDiv}></div>
@@ -56,13 +53,13 @@ const ClientChannelDetailsModal = ({
         opened={opened}
         onClose={() => {
           onChannelDetailsModalShown(false);
-          setDetails([]);
         }}
         title={`${messageHeaderName}`}
       >
         {showChannelOwnerDetails()}
         <ClientAddChannelMemberForm
           selectedId={selectedId}
+          emailList={emailList}
           onAddChannelMember={onAddChannelMember}
         />
         {showChannelMembersDetails()}
