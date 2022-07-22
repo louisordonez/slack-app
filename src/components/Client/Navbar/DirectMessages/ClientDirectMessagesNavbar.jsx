@@ -1,14 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Text, Button, Group, MultiSelect } from '@mantine/core';
+import { Text, Group, MultiSelect } from '@mantine/core';
 import { User } from 'tabler-icons-react';
 import { getEmailList } from '../../../../services/utils/EmailList';
 
-const ClientDirectMessagesNavbar = ({ onSelectedUser }) => {
+const ClientDirectMessagesNavbar = ({ receiverClass, onSelectedUser }) => {
   const [emailData, setEmailData] = useState([]);
+  const [value, setValue] = useState([]);
 
   useEffect(() => {
     getEmailList().then((result) => setEmailData(result));
-  }, []);
+
+    if (receiverClass === 'Channel') {
+      setValue([]);
+    }
+  }, [receiverClass]);
+
+  const handleSelected = (e) => {
+    setValue(e);
+    onSelectedUser(e);
+  };
 
   return (
     <>
@@ -23,7 +33,8 @@ const ClientDirectMessagesNavbar = ({ onSelectedUser }) => {
           nothingFound="Nothing found"
           maxDropdownHeight={160}
           limit={20}
-          onChange={onSelectedUser}
+          value={value}
+          onChange={(e) => handleSelected(e)}
           data={emailData}
           maxSelectedValues={1}
         />

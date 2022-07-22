@@ -7,10 +7,10 @@ import ClientDirectMessagesNavbar from './DirectMessages/ClientDirectMessagesNav
 const ClientNavbar = ({
   hidden,
   channels,
+  receiverClass,
   onIsLoadingVisible,
   onUserLogOut,
   onCreateChannelModalShown,
-  onSendDirectMessageModalShown,
   onSelectedUser,
   onSelectedChannel,
 }) => {
@@ -30,7 +30,10 @@ const ClientNavbar = ({
           />
         </Stack>
         <Stack>
-          <ClientDirectMessagesNavbar onSelectedUser={onSelectedUser} />
+          <ClientDirectMessagesNavbar
+            receiverClass={receiverClass}
+            onSelectedUser={onSelectedUser}
+          />
         </Stack>
         <Stack>
           <ClientChannelsNavbar

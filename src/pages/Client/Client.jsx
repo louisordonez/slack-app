@@ -197,14 +197,10 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   };
 
   const handleSelectedChannel = (channelId, channelName) => {
-    if (receiverClass === 'User') {
-      showErrorToast(`Clear selected user first`);
-    } else {
-      setSelectedId(channelId);
-      setMessageHeaderName(channelName);
-      setReceiverClass('Channel');
-      handleShowMessages(channelId, 'Channel');
-    }
+    setSelectedId(channelId);
+    setMessageHeaderName(channelName);
+    setReceiverClass('Channel');
+    handleShowMessages(channelId, 'Channel');
   };
 
   const handleChannelDetails = () => {
@@ -298,6 +294,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
           <ClientNavbar
             hidden={opened}
             channels={channels}
+            receiverClass={receiverClass}
             onUserLogOut={onUserLogOut}
             onCreateChannelModalShown={handleCreateChannelModal}
             onIsLoadingVisible={onIsLoadingVisible}
