@@ -1,17 +1,7 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Text, Avatar, Tooltip } from '@mantine/core';
-import { usePrevious } from '../../../../services/utils/UsePrevious';
 
 const ClientMessageBody = ({ messages }) => {
-  // const [chatMessages, setChatMessages] = useState([]);
-  // const prevMessages = usePrevious(messages);
-  // useEffect(() => {
-  //   if (prevMessages !== messages) {
-  //     setChatMessages(messages);
-  //     console.log(`updated`);
-  //   }
-  // }, [chatMessages]);
-
   const bottomDiv = useRef(null);
 
   useEffect(() => {
