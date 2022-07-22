@@ -223,7 +223,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
           return newChannelMembers.push(findMember);
         });
 
-        channelDetailsResponse['channel_members'] = newChannelMembers;
+        channelDetailsResponse['channel_members'] = newChannelMembers.reverse();
 
         setChannelDetails(channelDetailsResponse);
         onIsLoadingVisible(false);
