@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Text, Group, MultiSelect } from '@mantine/core';
+import { Text, Group, MultiSelect, Button } from '@mantine/core';
 import { User } from 'tabler-icons-react';
 
 const ClientDirectMessagesNavbar = ({
   emailList,
   receiverClass,
   onSelectedUser,
+  onSearchUserModalShown,
 }) => {
   const [userId, setUserId] = useState([]);
 
@@ -23,7 +24,12 @@ const ClientDirectMessagesNavbar = ({
   return (
     <>
       <Text className="client-stack-direct-messages-header bold-font">
-        <Group position="apart">Direct Messages</Group>
+        <Group position="apart">
+          Direct Messages
+          <Button variant="default" compact onClick={onSearchUserModalShown}>
+            +
+          </Button>
+        </Group>
       </Text>
       <div className="client-stack-direct-messages-container">
         <MultiSelect

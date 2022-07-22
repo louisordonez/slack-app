@@ -11,6 +11,7 @@ const ClientNavbar = ({
   receiverClass,
   onIsLoadingVisible,
   onUserLogOut,
+  onSearchUserModalShown,
   onCreateChannelModalShown,
   onSelectedUser,
   onSelectedChannel,
@@ -35,6 +36,7 @@ const ClientNavbar = ({
             emailList={emailList}
             receiverClass={receiverClass}
             onSelectedUser={onSelectedUser}
+            onSearchUserModalShown={onSearchUserModalShown}
           />
         </Stack>
         <Stack>

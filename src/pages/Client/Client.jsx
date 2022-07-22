@@ -15,6 +15,7 @@ import { axiosGetCall, axiosPostCall } from '../../services/utils/AxiosApiCall';
 import { showSuccessToast, showErrorToast } from '../../components/Toast/Toast';
 import { getEmailList } from '../../services/utils/EmailList';
 import { convertDatetime } from '../../services/utils/DatetimeFormat';
+import ClientSearchUserModal from '../../components/Modal/Client/ClientSearchUserModal';
 
 const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   if (getLocalStorageItem('userHeaders') === null) {
@@ -28,6 +29,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     useState(false);
   const [isChannelDetailsModalShown, setIsChannelDetailsModalShown] =
     useState(false);
+  const [isSearchUserModalShown, setIsSearchUserModalShown] = useState(false);
   const [emailList, setEmailList] = useState([]);
   const [channels, setChannels] = useState([]);
   const [messageHeaderName, setMessageHeaderName] = useState('');
@@ -46,6 +48,9 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
 
     return () => clearInterval(interval);
   }, [emailList, channels, messages, channelDetails]);
+
+  const handleSearchUserModal = () =>
+    setIsSearchUserModalShown((state) => !state);
 
   const handleOpened = () => setOpened((state) => !state);
 
@@ -117,18 +122,13 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     if (id.length !== 0) {
       const emailObj = emailList.find((user) => user.value === id[0]);
 
+      handleShowMessages(null, 'User');
       setSelectedId(id[0]);
       setReceiverClass('User');
       setMessageHeaderName(emailObj.label);
       setMessages([]);
       handleShowMessages(id[0], 'User');
       setOpened(false);
-    } else {
-      setSelectedId(null);
-      setReceiverClass('');
-      setMessageHeaderName('');
-      setMessages([]);
-      handleShowMessages(null, 'User');
     }
   };
 
@@ -198,6 +198,13 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     setOpened(false);
   };
 
+  const handleChannelDetailsModalShown = () => {
+    if (receiverClass === 'Channel') {
+      setChannelDetails([]);
+      setIsChannelDetailsModalShown((state) => !state);
+    }
+  };
+
   const handleChannelDetails = () => {
     if (receiverClass === 'Channel') {
       const onChannelDetailsSuccess = (response) => {
@@ -231,13 +238,6 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
         onChannelDetailsSuccess,
         onChannelDetailsError
       );
-    }
-  };
-
-  const handleChannelDetailsModalShown = () => {
-    if (receiverClass === 'Channel') {
-      setChannelDetails([]);
-      setIsChannelDetailsModalShown((state) => !state);
     }
   };
 
@@ -285,6 +285,7 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
             channels={channels}
             receiverClass={receiverClass}
             onUserLogOut={onUserLogOut}
+            onSearchUserModalShown={handleSearchUserModal}
             onCreateChannelModalShown={handleCreateChannelModal}
             onIsLoadingVisible={onIsLoadingVisible}
             onSelectedUser={handleSelectedUser}
@@ -302,6 +303,14 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
           onChannelDetailsModalShown={handleChannelDetailsModalShown}
         />
       </AppShell>
+      <ClientSearchUserModal
+        opened={isSearchUserModalShown}
+        emailList={emailList}
+        receiverClass={receiverClass}
+        onSelectedUser={handleSelectedUser}
+        onSearchUserModalShown={handleSearchUserModal}
+      />
+
       <ClientCreateChannelModal
         opened={isCreateChannelModalShown}
         emailList={emailList}
