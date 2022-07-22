@@ -51,9 +51,7 @@ const ClientChannelDetailsModal = ({
       <Modal
         centered
         opened={opened}
-        onClose={() => {
-          onChannelDetailsModalShown(false);
-        }}
+        onClose={() => onChannelDetailsModalShown(false)}
         title={`${messageHeaderName}`}
       >
         {showChannelOwnerDetails()}
