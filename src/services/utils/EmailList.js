@@ -4,18 +4,14 @@ import { axiosGetCall } from '../utils/AxiosApiCall';
 
 export const onEmailListSuccess = (response) => {
   const createNewEmailList = (list) => {
-    let newEmailListArray = [];
-
-    list.map((object) => {
-      const newEmailData = {
+    const newEmailList = list.map((object) => {
+      return {
         value: object.id,
         label: object.email,
       };
-
-      return newEmailListArray.push(newEmailData);
     });
 
-    return newEmailListArray.sort((a, b) => a.value - b.value);
+    return newEmailList.sort((a, b) => a.value - b.value);
   };
 
   return createNewEmailList(response.data.data);
