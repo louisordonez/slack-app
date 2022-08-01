@@ -85,22 +85,18 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
   const handleShowMessages = (id, receiver) => {
     const onShowMessagesSuccess = (response) => {
       const createMessagesList = (list) => {
-        let newMessagesArray = [];
-
-        list.map((object) => {
+        const messages = list.map((object) => {
           const { date, time } = convertDatetime(object.created_at);
-          const messageObj = {
+          return {
             'sender-id': object.sender.id,
             'sender-email': object.sender.email,
             body: object.body,
             date,
             time,
           };
-
-          return newMessagesArray.push(messageObj);
         });
 
-        return newMessagesArray;
+        return messages;
       };
 
       setMessages(createMessagesList(response.data.data));
