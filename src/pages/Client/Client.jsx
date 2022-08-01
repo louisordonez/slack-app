@@ -205,19 +205,14 @@ const Client = ({ onUserLogOut, onIsLoadingVisible }) => {
     if (receiverClass === 'Channel') {
       const onChannelDetailsSuccess = (response) => {
         let channelDetailsResponse = response.data.data;
-        let newChannelMembers = [];
 
         channelDetailsResponse['owner_email'] = emailList.find(
           (user) => user.value === channelDetailsResponse['owner_id']
         ).label;
 
-        channelDetailsResponse['channel_members'].map((member) => {
-          const findMember = emailList.find(
-            (user) => user.value === member['user_id']
-          );
-
-          return newChannelMembers.push(findMember);
-        });
+        const newChannelMembers = channelDetailsResponse['channel_members'].map(
+          (member) => emailList.find((user) => user.value === member['user_id'])
+        );
 
         channelDetailsResponse['channel_members'] = newChannelMembers.reverse();
 
