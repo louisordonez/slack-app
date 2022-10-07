@@ -32,3 +32,5 @@ This project is a replica of the Slack application.
   `password: 12345678`
 
 ### Live Demo: https://slack-app-xi.vercel.app/
+
+Note: Disable secure connection due to API limitation
