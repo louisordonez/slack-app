@@ -34,3 +34,5 @@ This project is a replica of the Slack application.
 ### Live Demo: https://slack-app-xi.vercel.app/
 
 Note: Disable secure connection due to API limitation
+1. Site settings
+2. Insecure content > Allow
