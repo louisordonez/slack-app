@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { LoadingOverlay } from '@mantine/core';
-import Landing from './pages/Landing/Landing';
-import Login from './pages/Login/Login';
-import SignUp from './pages/SignUp/SignUp';
-import ProtectedRoute from './routes/ProtectedRoute';
-import Client from './pages/Client/Client';
-import Error404 from './pages/Error/Error404';
-import { IsLoggedInLocalStorage } from './services/utils/IsLoggedInLocalStorage';
-import { assignLocalStorageItem } from './services/utils/LocalStorage';
+import React, { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { LoadingOverlay } from "@mantine/core";
+import Landing from "./pages/Landing/Landing";
+import Login from "./pages/Login/Login";
+import SignUp from "./pages/SignUp/SignUp";
+import ProtectedRoute from "./routes/ProtectedRoute";
+import Client from "./pages/Client/Client";
+import Error404 from "./pages/Error/Error404";
+import { IsLoggedInLocalStorage } from "./services/utils/IsLoggedInLocalStorage";
+import { assignLocalStorageItem } from "./services/utils/LocalStorage";
 
 const App = () => {
   const [userHeaders, setUserHeaders] = useState([]);
@@ -18,9 +18,9 @@ const App = () => {
 
   useEffect(() => {
     if (isLoggedIn === null) {
-      assignLocalStorageItem('userHeaders', userHeaders);
-      assignLocalStorageItem('userData', userData);
-      assignLocalStorageItem('isLoggedIn', []);
+      assignLocalStorageItem("userHeaders", userHeaders);
+      assignLocalStorageItem("userData", userData);
+      assignLocalStorageItem("isLoggedIn", []);
     }
   }, [isLoggedIn, userHeaders, userData]);
 
@@ -28,9 +28,9 @@ const App = () => {
     setUserHeaders(headers);
     setUserData(data);
     setIsLoggedIn(bool);
-    assignLocalStorageItem('userData', data);
-    assignLocalStorageItem('userHeaders', headers);
-    assignLocalStorageItem('isLoggedIn', bool);
+    assignLocalStorageItem("userData", data);
+    assignLocalStorageItem("userHeaders", headers);
+    assignLocalStorageItem("isLoggedIn", bool);
   };
 
   const handleIsLoadingVisible = () => setIsLoadingVisible((state) => !state);
@@ -38,13 +38,13 @@ const App = () => {
   const handleUserLogOut = () => {
     const emptyArray = [];
 
-    assignLocalStorageItem('userHeaders', emptyArray);
-    assignLocalStorageItem('userData', emptyArray);
-    assignLocalStorageItem('isLoggedIn', emptyArray);
+    assignLocalStorageItem("userHeaders", emptyArray);
+    assignLocalStorageItem("userData", emptyArray);
+    assignLocalStorageItem("isLoggedIn", emptyArray);
 
     handleIsLoadingVisible();
 
-    window.location.assign('/login');
+    window.location.assign("/login");
   };
 
   return (
